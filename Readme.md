@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
-* Студент: [Владислав Ермолин](https://up.htmlacademy.ru/react/1/user/123103).
-* Наставник: `Неизвестно`.
+* Студент: [Владислав Ермолин](https://htmlacademy.ru/profile/id123103).
+* Наставник: [Алексей Балесный](https://htmlacademy.ru/profile/id221665).
 
 ---
 
