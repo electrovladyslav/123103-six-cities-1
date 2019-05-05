@@ -11,10 +11,16 @@ const initialState = {
   ]
 };
 
+function handleClick(e) {
+  console.log(`The link was clicked.`); // eslint-disable-line no-console
+  e.preventDefault();
+}
+
 const init = ({rentNames} = initialState) => {
 
   ReactDOM.render(<Main
     rentNames = {rentNames}
+    handleClick = {handleClick}
   />, document.getElementById(`root`));
 };
 

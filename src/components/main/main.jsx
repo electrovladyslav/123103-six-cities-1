@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-
 const Main = (props) => {
   const rentNames = props.rentNames;
+  const handleClick = props.handleClick;
 
   return (
     <React.Fragment>
@@ -182,7 +182,7 @@ const Main = (props) => {
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>
-                      <h2 className="place-card__name">
+                      <h2 className="place-card__name" onClick={handleClick}>
                         <a href="#">
                           {rentName}
                         </a>
@@ -191,8 +191,8 @@ const Main = (props) => {
                     </div>
                   </article>
                 )}
-
                 {/* ---End of rent card--- */}
+
               </div>
             </section>
             <div className="cities__right-section">
@@ -207,7 +207,8 @@ const Main = (props) => {
 
 
 Main.propTypes = {
-  rentNames: PropTypes.arrayOf(PropTypes.string)
+  rentNames: PropTypes.arrayOf(PropTypes.string),
+  handleClick: PropTypes.func
 };
 
 export default Main;
