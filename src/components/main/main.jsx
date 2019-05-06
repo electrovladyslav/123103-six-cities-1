@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const Main = (props) => {
   const rentNames = props.rentNames;
-  const handleClick = props.handleClick;
+  const onCardTitleClick = props.onCardTitleClick;
 
   return (
     <React.Fragment>
@@ -182,7 +182,7 @@ const Main = (props) => {
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>
-                      <h2 className="place-card__name" onClick={handleClick}>
+                      <h2 className="place-card__name" onClick={onCardTitleClick}>
                         <a href="#">
                           {rentName}
                         </a>
@@ -207,8 +207,8 @@ const Main = (props) => {
 
 
 Main.propTypes = {
-  rentNames: PropTypes.arrayOf(PropTypes.string),
-  handleClick: PropTypes.func
+  rentNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onCardTitleClick: PropTypes.func.isRequired,
 };
 
 export default Main;

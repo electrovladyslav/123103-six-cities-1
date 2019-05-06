@@ -11,16 +11,16 @@ const initialState = {
   ]
 };
 
-function handleClick(e) {
+const handleClick = (event) => {
   console.log(`The link was clicked.`); // eslint-disable-line no-console
-  e.preventDefault();
-}
+  event.preventDefault();
+};
 
 const init = ({rentNames} = initialState) => {
 
   ReactDOM.render(<Main
     rentNames = {rentNames}
-    handleClick = {handleClick}
+    onCardTitleClick = {handleClick}
   />, document.getElementById(`root`));
 };
 
