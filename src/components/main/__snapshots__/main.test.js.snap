@@ -348,6 +348,7 @@ Array [
                 </div>
                 <h2
                   className="place-card__name"
+                  onClick={[MockFunction]}
                 >
                   <a
                     href="#"
@@ -449,6 +450,7 @@ Array [
                 </div>
                 <h2
                   className="place-card__name"
+                  onClick={[MockFunction]}
                 >
                   <a
                     href="#"
@@ -550,6 +552,7 @@ Array [
                 </div>
                 <h2
                   className="place-card__name"
+                  onClick={[MockFunction]}
                 >
                   <a
                     href="#"
@@ -651,6 +654,7 @@ Array [
                 </div>
                 <h2
                   className="place-card__name"
+                  onClick={[MockFunction]}
                 >
                   <a
                     href="#"

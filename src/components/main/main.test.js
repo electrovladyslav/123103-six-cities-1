@@ -10,6 +10,7 @@ it(`Main component renders correctly`, () => {
   const tree = renderer
   .create(<Main
     rentNames ={[`First`, `Second`, `Third`, `Fourth`]}
+    onCardTitleClick = {jest.fn()}
   />)
   .toJSON();
   expect(tree).toMatchSnapshot();
