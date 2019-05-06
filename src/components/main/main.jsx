@@ -140,8 +140,8 @@ const Main = (props) => {
               <div className="cities__places-list places__list tabs__content">
 
                 {/* ---Rent card--- */}
-                {rentNames.map((rentName, index) =>
-                  <article className="cities__place-card place-card" key = {index}>
+                {rentNames.map((rentName) =>
+                  <article className="cities__place-card place-card" key = {rentName}>
                     <div className="place-card__mark">
                       <span>Premium</span>
                     </div>
