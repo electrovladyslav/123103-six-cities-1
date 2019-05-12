@@ -10,7 +10,7 @@ const mockState = {
   onCardTitleClick: jest.fn()
 };
 
-it(`Rent card component renders correctly`, () => {
+it(`Rent list component renders correctly`, () => {
   const tree = renderer
   .create(<RentList
     offers ={mockState.offers}
