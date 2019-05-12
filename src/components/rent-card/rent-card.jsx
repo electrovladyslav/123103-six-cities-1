@@ -12,6 +12,7 @@ const RentCard = (props) => {
     type,
   } = props.offer;
   const onCardTitleClick = props.onCardTitleClick;
+  const onCardImageClick = props.onCardImageClick;
 
   return (
     <React.Fragment>
@@ -20,7 +21,7 @@ const RentCard = (props) => {
           <span>Premium</span>
         </div>}
         <div className="cities__image-wrapper place-card__image-wrapper">
-          <a href="#">
+          <a href="#" onClick={onCardImageClick}>
             <img
               className="place-card__image"
               src={imageSource}
@@ -71,7 +72,8 @@ RentCard.propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   }),
-  onCardTitleClick: PropTypes.func.isRequired
+  onCardTitleClick: PropTypes.func.isRequired,
+  onCardImageClick: PropTypes.func.isRequired,
 };
 
 export default RentCard;
