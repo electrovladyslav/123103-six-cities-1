@@ -26,9 +26,9 @@ it(`On click on card image active card comes to handler`, () => {
       />
   );
 
-  const cardImages = app.find(`.place-card__image`);
+  const cardImages = app.find(`.place-card__image-wrapper a`);
   cardImages.forEach((cardImage) => {
     cardImage.simulate(`click`, {preventDefault() {}});
   });
-  expect(onCardImageClick.mock.calls).toContain([`Super very best appartment`]);
+  expect(onCardImageClick.mock.calls[0][0]).toContain([`Super very best appartment`]);
 });
