@@ -18,6 +18,8 @@ it(`Rent card component renders correctly`, () => {
   .create(<RentCard
     offer ={mockOffer}
     onCardTitleClick = {jest.fn()}
+    onCardImageClick = {jest.fn()}
+
   />)
   .toJSON();
   expect(tree).toMatchSnapshot();

@@ -11,9 +11,9 @@ class RentsList extends PureComponent {
       activeCard: null
     };
 
-    this._setActiveCard = this._setActiveCard.bind(this);
-    this._removeActiveCard = this._setActiveCard.bind(this);
-    this._cardImageClickHandler = this._cardImageClickHandler.bind(this);
+    // this._setActiveCard = this._setActiveCard.bind(this);
+    // this._removeActiveCard = this._setActiveCard.bind(this);
+    // this._cardImageClickHandler = this._cardImageClickHandler.bind(this);
   }
 
   render() {
@@ -62,22 +62,20 @@ class RentsList extends PureComponent {
             {/* ---Rent card--- */}
             {offers.map((offer) => {
               return (
-                <div
+                <RentCard
+                  offer={offer}
+                  onCardTitleClick={onCardTitleClick}
+                  onCardImageClick={() => {
+                    this._cardImageClickHandler(this.state.activeCard);
+                  }}
                   key={offer.name}
-                  onMouseEnter={() => {
+                  onMouseEnterCard={() => {
                     this._setActiveCard(offer.name);
                   }}
-                  onMouseLeave={() => {
+                  onMouseLeaveCrad={() => {
                     this._removeActiveCard();
-                  }}>
-                  <RentCard
-                    offer={offer}
-                    onCardTitleClick={onCardTitleClick}
-                    onCardImageClick={() => {
-                      this._cardImageClickHandler(this.state.activeCard);
-                    }}
-                  />
-                </div>
+                  }}
+                />
               );
             })}
             {/* ---End of rent card--- */}
@@ -90,20 +88,21 @@ class RentsList extends PureComponent {
   _setActiveCard(id) {
     this.setState({
       activeCard: id
+    }, () => {
+      console.log(`SetActive card: ${this.state.activeCard}`); // eslint-disable-line no-console
     });
-    console.log(`SetActive card: ${this.state.activeCard}`); // eslint-disable-line no-console
   }
 
   _removeActiveCard() {
     this.setState({
       activeCard: null
+    }, () => {
+      console.log(`removeActive card: ${this.state.activeCard}`); // eslint-disable-line no-console
     });
-    console.log(`removeActive card: ${this.state.activeCard}`); // eslint-disable-line no-console
   }
 
   _cardImageClickHandler(activeCard) {
     console.log(`Active card: ${activeCard}`); // eslint-disable-line no-console
-    event.preventDefault();
   }
 }
 

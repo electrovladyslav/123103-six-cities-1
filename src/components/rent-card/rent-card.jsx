@@ -9,19 +9,31 @@ const RentCard = (props) => {
     isBookmarked = false,
     rating = 3,
     name,
-    type,
+    type
   } = props.offer;
-  const onCardTitleClick = props.onCardTitleClick;
-  const onCardImageClick = props.onCardImageClick;
+  const {
+    onCardTitleClick,
+    onCardImageClick,
+    onMouseEnterCard,
+    onMouseLeaveCard
+  } = props;
 
   return (
     <React.Fragment>
-      <article className="cities__place-card place-card">
-        {isPremium && <div className="place-card__mark">
-          <span>Premium</span>
-        </div>}
+      <article
+        className="cities__place-card place-card"
+        onMouseEnter={onMouseEnterCard}
+        onMouseLeave={onMouseLeaveCard}>
+        {isPremium && (
+          <div className="place-card__mark">
+            <span>Premium</span>
+          </div>
+        )}
         <div className="cities__image-wrapper place-card__image-wrapper">
-          <a href="#" onClick={onCardImageClick}>
+          <a href="#" onClick={(event) => {
+            onCardImageClick(name);
+            event.preventDefault();
+          }}>
             <img
               className="place-card__image"
               src={imageSource}
@@ -38,7 +50,8 @@ const RentCard = (props) => {
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
             <button
-              className={`place-card__bookmark-button button ${isBookmarked && `place-card__bookmark-button--active`}`}
+              className={`place-card__bookmark-button button ${isBookmarked &&
+                `place-card__bookmark-button--active`}`}
               type="button">
               <svg className="place-card__bookmark-icon" width="18" height="19">
                 <use xlinkHref="#icon-bookmark" />
@@ -70,10 +83,12 @@ RentCard.propTypes = {
     isBookmarked: PropTypes.bool,
     rating: PropTypes.number,
     name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired
   }),
   onCardTitleClick: PropTypes.func.isRequired,
   onCardImageClick: PropTypes.func.isRequired,
+  onMouseEnterCard: PropTypes.func,
+  onMouseLeaveCard: PropTypes.func,
 };
 
 export default RentCard;

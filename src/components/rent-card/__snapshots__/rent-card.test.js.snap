@@ -9,6 +9,7 @@ exports[`Rent card component renders correctly 1`] = `
   >
     <a
       href="#"
+      onClick={[MockFunction]}
     >
       <img
         alt="Place image"
