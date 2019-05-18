@@ -6,7 +6,8 @@ export default [
     isBookmarked: false,
     rating: 4.5,
     name: `Beautiful & luxurious apartment at great location`,
-    type: `Apartment`
+    type: `Apartment`,
+    coordinates: [52.3909553943508, 4.85309666406198],
   },
   {
     isPremium: false,
@@ -15,7 +16,8 @@ export default [
     isBookmarked: true,
     rating: 4,
     name: `Wood and stone place`,
-    type: `Private room`
+    type: `Private room`,
+    coordinates: [52.369553943508, 4.85309666406198],
   },
   {
     isPremium: false,
@@ -24,7 +26,8 @@ export default [
     isBookmarked: false,
     rating: 4,
     name: `Canal View Prinsengracht`,
-    type: `Apartment`
+    type: `Apartment`,
+    coordinates: [52.3909553943508, 4.929309666406198],
   },
   {
     isPremium: true,
@@ -33,6 +36,7 @@ export default [
     isBookmarked: false,
     rating: 5,
     name: `Nice, cozy, warm big bed apartment`,
-    type: `Apartment`
+    type: `Apartment`,
+    coordinates: [52.3809553943508, 4.939309666406198],
   }
 ];
