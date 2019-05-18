@@ -2,10 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import RentsList from "../rents-list/rents-list.jsx";
+import Map from "../map/map.jsx";
+
 
 const Main = (props) => {
   const offers = props.offers;
   const onCardTitleClick = props.onCardTitleClick;
+  const leaflet = props.leaflet;
+  const city = {
+    name: `Amsterdam`,
+    coordinates: [52.38333, 4.9],
+    rentsCount: 312,
+  };
 
   return (
     <React.Fragment>
@@ -105,13 +113,19 @@ const Main = (props) => {
         <div className="cities__places-wrapper">
           <div className="cities__places-container container">
             <RentsList
-              cityName={`Amsterdam`}
-              rentsCount={312}
+              cityName={city.name}
+              rentsCount={city.rentsCount}
               offers={offers}
               onCardTitleClick={onCardTitleClick}
             />
             <div className="cities__right-section">
-              <section className="cities__map map" />
+              <section className="cities__map map">
+                <Map
+                  city={city}
+                  offersCords={offers.map((offer) => offer.coordinates)}
+                  leaflet={leaflet}
+                />
+              </section>
             </div>
           </div>
         </div>
@@ -122,7 +136,8 @@ const Main = (props) => {
 
 Main.propTypes = {
   offers: PropTypes.array.isRequired,
-  onCardTitleClick: PropTypes.func.isRequired
+  onCardTitleClick: PropTypes.func.isRequired,
+  leaflet: PropTypes.object.isRequired,
 };
 
 export default Main;
