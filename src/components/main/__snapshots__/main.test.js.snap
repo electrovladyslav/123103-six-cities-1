@@ -269,7 +269,11 @@ Array [
         >
           <section
             className="cities__map map"
-          />
+          >
+            <div
+              id="map"
+            />
+          </section>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import leaflet from "leaflet";
+// import this.leaflet from "this.leaflet";
 import PropTypes from "prop-types";
 
 class Map extends PureComponent {
@@ -11,6 +11,8 @@ class Map extends PureComponent {
       offersCords: props.offersCords,
       zoom: 12,
     };
+
+    this.leaflet = props.leaflet;
   }
 
   render() {
@@ -23,19 +25,19 @@ class Map extends PureComponent {
 
   componentDidMount() {
     const cityCords = this.state.city.coordinates;
-    const icon = leaflet.icon({
+    const icon = this.leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
     });
 
-    const map = leaflet.map(`map`, {
+    const map = this.leaflet.map(`map`, {
       center: cityCords,
       zoom: this.state.zoom,
       zoomControl: false,
       marker: true
     });
     map.setView(cityCords, this.state.zoom);
-    leaflet
+    this.leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
@@ -43,7 +45,7 @@ class Map extends PureComponent {
 
     // const offerCords = [52.3709553943508, 4.89309666406198];
     this.state.offersCords.forEach((offerCords) => {
-      leaflet.marker(offerCords, {icon}).addTo(map);
+      this.leaflet.marker(offerCords, {icon}).addTo(map);
     });
   }
 }
@@ -55,6 +57,7 @@ Map.propTypes = {
     rentsCount: PropTypes.number,
   }),
   offersCords: PropTypes.array.isRequired,
+  leaflet: PropTypes.object.isRequired,
 };
 
 export default Map;

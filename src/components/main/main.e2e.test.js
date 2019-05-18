@@ -3,6 +3,8 @@ import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Main from "./main";
 
+import leafletMock from "../../mocks/leaflet";
+
 Enzyme.configure({adapter: new Adapter()});
 
 const onCardTitleClick = jest.fn();
@@ -46,7 +48,11 @@ const mockOffers = [{
 
 it(`In main component click on card header works`, () => {
   const app = mount(
-      <Main offers={mockOffers} onCardTitleClick={onCardTitleClick} />
+      <Main
+        offers={mockOffers}
+        onCardTitleClick={onCardTitleClick}
+        leaflet={leafletMock}
+      />
   );
 
   const cardHeaders = app.find(`.place-card__name`);

@@ -4,9 +4,11 @@ import PropTypes from "prop-types";
 import RentsList from "../rents-list/rents-list.jsx";
 import Map from "../map/map.jsx";
 
+
 const Main = (props) => {
   const offers = props.offers;
   const onCardTitleClick = props.onCardTitleClick;
+  const leaflet = props.leaflet;
   const city = {
     name: `Amsterdam`,
     coordinates: [52.38333, 4.9],
@@ -121,6 +123,7 @@ const Main = (props) => {
                 <Map
                   city={city}
                   offersCords={offers.map((offer) => offer.coordinates)}
+                  leaflet={leaflet}
                 />
               </section>
             </div>
@@ -133,7 +136,8 @@ const Main = (props) => {
 
 Main.propTypes = {
   offers: PropTypes.array.isRequired,
-  onCardTitleClick: PropTypes.func.isRequired
+  onCardTitleClick: PropTypes.func.isRequired,
+  leaflet: PropTypes.object.isRequired,
 };
 
 export default Main;
