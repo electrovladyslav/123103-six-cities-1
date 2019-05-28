@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import RentsList from "../rents-list/rents-list.jsx";
+import CitiesList from "../cities-list/cities-list.jsx";
 import Map from "../map/map.jsx";
-
 
 const Main = (props) => {
   const offers = props.offers;
@@ -73,7 +73,11 @@ const Main = (props) => {
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <div className="cities tabs">
+
+        <CitiesList
+          cities = {[`Mocsow`, `Chicago`]}
+        />
+        {/* <div className="cities tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
               <li className="locations__item">
@@ -108,7 +112,7 @@ const Main = (props) => {
               </li>
             </ul>
           </section>
-        </div>
+        </div>*/}
 
         <div className="cities__places-wrapper">
           <div className="cities__places-container container">
