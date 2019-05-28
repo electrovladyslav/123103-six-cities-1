@@ -83,8 +83,8 @@ const initialState = {
   ],
 };
 
-const filterOffersByCity = (offers, city) => {
-  return offers.filter((offer) => offer.city === city);
+export const filterOffersByCity = (offers, city) => {
+  return offers.filter((offer) => offer.city.name === city.name);
 };
 
 export const ActionCreator = {

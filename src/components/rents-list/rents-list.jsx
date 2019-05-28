@@ -56,7 +56,7 @@ class RentsList extends PureComponent {
           </form>
           <div className="cities__places-list places__list tabs__content">
             {/* ---Rent card--- */}
-            {offers.map((offer) => {
+            {offers.map((offer, index) => {
               return (
                 <RentCard
                   offer={offer}
@@ -64,7 +64,7 @@ class RentsList extends PureComponent {
                   onCardImageClick={() => {
                     this._cardImageClickHandler(this.state.activeCard);
                   }}
-                  key={offer.name}
+                  key={`${offer.name}${index}`}
                   onMouseEnterCard={() => {
                     this._setActiveCard(offer.name);
                   }}

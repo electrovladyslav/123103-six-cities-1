@@ -11,7 +11,7 @@ import Map from "../map/map.jsx";
 const Main = (props) => {
   const offers = props.offers;
   const onCardTitleClick = props.onCardTitleClick;
-  const onGetOffers = props.onGetOffers;
+  // const onGetOffers = props.onGetOffers;
   const onCityClick = props.onCityClick;
   const leaflet = props.leaflet;
   const city = props.city;

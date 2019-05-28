@@ -1,56 +1,32 @@
 import React from "react";
 import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import Main from "./main";
+import {Main} from "./main";
 
 import leafletMock from "../../mocks/leaflet";
+import offers from "../../mocks/offers";
 
 Enzyme.configure({adapter: new Adapter()});
 
 const onCardTitleClick = jest.fn();
-const mockOffers = [{
-  isPremium: false,
-  imageSource: `blabla.jpg`,
-  price: 100,
-  isBookmarked: false,
-  rating: 3,
-  name: `Super very best appartment 1`,
-  type: `Closet`,
-  activeCard: `activeCardId`
-}, {
-  isPremium: false,
-  imageSource: `blabla.jpg`,
-  price: 100,
-  isBookmarked: false,
-  rating: 3,
-  name: `Super very best appartment 2`,
-  type: `Closet`,
-  activeCard: `activeCardId`
-}, {
-  isPremium: false,
-  imageSource: `blabla.jpg`,
-  price: 100,
-  isBookmarked: false,
-  rating: 3,
-  name: `Super very best appartment 3`,
-  type: `Closet`,
-  activeCard: `activeCardId`
-}, {
-  isPremium: false,
-  imageSource: `blabla.jpg`,
-  price: 100,
-  isBookmarked: false,
-  rating: 3,
-  name: `Super very best appartment 4`,
-  type: `Closet`,
-  activeCard: `activeCardId`
-}];
+const mockOffers = offers.slice(0, 4);
+const mockCity = {
+  name: `Moscow`,
+  location: {
+    latitude: 52.370216,
+    longitude: 4.895168,
+    zoom: 10
+  }
+};
 
 it(`In main component click on card header works`, () => {
   const app = mount(
       <Main
+        city={mockCity}
         offers={mockOffers}
         onCardTitleClick={onCardTitleClick}
+        onCityClick={jest.fn()}
+        onGetOffers={jest.fn()}
         leaflet={leafletMock}
       />
   );

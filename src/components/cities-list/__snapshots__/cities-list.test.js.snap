@@ -16,6 +16,20 @@ exports[`Rent list component renders correctly 1`] = `
         <a
           className="locations__item-link tabs__item tabs__item--active"
           href="#"
+          onClick={[Function]}
+        >
+          <span>
+            Moscow
+          </span>
+        </a>
+      </li>
+      <li
+        className="locations__item"
+      >
+        <a
+          className="locations__item-link tabs__item"
+          href="#"
+          onClick={[Function]}
         >
           <span>
             Paris
@@ -28,30 +42,7 @@ exports[`Rent list component renders correctly 1`] = `
         <a
           className="locations__item-link tabs__item"
           href="#"
-        >
-          <span>
-            Cologne
-          </span>
-        </a>
-      </li>
-      <li
-        className="locations__item"
-      >
-        <a
-          className="locations__item-link tabs__item"
-          href="#"
-        >
-          <span>
-            Brussels
-          </span>
-        </a>
-      </li>
-      <li
-        className="locations__item"
-      >
-        <a
-          className="locations__item-link tabs__item"
-          href="#"
+          onClick={[Function]}
         >
           <span>
             Amsterdam
@@ -64,6 +55,20 @@ exports[`Rent list component renders correctly 1`] = `
         <a
           className="locations__item-link tabs__item"
           href="#"
+          onClick={[Function]}
+        >
+          <span>
+            Brussels
+          </span>
+        </a>
+      </li>
+      <li
+        className="locations__item"
+      >
+        <a
+          className="locations__item-link tabs__item"
+          href="#"
+          onClick={[Function]}
         >
           <span>
             Hamburg
@@ -76,9 +81,10 @@ exports[`Rent list component renders correctly 1`] = `
         <a
           className="locations__item-link tabs__item"
           href="#"
+          onClick={[Function]}
         >
           <span>
-            Dusseldorf
+            Melbourne
           </span>
         </a>
       </li>

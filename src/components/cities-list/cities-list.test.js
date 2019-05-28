@@ -4,14 +4,8 @@ import renderer from "react-test-renderer";
 import CitiesList from "./cities-list";
 
 const mockState = {
-  cities: [
-    `Paris`,
-    `Cologne`,
-    `Brussels`,
-    `Amsterdam`,
-    `Hamburg`,
-    `Dusseldorf`,
-  ]
+  cities: [],
+  onCityClick: jest.fn(),
 };
 
 it(`Rent list component renders correctly`, () => {
@@ -19,6 +13,7 @@ it(`Rent list component renders correctly`, () => {
     .create(
         <CitiesList
           cities={mockState.cities}
+          onCityClick={mockState.onCityClick}
         />
     )
     .toJSON();
