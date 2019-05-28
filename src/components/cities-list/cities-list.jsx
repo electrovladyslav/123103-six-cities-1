@@ -24,11 +24,11 @@ const CitiesList = (props) => {
         <section className="locations container">
           <ul className="locations__list tabs__list">
             {cities.map((city, index) => {
+              const cityClassActive = index === activeCity ? ` tabs__item--active` : ``;
               return (
                 <li className="locations__item" key={city}>
                   <a
-                    className={`locations__item-link tabs__item ${index ===
-                      activeCity ? `tabs__item--active` : ``}`}
+                    className={`locations__item-link tabs__item${cityClassActive}`}
                     href="#">
                     <span>{city}</span>
                   </a>
