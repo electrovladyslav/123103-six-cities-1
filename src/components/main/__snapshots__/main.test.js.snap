@@ -127,7 +127,7 @@ Array [
             className="locations__item"
           >
             <a
-              className="locations__item-link tabs__item "
+              className="locations__item-link tabs__item"
               href="#"
             >
               <span>
@@ -139,7 +139,7 @@ Array [
             className="locations__item"
           >
             <a
-              className="locations__item-link tabs__item "
+              className="locations__item-link tabs__item"
               href="#"
             >
               <span>
@@ -151,7 +151,7 @@ Array [
             className="locations__item"
           >
             <a
-              className="locations__item-link tabs__item "
+              className="locations__item-link tabs__item"
               href="#"
             >
               <span>
@@ -163,7 +163,7 @@ Array [
             className="locations__item"
           >
             <a
-              className="locations__item-link tabs__item "
+              className="locations__item-link tabs__item"
               href="#"
             >
               <span>
@@ -175,7 +175,7 @@ Array [
             className="locations__item"
           >
             <a
-              className="locations__item-link tabs__item "
+              className="locations__item-link tabs__item"
               href="#"
             >
               <span>

@@ -99,27 +99,12 @@ it(`Reducer should change city correctly`, () => {
             city: {
               name: `Amsterdam`,
               coordinates: [52.38333, 4.9],
-              rentsCount: 312,
             },
             offers: [{
-              isPremium: true,
-              imageSource: `img/apartment-01.jpg`,
-              price: 120,
-              isBookmarked: false,
-              rating: 4.5,
-              name: `Beautiful & luxurious apartment at great location`,
-              type: `Apartment`,
-              coordinates: [52.3909553943508, 4.85309666406198],
+              coordinates: [1, 1],
             },
             {
-              isPremium: false,
-              imageSource: `img/room.jpg`,
-              price: 80,
-              isBookmarked: true,
-              rating: 4,
-              name: `Wood and stone place`,
-              type: `Private room`,
-              coordinates: [52.369553943508, 4.85309666406198],
+              coordinates: [2, 2],
             }]
           },
           {
@@ -136,24 +121,10 @@ it(`Reducer should change city correctly`, () => {
       coordinates: [-37.840935, 144.946457],
     },
     offers: [{
-      isPremium: true,
-      imageSource: `img/apartment-01.jpg`,
-      price: 120,
-      isBookmarked: false,
-      rating: 4.5,
-      name: `Beautiful & luxurious apartment at great location`,
-      type: `Apartment`,
-      coordinates: [52.3909553943508, 4.85309666406198],
+      coordinates: [1, 1],
     },
     {
-      isPremium: false,
-      imageSource: `img/room.jpg`,
-      price: 80,
-      isBookmarked: true,
-      rating: 4,
-      name: `Wood and stone place`,
-      type: `Private room`,
-      coordinates: [52.369553943508, 4.85309666406198],
+      coordinates: [2, 2],
     }]
   });
 });
@@ -165,62 +136,34 @@ it(`Reducer should get offers correctly`, () => {
             city: {
               name: `Amsterdam`,
               coordinates: [52.38333, 4.9],
-              rentsCount: 312,
             },
             offers: [{
-              isPremium: true,
-              imageSource: `img/apartment-01.jpg`,
-              price: 120,
-              isBookmarked: false,
-              rating: 4.5,
-              name: `Beautiful & luxurious apartment at great location`,
-              type: `Apartment`,
-              coordinates: [52.3909553943508, 4.85309666406198],
+              coordinates: [1, 1],
             },
             {
-              isPremium: false,
-              imageSource: `img/room.jpg`,
-              price: 80,
-              isBookmarked: true,
-              rating: 4,
-              name: `Wood and stone place`,
-              type: `Private room`,
-              coordinates: [52.369553943508, 4.85309666406198],
+              coordinates: [2, 2],
             }]
           },
           {
             type: `GET_OFFERS`,
-            payload: {
-              name: `Melbourne`,
-              coordinates: [-37.840935, 144.946457],
+            payload: [{
+              coordinates: [3, 3],
             },
+            {
+              coordinates: [4, 4],
+            }],
           }
       )
   ).toEqual({
     city: {
       name: `Amsterdam`,
       coordinates: [52.38333, 4.9],
-      rentsCount: 312,
     },
     offers: [{
-      isPremium: true,
-      imageSource: `img/apartment-01.jpg`,
-      price: 120,
-      isBookmarked: false,
-      rating: 4.5,
-      name: `Beautiful & luxurious apartment at great location`,
-      type: `Apartment`,
-      coordinates: [52.3909553943508, 4.85309666406198],
+      coordinates: [3, 3],
     },
     {
-      isPremium: false,
-      imageSource: `img/room.jpg`,
-      price: 80,
-      isBookmarked: true,
-      rating: 4,
-      name: `Wood and stone place`,
-      type: `Private room`,
-      coordinates: [52.369553943508, 4.85309666406198],
+      coordinates: [4, 4],
     }]
   });
 });

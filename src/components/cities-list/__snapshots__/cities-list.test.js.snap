@@ -26,7 +26,7 @@ exports[`Rent list component renders correctly 1`] = `
         className="locations__item"
       >
         <a
-          className="locations__item-link tabs__item "
+          className="locations__item-link tabs__item"
           href="#"
         >
           <span>
@@ -38,7 +38,7 @@ exports[`Rent list component renders correctly 1`] = `
         className="locations__item"
       >
         <a
-          className="locations__item-link tabs__item "
+          className="locations__item-link tabs__item"
           href="#"
         >
           <span>
@@ -50,7 +50,7 @@ exports[`Rent list component renders correctly 1`] = `
         className="locations__item"
       >
         <a
-          className="locations__item-link tabs__item "
+          className="locations__item-link tabs__item"
           href="#"
         >
           <span>
@@ -62,7 +62,7 @@ exports[`Rent list component renders correctly 1`] = `
         className="locations__item"
       >
         <a
-          className="locations__item-link tabs__item "
+          className="locations__item-link tabs__item"
           href="#"
         >
           <span>
@@ -74,7 +74,7 @@ exports[`Rent list component renders correctly 1`] = `
         className="locations__item"
       >
         <a
-          className="locations__item-link tabs__item "
+          className="locations__item-link tabs__item"
           href="#"
         >
           <span>
