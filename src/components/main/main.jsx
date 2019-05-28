@@ -11,7 +11,7 @@ import Map from "../map/map.jsx";
 const Main = (props) => {
   const offers = props.offers;
   const onCardTitleClick = props.onCardTitleClick;
-  // const onGetOffers = props.onGetOffers;
+  const onGetOffers = props.onGetOffers;
   const onCityClick = props.onCityClick;
   const leaflet = props.leaflet;
   const city = props.city;
@@ -77,9 +77,9 @@ const Main = (props) => {
 
         <CitiesList
           cities={offers.map((offer) => offer.city)}
-          onCityClick={(event) => {
-            onCityClick(event);
-            // onGetOffers(event);
+          onCityClick={(clickedCity) => {
+            onCityClick(clickedCity);
+            onGetOffers(offers, clickedCity);
           }}
         />
 
@@ -87,7 +87,7 @@ const Main = (props) => {
           <div className="cities__places-container container">
             <RentsList
               cityName={city.name}
-              rentsCount={312}
+              rentsCount={offers.length}
               offers={offers}
               onCardTitleClick={onCardTitleClick}
             />
