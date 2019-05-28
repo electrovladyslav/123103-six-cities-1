@@ -1,5 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+
+import {ActionCreator} from "../../reducer";
 
 import RentsList from "../rents-list/rents-list.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
@@ -8,12 +11,10 @@ import Map from "../map/map.jsx";
 const Main = (props) => {
   const offers = props.offers;
   const onCardTitleClick = props.onCardTitleClick;
+  const onGetOffers = props.onGetOffers;
+  const onCityClick = props.onCityClick;
   const leaflet = props.leaflet;
-  const city = {
-    name: `Amsterdam`,
-    coordinates: [52.38333, 4.9],
-    rentsCount: 312,
-  };
+  const city = props.city;
 
   return (
     <React.Fragment>
@@ -75,14 +76,18 @@ const Main = (props) => {
         <h1 className="visually-hidden">Cities</h1>
 
         <CitiesList
-          cities = {[`Mocsow`, `Chicago`]}
+          cities={offers.map((offer) => offer.city)}
+          onCityClick={(event) => {
+            onCityClick(event);
+            // onGetOffers(event);
+          }}
         />
 
         <div className="cities__places-wrapper">
           <div className="cities__places-container container">
             <RentsList
               cityName={city.name}
-              rentsCount={city.rentsCount}
+              rentsCount={312}
               offers={offers}
               onCardTitleClick={onCardTitleClick}
             />
@@ -105,7 +110,33 @@ const Main = (props) => {
 Main.propTypes = {
   offers: PropTypes.array.isRequired,
   onCardTitleClick: PropTypes.func.isRequired,
+  onCityClick: PropTypes.func.isRequired,
+  onGetOffers: PropTypes.func.isRequired,
   leaflet: PropTypes.object.isRequired,
+  city: PropTypes.shape({
+    name: PropTypes.string,
+    coordinates: PropTypes.array,
+    rentsCount: PropTypes.number,
+  }),
 };
 
-export default Main;
+const mapStateToProps = (state, ownProps) =>
+  Object.assign({}, ownProps, {
+    city: state.city,
+    offers: state.offers,
+  });
+
+const mapDispatchToProps = (dispatch) => ({
+  onCityClick: (city) => dispatch(ActionCreator.changeCity(city)),
+
+  onGetOffers: (offers, city) => {
+    dispatch(ActionCreator.getOffers(offers, city));
+  },
+});
+
+export {Main};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Main);

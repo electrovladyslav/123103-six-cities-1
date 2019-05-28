@@ -10,10 +10,6 @@ class RentsList extends PureComponent {
     this.state = {
       activeCard: null
     };
-
-    // this._setActiveCard = this._setActiveCard.bind(this);
-    // this._removeActiveCard = this._setActiveCard.bind(this);
-    // this._cardImageClickHandler = this._cardImageClickHandler.bind(this);
   }
 
   render() {

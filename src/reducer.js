@@ -1,11 +1,22 @@
 const initialState = {
   city: {
     name: `Amsterdam`,
-    coordinates: [52.38333, 4.9],
-    rentsCount: 312,
+    location: {
+      latitude: 52.370216,
+      longitude: 4.895168,
+      zoom: 10
+    }
   },
   offers: [
     {
+      city: {
+        name: `Amsterdam`,
+        location: {
+          latitude: 52.370216,
+          longitude: 4.895168,
+          zoom: 10
+        }
+      },
       isPremium: true,
       imageSource: `img/apartment-01.jpg`,
       price: 120,
@@ -16,6 +27,14 @@ const initialState = {
       coordinates: [52.3909553943508, 4.85309666406198],
     },
     {
+      city: {
+        name: `Amsterdam`,
+        location: {
+          latitude: 52.370216,
+          longitude: 4.895168,
+          zoom: 10
+        }
+      },
       isPremium: false,
       imageSource: `img/room.jpg`,
       price: 80,
@@ -26,6 +45,14 @@ const initialState = {
       coordinates: [52.369553943508, 4.85309666406198],
     },
     {
+      city: {
+        name: `Amsterdam`,
+        location: {
+          latitude: 52.370216,
+          longitude: 4.895168,
+          zoom: 10
+        }
+      },
       isPremium: false,
       imageSource: `img/apartment-02.jpg`,
       price: 132,
@@ -36,6 +63,14 @@ const initialState = {
       coordinates: [52.3909553943508, 4.929309666406198],
     },
     {
+      city: {
+        name: `Amsterdam`,
+        location: {
+          latitude: 52.370216,
+          longitude: 4.895168,
+          zoom: 10
+        }
+      },
       isPremium: true,
       imageSource: `img/apartment-03.jpg`,
       price: 180,
@@ -44,21 +79,35 @@ const initialState = {
       name: `Nice, cozy, warm big bed apartment`,
       type: `Apartment`,
       coordinates: [52.3809553943508, 4.939309666406198],
-    }
+    },
   ],
 };
 
-export const filterOffersByCity = (offers, city) => {
+const filterOffersByCity = (offers, city) => {
   return offers.filter((offer) => offer.city === city);
+};
+
+export const ActionCreator = {
+  changeCity: (city) => ({
+    type: `CHANGE_CITY`,
+    payload: city,
+  }),
+
+  getOffers: (offers, city) => {
+    return {
+      type: `GET_OFFERS`,
+      payload: filterOffersByCity(offers, city),
+    };
+  },
 };
 
 export function reducer(state = initialState, action) {
   switch (action.type) {
-    case `CHANGE_CITY` :
+    case `CHANGE_CITY`:
       return Object.assign({}, state, {
         city: action.payload,
       });
-    case `GET_OFFERS` :
+    case `GET_OFFERS`:
       return Object.assign({}, state, {
         offers: action.payload,
       });
@@ -66,4 +115,3 @@ export function reducer(state = initialState, action) {
 
   return state;
 }
-
