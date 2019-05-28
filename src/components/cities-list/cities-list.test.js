@@ -2,13 +2,14 @@ import React from "react";
 import renderer from "react-test-renderer";
 
 import CitiesList from "./cities-list";
+import cities from "../../mocks/cities";
 
 const mockState = {
-  cities: [],
+  cities,
   onCityClick: jest.fn(),
 };
 
-it(`Rent list component renders correctly`, () => {
+it(`Cities list component renders correctly`, () => {
   const tree = renderer
     .create(
         <CitiesList

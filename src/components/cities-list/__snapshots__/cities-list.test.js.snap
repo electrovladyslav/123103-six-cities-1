@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Rent list component renders correctly 1`] = `
+exports[`Cities list component renders correctly 1`] = `
 <div
   className="cities tabs"
 >

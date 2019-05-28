@@ -1,45 +1,42 @@
 import {reducer, filterOffersByCity} from "./reducer";
 import initialState from "./mocks/initial-state";
 
-// it(`Offers filter correctly`, () => {
-//   expect(
-//       filterOffersByCity(
-//           [
-//             {city: {
-//               name: `Amsterdam`,
-//             }},
-//             {city: `Moscow`},
-//             {city: `Amsterdam`},
-//             {city: `New York`},
-//           ],
-//           `Amsterdam`
-//       )
-//   ).toEqual([{city: `Amsterdam`}, {city: `Amsterdam`}]);
+it(`Offers filter correctly`, () => {
+  const mockCities = [
+    {
+      city: {
+        name: `Amsterdam`,
+      },
+    },
+    {
+      city: {
+        name: `Moscow`,
+      },
+    },
+    {
+      city: {
+        name: `Amsterdam`,
+      },
+    },
+    {
+      city: {
+        name: `New York`,
+      },
+    },
+  ];
 
-//   expect(
-//       filterOffersByCity(
-//           [
-//             {city: `Amsterdam`},
-//             {city: `Moscow`},
-//             {city: `Amsterdam`},
-//             {city: `New York`},
-//           ],
-//           `Moscow`
-//       )
-//   ).toEqual([{city: `Moscow`}]);
+  expect(filterOffersByCity(mockCities, {name: `Amsterdam`})).toEqual([
+    {city: {name: `Amsterdam`}},
+    {city: {name: `Amsterdam`}},
+  ]);
 
-//   expect(
-//       filterOffersByCity(
-//           [
-//             {city: `Amsterdam`},
-//             {city: `Moscow`},
-//             {city: `Amsterdam`},
-//             {city: `New York`},
-//           ],
-//           `Barselona`
-//       )
-//   ).toEqual([]);
-// });
+  expect(filterOffersByCity(mockCities, {name: `Moscow`})).toEqual([
+    {city: {name: `Moscow`}},
+  ]);
+
+
+  expect(filterOffersByCity(mockCities, {name: `Barselona`})).toEqual([]);
+});
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(undefined, {})).toEqual(initialState);
@@ -53,12 +50,14 @@ it(`Reducer should change city correctly`, () => {
               name: `Amsterdam`,
               coordinates: [52.38333, 4.9],
             },
-            offers: [{
-              coordinates: [1, 1],
-            },
-            {
-              coordinates: [2, 2],
-            }]
+            offers: [
+              {
+                coordinates: [1, 1],
+              },
+              {
+                coordinates: [2, 2],
+              },
+            ],
           },
           {
             type: `CHANGE_CITY`,
@@ -73,12 +72,14 @@ it(`Reducer should change city correctly`, () => {
       name: `Melbourne`,
       coordinates: [-37.840935, 144.946457],
     },
-    offers: [{
-      coordinates: [1, 1],
-    },
-    {
-      coordinates: [2, 2],
-    }]
+    offers: [
+      {
+        coordinates: [1, 1],
+      },
+      {
+        coordinates: [2, 2],
+      },
+    ],
   });
 });
 
@@ -90,21 +91,25 @@ it(`Reducer should get offers correctly`, () => {
               name: `Amsterdam`,
               coordinates: [52.38333, 4.9],
             },
-            offers: [{
-              coordinates: [1, 1],
-            },
-            {
-              coordinates: [2, 2],
-            }]
+            offers: [
+              {
+                coordinates: [1, 1],
+              },
+              {
+                coordinates: [2, 2],
+              },
+            ],
           },
           {
             type: `GET_OFFERS`,
-            payload: [{
-              coordinates: [3, 3],
-            },
-            {
-              coordinates: [4, 4],
-            }],
+            payload: [
+              {
+                coordinates: [3, 3],
+              },
+              {
+                coordinates: [4, 4],
+              },
+            ],
           }
       )
   ).toEqual({
@@ -112,11 +117,13 @@ it(`Reducer should get offers correctly`, () => {
       name: `Amsterdam`,
       coordinates: [52.38333, 4.9],
     },
-    offers: [{
-      coordinates: [3, 3],
-    },
-    {
-      coordinates: [4, 4],
-    }]
+    offers: [
+      {
+        coordinates: [3, 3],
+      },
+      {
+        coordinates: [4, 4],
+      },
+    ],
   });
 });

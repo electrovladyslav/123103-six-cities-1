@@ -6,11 +6,9 @@ class Map extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      city: props.city,
-      offersCords: props.offersCords,
-      zoom: 12,
-    };
+    this.city = props.city;
+    this.offersCords = props.offersCords;
+    this.zoom = 10;
 
     this.leaflet = props.leaflet;
   }
@@ -24,7 +22,7 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const cityCords = [this.state.city.location.latitude, this.state.city.location.longitude];
+    const cityCords = [this.city.location.latitude, this.city.location.longitude];
     const icon = this.leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
@@ -32,30 +30,27 @@ class Map extends PureComponent {
 
     this.map = this.leaflet.map(`map`, {
       center: cityCords,
-      zoom: this.state.zoom,
+      zoom: this.zoom,
       zoomControl: false,
       marker: true
     });
-    this.map.setView(cityCords, this.state.zoom);
+    this.map.setView(cityCords, this.zoom);
     this.leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
       .addTo(this.map);
 
-    this.state.offersCords.forEach((offerCords) => {
+    this.offersCords.forEach((offerCords) => {
       this.leaflet.marker(offerCords, {icon}).addTo(this.map);
     });
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.city.name !== prevProps.city.name) {
-      this.setState({
-        city: this.props.city,
-        offersCords: this.props.offersCords
-      }, () => {
-        // this.map.setView([this.state.city.location.latitude, this.state.city.location.longitude], this.state.zoom);
-      });
+      this.city = this.props.city;
+      this.offersCords = this.props.offersCords;
+      this.map.setView([this.city.location.latitude, this.city.location.longitude], this.zoom);
 
     }
   }
