@@ -1,5 +1,6 @@
 export default [
   {
+    city: `Amsterdam`,
     isPremium: true,
     imageSource: `img/apartment-01.jpg`,
     price: 120,
@@ -10,6 +11,7 @@ export default [
     coordinates: [52.3909553943508, 4.85309666406198],
   },
   {
+    city: `Amsterdam`,
     isPremium: false,
     imageSource: `img/room.jpg`,
     price: 80,
@@ -20,6 +22,7 @@ export default [
     coordinates: [52.369553943508, 4.85309666406198],
   },
   {
+    city: `Amsterdam`,
     isPremium: false,
     imageSource: `img/apartment-02.jpg`,
     price: 132,
@@ -30,6 +33,7 @@ export default [
     coordinates: [52.3909553943508, 4.929309666406198],
   },
   {
+    city: `Amsterdam`,
     isPremium: true,
     imageSource: `img/apartment-03.jpg`,
     price: 180,

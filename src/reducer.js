@@ -48,6 +48,10 @@ const initialState = {
   ],
 };
 
+export const filterOffersByCity = (offers, city) => {
+  return offers.filter((offer) => offer.city === city);
+};
+
 export function reducer(state = initialState, action) {
   switch (action.type) {
     case `CHANGE_CITY` :
