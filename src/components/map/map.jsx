@@ -23,10 +23,6 @@ class Map extends PureComponent {
       this.props.city.location.latitude,
       this.props.city.location.longitude,
     ];
-    const icon = this.leaflet.icon({
-      iconUrl: `img/pin.svg`,
-      iconSize: [30, 30],
-    });
 
     this.map = this.leaflet.map(`map`, {
       center: cityCords,
@@ -44,9 +40,7 @@ class Map extends PureComponent {
       )
       .addTo(this.map);
 
-    this.props.offersCords.forEach((offerCords) => {
-      this.leaflet.marker(offerCords, {icon}).addTo(this.map);
-    });
+    this.renderOffersMarkers();
   }
 
   componentDidUpdate() {
@@ -54,6 +48,19 @@ class Map extends PureComponent {
         [this.props.city.location.latitude, this.props.city.location.longitude],
         this.zoom
     );
+
+    this.renderOffersMarkers();
+  }
+
+  renderOffersMarkers() {
+    const icon = this.leaflet.icon({
+      iconUrl: `img/pin.svg`,
+      iconSize: [30, 30],
+    });
+
+    this.props.offersCords.forEach((offerCords) => {
+      this.leaflet.marker(offerCords, {icon}).addTo(this.map);
+    });
   }
 }
 
