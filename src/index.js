@@ -7,22 +7,23 @@ import leaflet from "leaflet";
 import Main from "./components/main/main.jsx";
 import {reducer} from "./reducer";
 
-
 const handleClick = (event) => {
   console.log(`The link was clicked.`); // eslint-disable-line no-console
   event.preventDefault();
 };
 
 const init = () => {
-  const store = createStore(reducer);
+  const store = createStore(
+      reducer,
+      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
 
-  ReactDOM.render(<Provider store={store}>
-    <Main
-      onCardTitleClick = {handleClick}
-      leaflet={leaflet}
-    />
-  </Provider>
-  , document.getElementById(`root`));
+  ReactDOM.render(
+      <Provider store={store}>
+        <Main onCardTitleClick={handleClick} leaflet={leaflet} />
+      </Provider>,
+      document.getElementById(`root`)
+  );
 };
 
 init();
