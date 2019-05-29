@@ -1,4 +1,4 @@
-import getUniqueCities from "./getUniqueCities";
+import getUniqueCities from "./getUniqueElementsByName";
 import dumpCities from "../mocks/cities";
 
 
