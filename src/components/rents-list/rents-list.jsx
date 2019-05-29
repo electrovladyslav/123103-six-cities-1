@@ -8,12 +8,8 @@ class RentsList extends PureComponent {
     super(props);
 
     this.state = {
-      activeCard: null
+      activeCard: null,
     };
-
-    // this._setActiveCard = this._setActiveCard.bind(this);
-    // this._removeActiveCard = this._setActiveCard.bind(this);
-    // this._cardImageClickHandler = this._cardImageClickHandler.bind(this);
   }
 
   render() {
@@ -33,7 +29,7 @@ class RentsList extends PureComponent {
                 <use xlinkHref="#icon-arrow-select" />
               </svg>
             </span>
-            <ul className="places__options places__options--custom places__options--opened">
+            {/* <ul className="places__options places__options--custom places__options--opened">
               <li
                 className="places__option places__option--active"
                 tabIndex="0">
@@ -60,7 +56,7 @@ class RentsList extends PureComponent {
           </form>
           <div className="cities__places-list places__list tabs__content">
             {/* ---Rent card--- */}
-            {offers.map((offer) => {
+            {offers.map((offer, index) => {
               return (
                 <RentCard
                   offer={offer}
@@ -68,7 +64,7 @@ class RentsList extends PureComponent {
                   onCardImageClick={() => {
                     this._cardImageClickHandler(this.state.activeCard);
                   }}
-                  key={offer.name}
+                  key={`${offer.name}${index}`}
                   onMouseEnterCard={() => {
                     this._setActiveCard(offer.name);
                   }}
@@ -86,19 +82,25 @@ class RentsList extends PureComponent {
   }
 
   _setActiveCard(id) {
-    this.setState({
-      activeCard: id
-    }, () => {
-      console.log(`SetActive card: ${this.state.activeCard}`); // eslint-disable-line no-console
-    });
+    this.setState(
+        {
+          activeCard: id,
+        },
+        () => {
+          console.log(`SetActive card: ${this.state.activeCard}`); // eslint-disable-line no-console
+        }
+    );
   }
 
   _removeActiveCard() {
-    this.setState({
-      activeCard: null
-    }, () => {
-      console.log(`removeActive card: ${this.state.activeCard}`); // eslint-disable-line no-console
-    });
+    this.setState(
+        {
+          activeCard: null,
+        },
+        () => {
+          console.log(`removeActive card: ${this.state.activeCard}`); // eslint-disable-line no-console
+        }
+    );
   }
 
   _cardImageClickHandler(activeCard) {
@@ -110,7 +112,7 @@ RentsList.propTypes = {
   offers: PropTypes.array.isRequired,
   cityName: PropTypes.string.isRequired,
   rentsCount: PropTypes.number.isRequired,
-  onCardTitleClick: PropTypes.func.isRequired
+  onCardTitleClick: PropTypes.func.isRequired,
 };
 
 export default RentsList;

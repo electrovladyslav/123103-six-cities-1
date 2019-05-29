@@ -7,7 +7,10 @@ import leafletMock from "../../mocks/leaflet";
 const mockState = {
   city: {
     name: `London`,
-    coordinates: [51.50851, -0.12574],
+    location: {
+      latitude: 51.50851,
+      longitude: -0.12574,
+    },
     rentsCount: 125,
   },
   offersCords: [

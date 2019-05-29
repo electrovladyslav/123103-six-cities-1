@@ -1,10 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import {Provider} from "react-redux";
+import {createStore} from "redux";
+import leaflet from "leaflet";
 
 import Main from "./components/main/main.jsx";
-import offers from "./mocks/offers";
-
-import leaflet from "leaflet";
+import {reducer} from "./reducer";
 
 const handleClick = (event) => {
   console.log(`The link was clicked.`); // eslint-disable-line no-console
@@ -12,12 +13,17 @@ const handleClick = (event) => {
 };
 
 const init = () => {
+  const store = createStore(
+      reducer,
+      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
 
-  ReactDOM.render(<Main
-    offers = {offers}
-    onCardTitleClick = {handleClick}
-    leaflet={leaflet}
-  />, document.getElementById(`root`));
+  ReactDOM.render(
+      <Provider store={store}>
+        <Main onCardTitleClick={handleClick} leaflet={leaflet} />
+      </Provider>,
+      document.getElementById(`root`)
+  );
 };
 
 init();
