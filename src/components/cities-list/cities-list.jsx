@@ -1,18 +1,17 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 
-import getUniqueCities from "../../utils/getUniqueCities";
-import dumpCities from "../../mocks/cities";
+import prepareCities from "../../utils/prepareCities";
 
 class CitiesList extends PureComponent {
   constructor(props) {
     super(props);
-    this.activeCity = 0;
-    this.onCityClick = this.props.onCityClick;
-    this.cities = this.props.cities;
-    this.cities = this.cities.concat(dumpCities);
-    this.cities = getUniqueCities(this.cities);
-    this.cities = this.cities.slice(0, 6);
+
+    this.state = {
+      activeCity: this.props.cities[0],
+    };
+
+    this.cities = prepareCities(this.props.cities);
   }
 
   render() {
@@ -21,15 +20,15 @@ class CitiesList extends PureComponent {
         <div className="cities tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              {this.cities.map((city, index) => {
+              {this.cities.map((city) => {
                 const cityClassActive =
-                  index === this.activeCity ? ` tabs__item--active` : ``;
+                  city === this.state.activeCity ? ` tabs__item--active` : ``;
                 return (
                   <li className="locations__item" key={city.name}>
                     <a
                       onClick={() => {
-                        this.onCityClick(city);
-                        this.activeCity = index;
+                        this.props.onCityClick(city);
+                        this.setState({activeCity: city});
                       }}
                       className={`locations__item-link tabs__item${cityClassActive}`}
                       href="#">
