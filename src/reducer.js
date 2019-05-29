@@ -10,10 +10,10 @@ export const ActionCreator = {
     payload: city,
   }),
 
-  getOffers: (offers, city) => {
+  getOffers: (city) => {
     return {
       type: `GET_OFFERS`,
-      payload: filterOffersByCity(offers, city),
+      payload: filterOffersByCity(initialState.offers, city),
     };
   },
 };

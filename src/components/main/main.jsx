@@ -9,13 +9,6 @@ import CitiesList from "../cities-list/cities-list.jsx";
 import Map from "../map/map.jsx";
 
 const Main = (props) => {
-  const offers = props.offers;
-  const onCardTitleClick = props.onCardTitleClick;
-  const onGetOffers = props.onGetOffers;
-  const onCityClick = props.onCityClick;
-  const leaflet = props.leaflet;
-  const city = props.city;
-
   return (
     <React.Fragment>
       <div style={{display: `none`}}>
@@ -76,27 +69,27 @@ const Main = (props) => {
         <h1 className="visually-hidden">Cities</h1>
 
         <CitiesList
-          cities={offers.map((offer) => offer.city)}
+          cities={props.offers.map((offer) => offer.city)}
           onCityClick={(clickedCity) => {
-            onCityClick(clickedCity);
-            onGetOffers(offers, clickedCity);
+            props.onCityClick(clickedCity);
+            props.onGetOffers(clickedCity);
           }}
         />
 
         <div className="cities__places-wrapper">
           <div className="cities__places-container container">
             <RentsList
-              cityName={city.name}
-              rentsCount={offers.length}
-              offers={offers}
-              onCardTitleClick={onCardTitleClick}
+              cityName={props.city.name}
+              rentsCount={props.offers.length}
+              offers={props.offers}
+              onCardTitleClick={props.onCardTitleClick}
             />
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  city={city}
-                  offersCords={offers.map((offer) => offer.coordinates)}
-                  leaflet={leaflet}
+                  city={props.city}
+                  offersCords={props.offers.map((offer) => offer.coordinates)}
+                  leaflet={props.leaflet}
                 />
               </section>
             </div>
@@ -129,8 +122,8 @@ const mapStateToProps = (state, ownProps) =>
 const mapDispatchToProps = (dispatch) => ({
   onCityClick: (city) => dispatch(ActionCreator.changeCity(city)),
 
-  onGetOffers: (offers, city) => {
-    dispatch(ActionCreator.getOffers(offers, city));
+  onGetOffers: (city) => {
+    dispatch(ActionCreator.getOffers(city));
   },
 });
 
