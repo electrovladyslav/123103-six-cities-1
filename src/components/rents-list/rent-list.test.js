@@ -7,16 +7,18 @@ const mockState = {
   offers: [],
   cityName: `Bangkok`,
   rentsCount: 2000,
-  onCardTitleClick: jest.fn()
+  onCardTitleClick: jest.fn(),
+  onElementActivate: jest.fn(),
 };
 
 it(`Rent list component renders correctly`, () => {
   const tree = renderer
   .create(<RentList
-    offers ={mockState.offers}
+    elements ={mockState.offers}
     cityName ={mockState.cityName}
     rentsCount ={mockState.rentsCount}
     onCardTitleClick = {mockState.onCardTitleClick}
+    onElementActivate = {mockState.onElementActivate}
   />)
   .toJSON();
   expect(tree).toMatchSnapshot();

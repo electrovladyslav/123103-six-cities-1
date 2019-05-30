@@ -16,7 +16,7 @@ const fakeCities = [
 const fakeHandler = jest.fn();
 
 const app = shallow(
-    <CitiesList elements={fakeCities} onElementClick={fakeHandler} activeElementNumber={1}/>
+    <CitiesList elements={fakeCities} onElementActivate={fakeHandler} activeElementNumber={1}/>
 );
 
 const cityTitles = app.find(`.locations__item-link`);

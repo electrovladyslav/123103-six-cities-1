@@ -22,7 +22,7 @@ const withActiveElement = (Component) => {
           onElementActivate={(element) => {
             this.props.onElementActivate(element);
             this.setState({
-              activeElementNumber: this.elements.indexOf(element),
+              activeElementNumber: this.props.elements.indexOf(element),
             });
           }}
         />

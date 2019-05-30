@@ -14,7 +14,7 @@ it(`Cities list component renders correctly`, () => {
     .create(
         <CitiesList
           elements={mockState.cities}
-          onElementClick={mockState.onElementClick}
+          onElementActivate={mockState.onElementClick}
           activeElementNumber={0}
         />
     )
