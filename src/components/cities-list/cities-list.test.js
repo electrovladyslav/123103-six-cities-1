@@ -6,15 +6,16 @@ import cities from "../../mocks/cities";
 
 const mockState = {
   cities,
-  onCityClick: jest.fn(),
+  onElementClick: jest.fn(),
 };
 
 it(`Cities list component renders correctly`, () => {
   const tree = renderer
     .create(
         <CitiesList
-          cities={mockState.cities}
-          onCityClick={mockState.onCityClick}
+          elements={mockState.cities}
+          onElementClick={mockState.onElementClick}
+          activeElementNumber={0}
         />
     )
     .toJSON();

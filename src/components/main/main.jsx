@@ -7,8 +7,16 @@ import {ActionCreator} from "../../reducer";
 import RentsList from "../rents-list/rents-list.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
 import Map from "../map/map.jsx";
+import withActiveElement from "../../hocs/with-active-element/with-active-element.jsx";
+import prepareCities from "../../utils/prepareCities";
+
+const CitiesListWrapped = withActiveElement(CitiesList);
+
 
 const Main = (props) => {
+  let cities = props.offers.map((offer) => offer.city);
+  cities = prepareCities(cities);
+
   return (
     <React.Fragment>
       <div style={{display: `none`}}>
@@ -68,9 +76,9 @@ const Main = (props) => {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
 
-        <CitiesList
-          cities={props.offers.map((offer) => offer.city)}
-          onCityClick={(clickedCity) => {
+        <CitiesListWrapped
+          elements={cities}
+          onElementClick={(clickedCity) => {
             props.onCityClick(clickedCity);
             props.onGetOffers(clickedCity);
           }}
