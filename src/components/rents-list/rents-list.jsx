@@ -7,13 +7,13 @@ class RentsList extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      activeCard: null,
-    };
+    // this.state = {
+    //   activeCard: null,
+    // };
   }
 
   render() {
-    const {offers, onCardTitleClick, cityName, rentsCount} = this.props;
+    const {elements, onCardTitleClick, cityName, rentsCount} = this.props;
     return (
       <React.Fragment>
         <section className="cities__places places">
@@ -56,7 +56,7 @@ class RentsList extends PureComponent {
           </form>
           <div className="cities__places-list places__list tabs__content">
             {/* ---Rent card--- */}
-            {offers.map((offer, index) => {
+            {elements.map((offer, index) => {
               return (
                 <RentCard
                   offer={offer}
@@ -81,26 +81,12 @@ class RentsList extends PureComponent {
     );
   }
 
-  _setActiveCard(id) {
-    this.setState(
-        {
-          activeCard: id,
-        },
-        () => {
-          console.log(`SetActive card: ${this.state.activeCard}`); // eslint-disable-line no-console
-        }
-    );
+  _setActiveCard(offer) {
+    this.props.onElementActivate(offer);
   }
 
   _removeActiveCard() {
-    this.setState(
-        {
-          activeCard: null,
-        },
-        () => {
-          console.log(`removeActive card: ${this.state.activeCard}`); // eslint-disable-line no-console
-        }
-    );
+    this.props.onElementActivate(null);
   }
 
   _cardImageClickHandler(activeCard) {
@@ -109,10 +95,11 @@ class RentsList extends PureComponent {
 }
 
 RentsList.propTypes = {
-  offers: PropTypes.array.isRequired,
+  elements: PropTypes.array.isRequired,
   cityName: PropTypes.string.isRequired,
   rentsCount: PropTypes.number.isRequired,
   onCardTitleClick: PropTypes.func.isRequired,
+  onElementActivate: PropTypes.func.isRequired,
 };
 
 export default RentsList;

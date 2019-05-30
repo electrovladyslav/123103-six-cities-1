@@ -18,7 +18,7 @@ const CitiesList = (props) => {
                 <li className="locations__item" key={city.name}>
                   <a
                     onClick={() => {
-                      props.onElementClick(city);
+                      props.onElementActivate(city);
                     }}
                     className={`locations__item-link tabs__item${cityClassActive}`}
                     href="#">
@@ -36,7 +36,7 @@ const CitiesList = (props) => {
 
 CitiesList.propTypes = {
   elements: PropTypes.array.isRequired,
-  onElementClick: PropTypes.func.isRequired,
+  onElementActivate: PropTypes.func.isRequired,
   activeElementNumber: PropTypes.number.isRequired,
 };
 

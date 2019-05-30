@@ -11,7 +11,11 @@ import withActiveElement from "../../hocs/with-active-element/with-active-elemen
 import prepareCities from "../../utils/prepareCities";
 
 const CitiesListWrapped = withActiveElement(CitiesList);
-
+const RentsListWrapped = withActiveElement(RentsList);
+const onOfferChoose = (offer) => {
+  // eslint-disable-next-line no-console
+  console.log(`${offer.name} was chosen`);
+};
 
 const Main = (props) => {
   let cities = props.offers.map((offer) => offer.city);
@@ -78,7 +82,7 @@ const Main = (props) => {
 
         <CitiesListWrapped
           elements={cities}
-          onElementClick={(clickedCity) => {
+          onElementActivate={(clickedCity) => {
             props.onCityClick(clickedCity);
             props.onGetOffers(clickedCity);
           }}
@@ -86,10 +90,11 @@ const Main = (props) => {
 
         <div className="cities__places-wrapper">
           <div className="cities__places-container container">
-            <RentsList
+            <RentsListWrapped
+              elements={props.offers}
+              onElementActivate={onOfferChoose}
               cityName={props.city.name}
               rentsCount={props.offers.length}
-              offers={props.offers}
               onCardTitleClick={props.onCardTitleClick}
             />
             <div className="cities__right-section">
