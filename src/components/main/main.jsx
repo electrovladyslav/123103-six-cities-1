@@ -18,8 +18,10 @@ const onOfferChoose = (offer) => {
 };
 
 const Main = (props) => {
-  let cities = props.offers.map((offer) => offer.city);
+  let cities = props.initialOffers.map((offer) => offer.city);
   cities = prepareCities(cities);
+
+  // props.onGetOffers(cities[0]);
 
   return (
     <React.Fragment>
@@ -115,6 +117,7 @@ const Main = (props) => {
 
 Main.propTypes = {
   offers: PropTypes.array.isRequired,
+  initialOffers: PropTypes.array.isRequired,
   onCardTitleClick: PropTypes.func.isRequired,
   onCityClick: PropTypes.func.isRequired,
   onGetOffers: PropTypes.func.isRequired,
@@ -130,6 +133,7 @@ const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
     city: state.city,
     offers: state.offers,
+    initialOffers: state.initialOffers,
   });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -62,11 +62,11 @@ class RentsList extends PureComponent {
                   offer={offer}
                   onCardTitleClick={onCardTitleClick}
                   onCardImageClick={() => {
-                    this._cardImageClickHandler(this.state.activeCard);
+                    this._cardImageClickHandler(this.props.activeElementNumber);
                   }}
                   key={`${offer.name}${index}`}
                   onMouseEnterCard={() => {
-                    this._setActiveCard(offer.name);
+                    this._setActiveCard(offer);
                   }}
                   onMouseLeaveCrad={() => {
                     this._removeActiveCard();
@@ -96,6 +96,7 @@ class RentsList extends PureComponent {
 
 RentsList.propTypes = {
   elements: PropTypes.array.isRequired,
+  activeElementNumber: PropTypes.number.isRequired,
   cityName: PropTypes.string.isRequired,
   rentsCount: PropTypes.number.isRequired,
   onCardTitleClick: PropTypes.func.isRequired,

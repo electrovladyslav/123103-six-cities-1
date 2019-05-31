@@ -23,7 +23,8 @@ it(`In main component click on card header works`, () => {
   const app = mount(
       <Main
         city={mockCity}
-        offers={mockOffers}
+        initialOffers={mockOffers}
+        offers={[]}
         onCardTitleClick={onCardTitleClick}
         onCityClick={jest.fn()}
         onGetOffers={jest.fn()}

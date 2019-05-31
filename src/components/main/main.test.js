@@ -23,7 +23,8 @@ it(`Main component renders correctly`, () => {
     .create(
         <Main
           city={mockState.city}
-          offers={mockState.offers}
+          offers={[]}
+          initialOffers={mockState.offers}
           onCardTitleClick={mockState.onCardTitleClick}
           onCityClick={jest.fn()}
           onGetOffers={jest.fn()}

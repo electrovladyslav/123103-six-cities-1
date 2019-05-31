@@ -4,18 +4,18 @@ export default {
     location: {
       latitude: 52.370216,
       longitude: 4.895168,
-      zoom: 10
-    }
+      zoom: 10,
+    },
   },
-  offers: [
+  initialOffers: [
     {
       city: {
         name: `Amsterdam`,
         location: {
           latitude: 52.370216,
           longitude: 4.895168,
-          zoom: 10
-        }
+          zoom: 10,
+        },
       },
       isPremium: true,
       imageSource: `img/apartment-01.jpg`,
@@ -32,8 +32,8 @@ export default {
         location: {
           latitude: 52.370216,
           longitude: 4.895168,
-          zoom: 10
-        }
+          zoom: 10,
+        },
       },
       isPremium: false,
       imageSource: `img/room.jpg`,
@@ -50,8 +50,8 @@ export default {
         location: {
           latitude: 52.370216,
           longitude: 4.895168,
-          zoom: 10
-        }
+          zoom: 10,
+        },
       },
       isPremium: false,
       imageSource: `img/apartment-02.jpg`,
@@ -68,8 +68,8 @@ export default {
         location: {
           latitude: 52.370216,
           longitude: 4.895168,
-          zoom: 10
-        }
+          zoom: 10,
+        },
       },
       isPremium: true,
       imageSource: `img/apartment-03.jpg`,
@@ -135,4 +135,5 @@ export default {
       coordinates: [55.3909553943508, 37.929309666406198],
     },
   ],
+  offers: [],
 };

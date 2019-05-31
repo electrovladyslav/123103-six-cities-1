@@ -11,9 +11,10 @@ export const ActionCreator = {
   }),
 
   getOffers: (city) => {
+    debugger;
     return {
       type: `GET_OFFERS`,
-      payload: filterOffersByCity(initialState.offers, city),
+      payload: filterOffersByCity(initialState.initialOffers, city),
     };
   },
 };
