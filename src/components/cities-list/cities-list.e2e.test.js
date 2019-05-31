@@ -16,7 +16,7 @@ const fakeCities = [
 const fakeHandler = jest.fn();
 
 const app = shallow(
-    <CitiesList cities={fakeCities} onCityClick={fakeHandler} />
+    <CitiesList elements={fakeCities} onElementActivate={fakeHandler} activeElementNumber={1}/>
 );
 
 const cityTitles = app.find(`.locations__item-link`);
@@ -32,12 +32,4 @@ it(`In CitiesList component handler calls with right arguments`, () => {
   fakeCities.forEach((city, number) => {
     expect(fakeHandler).toHaveBeenNthCalledWith(number + 1, city);
   });
-});
-
-it(`CitiesList renders 6 cities even take 0 cities on enter`, () => {
-  const app2 = shallow(
-      <CitiesList cities={[]} onCityClick={fakeHandler} />
-  );
-  const cityTitles2 = app2.find(`.locations__item-link`);
-  expect(cityTitles2).toHaveLength(6);
 });

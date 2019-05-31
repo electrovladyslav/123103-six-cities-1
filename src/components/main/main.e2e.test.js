@@ -23,7 +23,8 @@ it(`In main component click on card header works`, () => {
   const app = mount(
       <Main
         city={mockCity}
-        offers={mockOffers}
+        initialOffers={mockOffers}
+        offers={[]}
         onCardTitleClick={onCardTitleClick}
         onCityClick={jest.fn()}
         onGetOffers={jest.fn()}
@@ -35,5 +36,5 @@ it(`In main component click on card header works`, () => {
   cardHeaders.forEach((cardHeader) => {
     cardHeader.simulate(`click`, {preventDefault() {}});
   });
-  expect(onCardTitleClick).toHaveBeenCalledTimes(4);
+  expect(onCardTitleClick).toHaveBeenCalledTimes(cardHeaders.length);
 });

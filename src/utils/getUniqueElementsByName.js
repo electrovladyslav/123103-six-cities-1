@@ -5,13 +5,13 @@
  */
 
 export default (array) => {
-  const obj = {};
 
-  return array.reduce((arr, current) => {
+  const hash = array.reduce((obj, current) => {
     if (!obj[current.name]) {
-      obj[current.name] = true;
-      arr.push(current);
+      obj[current.name] = current;
     }
-    return arr;
-  }, []);
+    return obj;
+  }, {});
+
+  return Object.values(hash);
 };

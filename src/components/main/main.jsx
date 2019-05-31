@@ -7,8 +7,22 @@ import {ActionCreator} from "../../reducer";
 import RentsList from "../rents-list/rents-list.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
 import Map from "../map/map.jsx";
+import withActiveElement from "../../hocs/with-active-element/with-active-element.jsx";
+import prepareCities from "../../utils/prepareCities";
+
+const CitiesListWrapped = withActiveElement(CitiesList);
+const RentsListWrapped = withActiveElement(RentsList);
+const onOfferChoose = (offer) => {
+  // eslint-disable-next-line no-console
+  console.log(`${offer.name} was chosen`);
+};
 
 const Main = (props) => {
+  let cities = props.initialOffers.map((offer) => offer.city);
+  cities = prepareCities(cities);
+
+  // props.onGetOffers(cities[0]); - цикличный перерендер
+
   return (
     <React.Fragment>
       <div style={{display: `none`}}>
@@ -68,9 +82,9 @@ const Main = (props) => {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
 
-        <CitiesList
-          cities={props.offers.map((offer) => offer.city)}
-          onCityClick={(clickedCity) => {
+        <CitiesListWrapped
+          elements={cities}
+          onElementActivate={(clickedCity) => {
             props.onCityClick(clickedCity);
             props.onGetOffers(clickedCity);
           }}
@@ -78,10 +92,11 @@ const Main = (props) => {
 
         <div className="cities__places-wrapper">
           <div className="cities__places-container container">
-            <RentsList
+            <RentsListWrapped
+              elements={props.offers}
+              onElementActivate={onOfferChoose}
               cityName={props.city.name}
               rentsCount={props.offers.length}
-              offers={props.offers}
               onCardTitleClick={props.onCardTitleClick}
             />
             <div className="cities__right-section">
@@ -102,6 +117,7 @@ const Main = (props) => {
 
 Main.propTypes = {
   offers: PropTypes.array.isRequired,
+  initialOffers: PropTypes.array.isRequired,
   onCardTitleClick: PropTypes.func.isRequired,
   onCityClick: PropTypes.func.isRequired,
   onGetOffers: PropTypes.func.isRequired,
@@ -117,6 +133,7 @@ const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
     city: state.city,
     offers: state.offers,
+    initialOffers: state.initialOffers,
   });
 
 const mapDispatchToProps = (dispatch) => ({
