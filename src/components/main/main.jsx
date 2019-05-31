@@ -21,7 +21,7 @@ const Main = (props) => {
   let cities = props.initialOffers.map((offer) => offer.city);
   cities = prepareCities(cities);
 
-  // props.onGetOffers(cities[0]);
+  // props.onGetOffers(cities[0]); - цикличный перерендер
 
   return (
     <React.Fragment>

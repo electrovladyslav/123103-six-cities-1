@@ -36,5 +36,5 @@ it(`In main component click on card header works`, () => {
   cardHeaders.forEach((cardHeader) => {
     cardHeader.simulate(`click`, {preventDefault() {}});
   });
-  expect(onCardTitleClick).toHaveBeenCalledTimes(4);
+  expect(onCardTitleClick).toHaveBeenCalledTimes(cardHeaders.length);
 });
