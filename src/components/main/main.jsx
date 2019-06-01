@@ -20,6 +20,49 @@ const onOfferChoose = (offer) => {
 const Main = (props) => {
   let cities = props.initialOffers.map((offer) => offer.city);
   cities = prepareCities(cities);
+  const isNoOffers = !props.offers.length;
+
+  const renderOfferBlock = (isEmpty) => {
+    if (isEmpty) {
+      return (
+        <section className="cities__no-places">
+          <div className="cities__status-wrapper tabs__content">
+            <b className="cities__status">No places to stay available</b>
+            <p className="cities__status-description">
+              We could not find any property availbale at the moment in{` `}
+              {props.city.name}
+            </p>
+          </div>
+        </section>
+      );
+    } else {
+      return (
+        <RentsListWrapped
+          elements={props.offers}
+          onElementActivate={onOfferChoose}
+          cityName={props.city.name}
+          rentsCount={props.offers.length}
+          onCardTitleClick={props.onCardTitleClick}
+        />
+      );
+    }
+  };
+
+  const renderMapBlock = (isEmpty) => {
+    if (!isEmpty) {
+      return (
+        <section className="cities__map map">
+          <Map
+            city={props.city}
+            offersLocation={props.offers.map((offer) => offer.location)}
+            leaflet={props.leaflet}
+          />
+        </section>
+      );
+    } else {
+      return ``;
+    }
+  };
 
   return (
     <React.Fragment>
@@ -77,7 +120,10 @@ const Main = (props) => {
         </div>
       </header>
 
-      <main className="page__main page__main--index">
+      <main
+        className={`page__main page__main--index${
+          isNoOffers ? ` page__main--index-empty` : ``
+        }`}>
         <h1 className="visually-hidden">Cities</h1>
 
         <CitiesListWrapped
@@ -89,22 +135,13 @@ const Main = (props) => {
         />
 
         <div className="cities__places-wrapper">
-          <div className="cities__places-container container">
-            <RentsListWrapped
-              elements={props.offers}
-              onElementActivate={onOfferChoose}
-              cityName={props.city.name}
-              rentsCount={props.offers.length}
-              onCardTitleClick={props.onCardTitleClick}
-            />
+          <div
+            className={`cities__places-container container${
+              isNoOffers ? ` cities__places-container--empty` : ``
+            }`}>
+            {renderOfferBlock(isNoOffers)}
             <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map
-                  city={props.city}
-                  offersLocation={props.offers.map((offer) => offer.location)}
-                  leaflet={props.leaflet}
-                />
-              </section>
+              {renderMapBlock(isNoOffers)}
             </div>
           </div>
         </div>

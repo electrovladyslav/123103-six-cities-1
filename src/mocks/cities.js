@@ -1,9 +1,17 @@
 export default [
   {
-    name: `Moscow`,
+    name: `Amsterdam`,
     location: {
-      latitude: 55.751244,
-      longitude: 37.618423,
+      latitude: 52.370216,
+      longitude: 4.895168,
+      zoom: 10,
+    },
+  },
+  {
+    name: `Hamburg`,
+    location: {
+      latitude: 53.550341,
+      longitude: 10.000654,
       zoom: 10,
     },
   },
@@ -16,14 +24,6 @@ export default [
     },
   },
   {
-    name: `Amsterdam`,
-    location: {
-      latitude: 52.370216,
-      longitude: 4.895168,
-      zoom: 10,
-    },
-  },
-  {
     name: `Brussels`,
     location: {
       latitude: 50.8505,
@@ -32,10 +32,10 @@ export default [
     },
   },
   {
-    name: `Hamburg`,
+    name: `Cologne`,
     location: {
-      latitude: 53.551086,
-      longitude: 9.993682,
+      latitude: 50.938361,
+      longitude: 6.959974,
       zoom: 10,
     },
   },
