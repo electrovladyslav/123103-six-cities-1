@@ -21,8 +21,6 @@ const Main = (props) => {
   let cities = props.initialOffers.map((offer) => offer.city);
   cities = prepareCities(cities);
 
-  // props.onGetOffers(cities[0]); - цикличный перерендер
-
   return (
     <React.Fragment>
       <div style={{display: `none`}}>
@@ -86,7 +84,7 @@ const Main = (props) => {
           elements={cities}
           onElementActivate={(clickedCity) => {
             props.onCityClick(clickedCity);
-            props.onGetOffers(clickedCity);
+            props.onGetOffers(props.initialOffers, clickedCity);
           }}
         />
 
@@ -103,7 +101,7 @@ const Main = (props) => {
               <section className="cities__map map">
                 <Map
                   city={props.city}
-                  offersCords={props.offers.map((offer) => offer.coordinates)}
+                  offersLocation={props.offers.map((offer) => offer.location)}
                   leaflet={props.leaflet}
                 />
               </section>
@@ -139,8 +137,8 @@ const mapStateToProps = (state, ownProps) =>
 const mapDispatchToProps = (dispatch) => ({
   onCityClick: (city) => dispatch(ActionCreator.changeCity(city)),
 
-  onGetOffers: (city) => {
-    dispatch(ActionCreator.getOffers(city));
+  onGetOffers: (offers, city) => {
+    dispatch(ActionCreator.filterOffers(offers, city));
   },
 });
 

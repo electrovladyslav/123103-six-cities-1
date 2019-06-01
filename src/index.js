@@ -1,11 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {Provider} from "react-redux";
-import {createStore} from "redux";
+import {createStore, applyMiddleware} from "redux";
+import thunk from "redux-thunk";
+import {compose} from "recompose";
 import leaflet from "leaflet";
 
 import Main from "./components/main/main.jsx";
-import {reducer} from "./reducer";
+import {reducer, Operation} from "./reducer";
+import configureAPI from "./api";
 
 const handleClick = (event) => {
   console.log(`The link was clicked.`); // eslint-disable-line no-console
@@ -13,10 +16,18 @@ const handleClick = (event) => {
 };
 
 const init = () => {
+  const api = configureAPI((...args) => store.dispatch(...args));
+
   const store = createStore(
       reducer,
-      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+      compose(
+          applyMiddleware(thunk.withExtraArgument(api)),
+          window.__REDUX_DEVTOOLS_EXTENSION__ &&
+        window.__REDUX_DEVTOOLS_EXTENSION__()
+      )
   );
+
+  store.dispatch(Operation.loadOffers());
 
   ReactDOM.render(
       <Provider store={store}>
