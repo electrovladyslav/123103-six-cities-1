@@ -7,10 +7,8 @@ const withActiveElement = (Component) => {
       super(props);
 
       this.state = {
-        activeElementNumber: 0,
+        activeElementNumber: this.props.activeElementNumber || 0,
       };
-
-      // this.elements = this.props.elements;
     }
 
     render() {
@@ -33,6 +31,7 @@ const withActiveElement = (Component) => {
   WithActiveElement.propTypes = {
     onElementActivate: PropTypes.func.isRequired,
     elements: PropTypes.array.isRequired,
+    activeElementNumber: PropTypes.number,
   };
 
   return WithActiveElement;

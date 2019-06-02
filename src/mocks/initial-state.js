@@ -1,35 +1,35 @@
 export default {
   city: {
-    name: `Amsterdam`,
-    location: {
-      latitude: 52.370216,
-      longitude: 4.895168,
-      zoom: 10,
-    },
+    // name: `Amsterdam`,
+    // location: {
+    //   latitude: 52.370216,
+    //   longitude: 4.895168,
+    //   zoom: 10,
+    // },
   },
   isAuthorizationRequired: false,
-  initialOffers: [
-    {
-      city: {
-        name: `Amsterdam`,
-        location: {
-          latitude: 52.370216,
-          longitude: 4.895168,
-          zoom: 10,
-        },
-      },
-      isPremium: true,
-      previewImageSource: `img/apartment-01.jpg`,
-      price: 120,
-      isBookmarked: false,
-      rating: 4.5,
-      name: `Beautiful & luxurious apartment at great location`,
-      type: `Apartment`,
-      location: {
-        latitude: 52.3909553943508,
-        longitude: 4.85309666406198,
-      }
-    },
+  allOffers: [
+    // {
+    //   city: {
+    //     name: `Amsterdam`,
+    //     location: {
+    //       latitude: 52.370216,
+    //       longitude: 4.895168,
+    //       zoom: 10,
+    //     },
+    //   },
+    //   isPremium: true,
+    //   previewImageSource: `img/apartment-01.jpg`,
+    //   price: 120,
+    //   isBookmarked: false,
+    //   rating: 4.5,
+    //   name: `Beautiful & luxurious apartment at great location`,
+    //   type: `Apartment`,
+    //   location: {
+    //     latitude: 52.3909553943508,
+    //     longitude: 4.85309666406198,
+    //   }
+    // },
     // {
     //   city: {
     //     name: `Amsterdam`,
@@ -158,27 +158,27 @@ export default {
     // },
   ],
   offers: [
-    {
-      city: {
-        name: `Amsterdam`,
-        location: {
-          latitude: 52.370216,
-          longitude: 4.895168,
-          zoom: 10,
-        },
-      },
-      isPremium: true,
-      previewImageSource: `img/apartment-01.jpg`,
-      price: 120,
-      isBookmarked: false,
-      rating: 4.5,
-      name: `Beautiful & luxurious apartment at great location`,
-      type: `Apartment`,
-      location: {
-        latitude: 52.3909553943508,
-        longitude: 4.85309666406198,
-      }
-    },
+    // {
+    //   city: {
+    //     name: `Amsterdam`,
+    //     location: {
+    //       latitude: 52.370216,
+    //       longitude: 4.895168,
+    //       zoom: 10,
+    //     },
+    //   },
+    //   isPremium: true,
+    //   previewImageSource: `img/apartment-01.jpg`,
+    //   price: 120,
+    //   isBookmarked: false,
+    //   rating: 4.5,
+    //   name: `Beautiful & luxurious apartment at great location`,
+    //   type: `Apartment`,
+    //   location: {
+    //     latitude: 52.3909553943508,
+    //     longitude: 4.85309666406198,
+    //   }
+    // },
     // {
     //   city: {
     //     name: `Amsterdam`,

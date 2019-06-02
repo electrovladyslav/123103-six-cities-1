@@ -59,7 +59,7 @@ export function reducer(state = initialState, action) {
 
     case ActionTypes.LOAD_OFFERS:
       return Object.assign({}, state, {
-        initialOffers: action.payload,
+        allOffers: action.payload,
       });
 
     case ActionTypes.REQUIRED_AUTHORIZATION:

@@ -9,6 +9,7 @@ import CitiesList from "../cities-list/cities-list.jsx";
 import Map from "../map/map.jsx";
 import withActiveElement from "../../hocs/with-active-element/with-active-element.jsx";
 import prepareCities from "../../utils/prepareCities";
+// import getRandomNumber from "../../utils/getRandomNumber";
 
 const CitiesListWrapped = withActiveElement(CitiesList);
 const RentsListWrapped = withActiveElement(RentsList);
@@ -18,8 +19,22 @@ const onOfferChoose = (offer) => {
 };
 
 const Main = (props) => {
-  let cities = props.initialOffers.map((offer) => offer.city);
+  let cities = props.allOffers.map((offer) => offer.city);
   cities = prepareCities(cities);
+  // debugger;
+
+  if (!props.allOffers.length) {
+    return `Ожидайте загрузки данных.`;
+  }
+  if (!Object.keys(props.city).length) {
+    // props.onChooseCity(cities[getRandomNumber(5)]); TODO прикрутить рандом
+    props.onChooseCity(cities[0]);
+  }
+
+  if (!props.offers.length) {
+    props.onGetOffers(props.allOffers, props.city);
+  }
+
   const isNoOffers = !props.offers.length;
 
   const renderOfferBlock = (isEmpty) => {
@@ -128,8 +143,8 @@ const Main = (props) => {
         <CitiesListWrapped
           elements={cities}
           onElementActivate={(clickedCity) => {
-            props.onCityClick(clickedCity);
-            props.onGetOffers(props.initialOffers, clickedCity);
+            props.onChooseCity(clickedCity);
+            props.onGetOffers(props.allOffers, clickedCity);
           }}
         />
 
@@ -151,9 +166,9 @@ const Main = (props) => {
 
 Main.propTypes = {
   offers: PropTypes.array.isRequired,
-  initialOffers: PropTypes.array.isRequired,
+  allOffers: PropTypes.array.isRequired,
   onCardTitleClick: PropTypes.func.isRequired,
-  onCityClick: PropTypes.func.isRequired,
+  onChooseCity: PropTypes.func.isRequired,
   onGetOffers: PropTypes.func.isRequired,
   leaflet: PropTypes.object.isRequired,
   city: PropTypes.shape({
@@ -167,11 +182,11 @@ const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
     city: state.city,
     offers: state.offers,
-    initialOffers: state.initialOffers,
+    allOffers: state.allOffers,
   });
 
 const mapDispatchToProps = (dispatch) => ({
-  onCityClick: (city) => dispatch(ActionCreator.changeCity(city)),
+  onChooseCity: (city) => dispatch(ActionCreator.changeCity(city)),
 
   onGetOffers: (offers, city) => {
     dispatch(ActionCreator.filterOffers(offers, city));
