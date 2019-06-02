@@ -1,45 +1,8 @@
-import {reducer, filterOffersByCity, Operation} from "./reducer";
+import {reducer, Operation} from "./reducer";
 import MockAdapter from "axios-mock-adapter";
 import api from "./api";
 import adapter from "./adapter";
 import initialState from "./mocks/initial-state";
-
-it(`Offers filter correctly`, () => {
-  const mockCities = [
-    {
-      city: {
-        name: `Amsterdam`,
-      },
-    },
-    {
-      city: {
-        name: `Moscow`,
-      },
-    },
-    {
-      city: {
-        name: `Amsterdam`,
-      },
-    },
-    {
-      city: {
-        name: `New York`,
-      },
-    },
-  ];
-
-  expect(filterOffersByCity(mockCities, {name: `Amsterdam`})).toEqual([
-    {city: {name: `Amsterdam`}},
-    {city: {name: `Amsterdam`}},
-  ]);
-
-  expect(filterOffersByCity(mockCities, {name: `Moscow`})).toEqual([
-    {city: {name: `Moscow`}},
-  ]);
-
-
-  expect(filterOffersByCity(mockCities, {name: `Barselona`})).toEqual([]);
-});
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(undefined, {})).toEqual(initialState);

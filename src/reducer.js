@@ -1,10 +1,7 @@
 import initialState from "./mocks/initial-state";
 import api from "./api";
 import adapter from "./adapter";
-
-export const filterOffersByCity = (offers, city) => {
-  return offers.filter((offer) => offer.city.name === city.name);
-};
+import {filterOffersByCity} from "./selectors";
 
 export const ActionCreator = {
   loadOffers: (offers) => {
