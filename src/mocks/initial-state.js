@@ -7,6 +7,7 @@ export default {
       zoom: 10,
     },
   },
+  isAuthorizationRequired: false,
   initialOffers: [
     {
       city: {

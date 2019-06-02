@@ -2,22 +2,36 @@ import initialState from "./mocks/initial-state";
 import adapter from "./adapter";
 import {filterOffersByCity} from "./selectors";
 
+export const ActionTypes = {
+  LOAD_OFFERS: `LOAD_OFFERS`,
+  CHANGE_CITY: `CHANGE_CITY`,
+  GET_OFFERS: `GET_OFFERS`,
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+};
+
 export const ActionCreator = {
+  requireAuthorization: (status) => {
+    return {
+      type: ActionTypes.REQUIRED_AUTHORIZATION,
+      payload: status,
+    };
+  },
+
   loadOffers: (offers) => {
     return {
-      type: `LOAD_OFFERS`,
+      type: ActionTypes.LOAD_OFFERS,
       payload: offers,
     };
   },
 
   changeCity: (city) => ({
-    type: `CHANGE_CITY`,
+    type: ActionTypes.CHANGE_CITY,
     payload: city,
   }),
 
   filterOffers: (offers, city) => {
     return {
-      type: `GET_OFFERS`,
+      type: ActionTypes.GET_OFFERS,
       payload: filterOffersByCity(offers, city),
     };
   },
@@ -33,19 +47,24 @@ export const Operation = {
 
 export function reducer(state = initialState, action) {
   switch (action.type) {
-    case `CHANGE_CITY`:
+    case ActionTypes.CHANGE_CITY:
       return Object.assign({}, state, {
         city: action.payload,
       });
 
-    case `GET_OFFERS`:
+    case ActionTypes.GET_OFFERS:
       return Object.assign({}, state, {
         offers: action.payload,
       });
 
-    case `LOAD_OFFERS`:
+    case ActionTypes.LOAD_OFFERS:
       return Object.assign({}, state, {
         initialOffers: action.payload,
+      });
+
+    case ActionTypes.REQUIRED_AUTHORIZATION:
+      return Object.assign({}, state, {
+        isAuthorizationRequired: action.payload,
       });
   }
 
