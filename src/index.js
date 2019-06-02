@@ -8,7 +8,7 @@ import leaflet from "leaflet";
 
 import Main from "./components/main/main.jsx";
 import {reducer, Operation} from "./reducer";
-import configureAPI from "./api";
+import createApi from "./api";
 
 const handleClick = (event) => {
   console.log(`The link was clicked.`); // eslint-disable-line no-console
@@ -16,7 +16,7 @@ const handleClick = (event) => {
 };
 
 const init = () => {
-  const api = configureAPI((...args) => store.dispatch(...args));
+  const api = createApi((...args) => store.dispatch(...args));
 
   const store = createStore(
       reducer,

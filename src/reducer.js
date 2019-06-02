@@ -1,5 +1,4 @@
 import initialState from "./mocks/initial-state";
-import api from "./api";
 import adapter from "./adapter";
 import {filterOffersByCity} from "./selectors";
 
@@ -25,7 +24,7 @@ export const ActionCreator = {
 };
 
 export const Operation = {
-  loadOffers: () => (dispatch) => {
+  loadOffers: () => (dispatch, _getState, api) => {
     return api.get(`/hotels`).then((response) => {
       dispatch(ActionCreator.loadOffers(adapter(response.data)));
     });
