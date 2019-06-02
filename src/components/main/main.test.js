@@ -24,9 +24,9 @@ it(`Main component renders correctly`, () => {
         <Main
           city={mockState.city}
           offers={[]}
-          initialOffers={mockState.offers}
+          allOffers={mockState.offers}
           onCardTitleClick={mockState.onCardTitleClick}
-          onCityClick={jest.fn()}
+          onChooseCity={jest.fn()}
           onGetOffers={jest.fn()}
           leaflet={leafletMock}
         />
