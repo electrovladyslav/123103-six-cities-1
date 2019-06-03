@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 import {ActionCreator} from "../../reducer";
+import {filterOffersByCity} from "../../selectors";
 
 import RentsList from "../rents-list/rents-list.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
@@ -21,7 +22,6 @@ const onOfferChoose = (offer) => {
 const Main = (props) => {
   let cities = props.allOffers.map((offer) => offer.city);
   cities = prepareCities(cities);
-  // debugger;
 
   if (!props.allOffers.length) {
     return `Ожидайте загрузки данных.`;
@@ -30,11 +30,6 @@ const Main = (props) => {
     // props.onChooseCity(cities[getRandomNumber(5)]); TODO прикрутить рандом
     props.onChooseCity(cities[0]);
   }
-
-  if (!props.offers.length) {
-    props.onGetOffers(props.allOffers, props.city);
-  }
-
   const isNoOffers = !props.offers.length;
 
   const renderOfferBlock = (isEmpty) => {
@@ -44,7 +39,8 @@ const Main = (props) => {
           <div className="cities__status-wrapper tabs__content">
             <b className="cities__status">No places to stay available</b>
             <p className="cities__status-description">
-              We could not find any property availbale at the moment in {props.city.name}
+              We could not find any property availbale at the moment in{` `}
+              {props.city.name}
             </p>
           </div>
         </section>
@@ -144,7 +140,6 @@ const Main = (props) => {
           elements={cities}
           onElementActivate={(clickedCity) => {
             props.onChooseCity(clickedCity);
-            props.onGetOffers(props.allOffers, clickedCity);
           }}
         />
 
@@ -169,7 +164,6 @@ Main.propTypes = {
   allOffers: PropTypes.array.isRequired,
   onCardTitleClick: PropTypes.func.isRequired,
   onChooseCity: PropTypes.func.isRequired,
-  onGetOffers: PropTypes.func.isRequired,
   leaflet: PropTypes.object.isRequired,
   city: PropTypes.shape({
     name: PropTypes.string,
@@ -181,16 +175,12 @@ Main.propTypes = {
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
     city: state.city,
-    offers: state.offers,
+    offers: filterOffersByCity(state),
     allOffers: state.allOffers,
   });
 
 const mapDispatchToProps = (dispatch) => ({
   onChooseCity: (city) => dispatch(ActionCreator.changeCity(city)),
-
-  onGetOffers: (offers, city) => {
-    dispatch(ActionCreator.filterOffers(offers, city));
-  },
 });
 
 export {Main};
