@@ -3,7 +3,8 @@ import adapter from "./adapter";
 
 export const ActionTypes = {
   LOAD_OFFERS: `LOAD_OFFERS`,
-  CHANGE_CITY: `CHANGE_CITY`,
+  LOAD_FAIL: `LOAD_FAIL`,
+  CHANGE_ACTIVE_CITY: `CHANGE_ACTIVE_CITY`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
 };
 
@@ -22,30 +23,46 @@ export const ActionCreator = {
     };
   },
 
-  changeCity: (city) => ({
-    type: ActionTypes.CHANGE_CITY,
-    payload: city,
+  loadFail: (message) => {
+    return {
+      type: ActionTypes.LOAD_FAIL,
+      payload: message,
+    };
+  },
+
+  changeActiveCity: (cityNumber) => ({
+    type: ActionTypes.CHANGE_ACTIVE_CITY,
+    payload: cityNumber,
   }),
 };
 
 export const Operation = {
   loadOffers: () => (dispatch, _getState, api) => {
-    return api.get(`/hotels`).then((response) => {
-      dispatch(ActionCreator.loadOffers(adapter(response.data)));
-    });
+    return api
+      .get(`/hotels`)
+      .then((response) => {
+        dispatch(ActionCreator.loadOffers(adapter(response.data)));
+      })
+      // eslint-disable-next-line no-console
+      .catch((err) => console.log(err));
   },
 };
 
 export function reducer(state = initialState, action) {
   switch (action.type) {
-    case ActionTypes.CHANGE_CITY:
+    case ActionTypes.CHANGE_ACTIVE_CITY:
       return Object.assign({}, state, {
-        city: action.payload,
+        activeCityNumber: action.payload,
       });
 
     case ActionTypes.LOAD_OFFERS:
       return Object.assign({}, state, {
         allOffers: action.payload,
+      });
+
+    case ActionTypes.LOAD_FAIL:
+      return Object.assign({}, state, {
+        loading: action.payload,
       });
 
     case ActionTypes.REQUIRED_AUTHORIZATION:

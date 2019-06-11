@@ -3,33 +3,35 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 import {ActionCreator} from "../../reducer";
-import {filterOffersByCity} from "../../selectors";
+import {filterOffersByCity, getCities, getActiveCity, getLoadingStatus} from "../../selectors";
 
 import RentsList from "../rents-list/rents-list.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
 import Map from "../map/map.jsx";
 import withActiveElement from "../../hocs/with-active-element/with-active-element.jsx";
-import prepareCities from "../../utils/prepareCities";
 // import getRandomNumber from "../../utils/getRandomNumber";
 
 const CitiesListWrapped = withActiveElement(CitiesList);
 const RentsListWrapped = withActiveElement(RentsList);
-const onOfferChoose = (offer) => {
+const onOfferChoose = (offerNumber) => {
   // eslint-disable-next-line no-console
-  console.log(`${offer.name} was chosen`);
+  console.log(`Offer #${offerNumber} was chosen`);
 };
 
 const Main = (props) => {
-  let cities = props.allOffers.map((offer) => offer.city);
-  cities = prepareCities(cities);
+  if (props.loading === `Network Error`) {
+    return `Что-то пошло не так, перезагрузите страницу.`;
+  }
 
   if (!props.allOffers.length) {
     return `Ожидайте загрузки данных.`;
   }
-  if (!Object.keys(props.city).length) {
+  if (!props.activeCity) {
     // props.onChooseCity(cities[getRandomNumber(5)]); TODO прикрутить рандом
-    props.onChooseCity(cities[0]);
+    props.onChooseCity(0);
+    return `Ожидайте загрузки данных.`;
   }
+
   const isNoOffers = !props.offers.length;
 
   const renderOfferBlock = (isEmpty) => {
@@ -40,7 +42,7 @@ const Main = (props) => {
             <b className="cities__status">No places to stay available</b>
             <p className="cities__status-description">
               We could not find any property availbale at the moment in{` `}
-              {props.city.name}
+              {props.activeCity.name}
             </p>
           </div>
         </section>
@@ -50,7 +52,7 @@ const Main = (props) => {
         <RentsListWrapped
           elements={props.offers}
           onElementActivate={onOfferChoose}
-          cityName={props.city.name}
+          cityName={props.activeCity.name}
           rentsCount={props.offers.length}
           onCardTitleClick={props.onCardTitleClick}
         />
@@ -63,7 +65,7 @@ const Main = (props) => {
       return (
         <section className="cities__map map">
           <Map
-            city={props.city}
+            city={props.activeCity}
             offersLocation={props.offers.map((offer) => offer.location)}
             leaflet={props.leaflet}
           />
@@ -137,7 +139,7 @@ const Main = (props) => {
         <h1 className="visually-hidden">Cities</h1>
 
         <CitiesListWrapped
-          elements={cities}
+          elements={props.cities}
           onElementActivate={(clickedCity) => {
             props.onChooseCity(clickedCity);
           }}
@@ -162,25 +164,29 @@ const Main = (props) => {
 Main.propTypes = {
   offers: PropTypes.array.isRequired,
   allOffers: PropTypes.array.isRequired,
-  onCardTitleClick: PropTypes.func.isRequired,
-  onChooseCity: PropTypes.func.isRequired,
-  leaflet: PropTypes.object.isRequired,
-  city: PropTypes.shape({
+  loading: PropTypes.string,
+  cities: PropTypes.array.isRequired,
+  activeCity: PropTypes.shape({
     name: PropTypes.string,
     coordinates: PropTypes.array,
     rentsCount: PropTypes.number,
   }),
+  onCardTitleClick: PropTypes.func.isRequired,
+  onChooseCity: PropTypes.func.isRequired,
+  leaflet: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
-    city: state.city,
     offers: filterOffersByCity(state),
     allOffers: state.allOffers,
+    loading: getLoadingStatus(state),
+    cities: getCities(state),
+    activeCity: getActiveCity(state),
   });
 
 const mapDispatchToProps = (dispatch) => ({
-  onChooseCity: (city) => dispatch(ActionCreator.changeCity(city)),
+  onChooseCity: (cityNumber) => dispatch(ActionCreator.changeActiveCity(cityNumber)),
 });
 
 export {Main};

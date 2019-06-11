@@ -1,7 +1,4 @@
-import {reducer, Operation} from "./reducer";
-import MockAdapter from "axios-mock-adapter";
-import createApi from "./api";
-import adapter from "./adapter";
+import {reducer} from "./reducer";
 import initialState from "./mocks/initial-state";
 
 it(`Reducer without additional parameters should return initial state`, () => {
@@ -94,22 +91,3 @@ it(`Reducer should get offers correctly`, () => {
   });
 });
 
-it(`Should make a correct API call to /hotels`, function () {
-  const dispatch = jest.fn();
-  const api = createApi(dispatch);
-  const apiMock = new MockAdapter(api);
-  const offersLoader = Operation.loadOffers();
-
-  apiMock
-    .onGet(`/hotels`)
-    .reply(200, [{fake: true}]);
-
-  return offersLoader(dispatch, jest.fn(), api)
-    .then(() => {
-      expect(dispatch).toHaveBeenCalledTimes(1);
-      expect(dispatch).toHaveBeenNthCalledWith(1, {
-        type: `LOAD_OFFERS`,
-        payload: adapter([{fake: true}]),
-      });
-    });
-});

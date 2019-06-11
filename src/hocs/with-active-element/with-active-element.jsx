@@ -18,7 +18,7 @@ const withActiveElement = (Component) => {
           elements={this.props.elements}
           activeElementNumber={this.state.activeElementNumber}
           onElementActivate={(element) => {
-            this.props.onElementActivate(element);
+            this.props.onElementActivate(this.props.elements.indexOf(element));
             this.setState({
               activeElementNumber: this.props.elements.indexOf(element),
             });
