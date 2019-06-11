@@ -162,10 +162,10 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.array,
   allOffers: PropTypes.array.isRequired,
   loading: PropTypes.string,
-  cities: PropTypes.array.isRequired,
+  cities: PropTypes.array,
   activeCity: PropTypes.shape({
     name: PropTypes.string,
     coordinates: PropTypes.array,
