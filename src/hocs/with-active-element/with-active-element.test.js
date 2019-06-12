@@ -15,8 +15,6 @@ it(`Should change activeElementNumber when call cities`, () => {
       <MockComponentWrapped elements={elements} onElementActivate={onElementActivate} />
   );
 
-  expect(wrapper.props().activeElementNumber).toEqual(0);
-
   wrapper.props().onElementActivate(wrapper.props().elements[0]);
   expect(wrapper.props().activeElementNumber).toEqual(0);
 

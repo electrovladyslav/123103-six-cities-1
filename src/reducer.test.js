@@ -1,129 +1,44 @@
-import {reducer, filterOffersByCity} from "./reducer";
+import {reducer} from "./reducer";
 import initialState from "./mocks/initial-state";
-
-it(`Offers filter correctly`, () => {
-  const mockCities = [
-    {
-      city: {
-        name: `Amsterdam`,
-      },
-    },
-    {
-      city: {
-        name: `Moscow`,
-      },
-    },
-    {
-      city: {
-        name: `Amsterdam`,
-      },
-    },
-    {
-      city: {
-        name: `New York`,
-      },
-    },
-  ];
-
-  expect(filterOffersByCity(mockCities, {name: `Amsterdam`})).toEqual([
-    {city: {name: `Amsterdam`}},
-    {city: {name: `Amsterdam`}},
-  ]);
-
-  expect(filterOffersByCity(mockCities, {name: `Moscow`})).toEqual([
-    {city: {name: `Moscow`}},
-  ]);
-
-
-  expect(filterOffersByCity(mockCities, {name: `Barselona`})).toEqual([]);
-});
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(undefined, {})).toEqual(initialState);
 });
 
-it(`Reducer should change city correctly`, () => {
+it(`Reducer play action CHANGE_ACTIVE_CITY correctly`, () => {
   expect(
       reducer(
+          {activeCityNumber: 0},
           {
-            city: {
-              name: `Amsterdam`,
-              coordinates: [52.38333, 4.9],
-            },
-            offers: [
-              {
-                coordinates: [1, 1],
-              },
-              {
-                coordinates: [2, 2],
-              },
-            ],
-          },
-          {
-            type: `CHANGE_CITY`,
-            payload: {
-              name: `Melbourne`,
-              coordinates: [-37.840935, 144.946457],
-            },
+            type: `CHANGE_ACTIVE_CITY`,
+            payload: 1,
           }
       )
-  ).toEqual({
-    city: {
-      name: `Melbourne`,
-      coordinates: [-37.840935, 144.946457],
-    },
-    offers: [
-      {
-        coordinates: [1, 1],
-      },
-      {
-        coordinates: [2, 2],
-      },
-    ],
-  });
+  ).toEqual({activeCityNumber: 1});
 });
 
-it(`Reducer should get offers correctly`, () => {
+it(`Reducer play action LOAD_FAIL correctly`, () => {
   expect(
       reducer(
+          {loading: ``},
           {
-            city: {
-              name: `Amsterdam`,
-              coordinates: [52.38333, 4.9],
-            },
-            offers: [
-              {
-                coordinates: [1, 1],
-              },
-              {
-                coordinates: [2, 2],
-              },
-            ],
-          },
-          {
-            type: `GET_OFFERS`,
-            payload: [
-              {
-                coordinates: [3, 3],
-              },
-              {
-                coordinates: [4, 4],
-              },
-            ],
+            type: `LOAD_FAIL`,
+            payload: `Error`,
           }
       )
-  ).toEqual({
-    city: {
-      name: `Amsterdam`,
-      coordinates: [52.38333, 4.9],
-    },
-    offers: [
-      {
-        coordinates: [3, 3],
-      },
-      {
-        coordinates: [4, 4],
-      },
-    ],
-  });
+  ).toEqual({loading: `Error`});
 });
+
+it(`Reducer play action REQUIRED_AUTHORIZATION correctly`, () => {
+  expect(
+      reducer(
+          {isAuthorizationRequired: false},
+          {
+            type: `REQUIRED_AUTHORIZATION`,
+            payload: true,
+          }
+      )
+  ).toEqual({isAuthorizationRequired: true});
+});
+
+// TODO LOAD_OFFERS:

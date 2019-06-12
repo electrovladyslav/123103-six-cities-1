@@ -2,31 +2,28 @@ import React from "react";
 import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import {Main} from "./main";
+import {LoadingTypes} from "../../reducer";
 
 import leafletMock from "../../mocks/leaflet";
-import offers from "../../mocks/offers";
+import mockAllOffers from "../../mocks/allOffers";
+import mockOffers from "../../mocks/offers";
+import mockCities from "../../mocks/cities";
 
 Enzyme.configure({adapter: new Adapter()});
 
 const onCardTitleClick = jest.fn();
-const mockOffers = offers.slice(0, 4);
-const mockCity = {
-  name: `Moscow`,
-  location: {
-    latitude: 52.370216,
-    longitude: 4.895168,
-    zoom: 10
-  }
-};
 
 it(`In main component click on card header works`, () => {
   const app = mount(
       <Main
-        city={mockCity}
-        initialOffers={mockOffers}
-        offers={[]}
+        offers={mockOffers}
+        allOffers={mockAllOffers}
+        loading={LoadingTypes.END_LOADING}
+        cities={mockCities}
+        activeCityNumber={0}
+        activeCity={mockCities[0]}
         onCardTitleClick={onCardTitleClick}
-        onCityClick={jest.fn()}
+        onChooseCity={jest.fn()}
         onGetOffers={jest.fn()}
         leaflet={leafletMock}
       />

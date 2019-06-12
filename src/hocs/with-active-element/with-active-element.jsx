@@ -7,10 +7,8 @@ const withActiveElement = (Component) => {
       super(props);
 
       this.state = {
-        activeElementNumber: 0,
+        activeElementNumber: this.props.activeElementNumber,
       };
-
-      // this.elements = this.props.elements;
     }
 
     render() {
@@ -20,7 +18,7 @@ const withActiveElement = (Component) => {
           elements={this.props.elements}
           activeElementNumber={this.state.activeElementNumber}
           onElementActivate={(element) => {
-            this.props.onElementActivate(element);
+            this.props.onElementActivate(this.props.elements.indexOf(element));
             this.setState({
               activeElementNumber: this.props.elements.indexOf(element),
             });
@@ -33,6 +31,7 @@ const withActiveElement = (Component) => {
   WithActiveElement.propTypes = {
     onElementActivate: PropTypes.func.isRequired,
     elements: PropTypes.array.isRequired,
+    activeElementNumber: PropTypes.number,
   };
 
   return WithActiveElement;

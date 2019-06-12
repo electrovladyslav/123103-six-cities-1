@@ -19,7 +19,20 @@ exports[`Cities list component renders correctly 1`] = `
           onClick={[Function]}
         >
           <span>
-            Moscow
+            Amsterdam
+          </span>
+        </a>
+      </li>
+      <li
+        className="locations__item"
+      >
+        <a
+          className="locations__item-link tabs__item"
+          href="#"
+          onClick={[Function]}
+        >
+          <span>
+            Hamburg
           </span>
         </a>
       </li>
@@ -45,19 +58,6 @@ exports[`Cities list component renders correctly 1`] = `
           onClick={[Function]}
         >
           <span>
-            Amsterdam
-          </span>
-        </a>
-      </li>
-      <li
-        className="locations__item"
-      >
-        <a
-          className="locations__item-link tabs__item"
-          href="#"
-          onClick={[Function]}
-        >
-          <span>
             Brussels
           </span>
         </a>
@@ -71,7 +71,7 @@ exports[`Cities list component renders correctly 1`] = `
           onClick={[Function]}
         >
           <span>
-            Hamburg
+            Cologne
           </span>
         </a>
       </li>

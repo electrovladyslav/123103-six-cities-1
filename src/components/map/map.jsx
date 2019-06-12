@@ -58,8 +58,8 @@ class Map extends PureComponent {
       iconSize: [30, 30],
     });
 
-    this.props.offersCords.forEach((offerCords) => {
-      this.leaflet.marker(offerCords, {icon}).addTo(this.map);
+    this.props.offersLocation.forEach((offerLocation) => {
+      this.leaflet.marker([offerLocation.latitude, offerLocation.longitude], {icon}).addTo(this.map);
     });
   }
 }
@@ -73,7 +73,7 @@ Map.propTypes = {
     }).isRequired,
     rentsCount: PropTypes.number,
   }),
-  offersCords: PropTypes.array.isRequired,
+  offersLocation: PropTypes.array.isRequired,
   leaflet: PropTypes.object.isRequired,
 };
 

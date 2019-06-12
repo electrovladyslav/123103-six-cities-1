@@ -2,26 +2,84 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {ActionCreator} from "../../reducer";
+import {ActionCreator, LoadingTypes} from "../../reducer";
+import {
+  filterOffersByCity,
+  getCities,
+  getActiveCity,
+  getLoadingStatus,
+  getActiveCityNumber,
+} from "../../selectors";
 
 import RentsList from "../rents-list/rents-list.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
 import Map from "../map/map.jsx";
 import withActiveElement from "../../hocs/with-active-element/with-active-element.jsx";
-import prepareCities from "../../utils/prepareCities";
 
 const CitiesListWrapped = withActiveElement(CitiesList);
 const RentsListWrapped = withActiveElement(RentsList);
-const onOfferChoose = (offer) => {
+
+const onOfferChoose = (offerNumber) => {
   // eslint-disable-next-line no-console
-  console.log(`${offer.name} was chosen`);
+  console.log(`Offer #${offerNumber} was chosen`);
 };
 
 const Main = (props) => {
-  let cities = props.initialOffers.map((offer) => offer.city);
-  cities = prepareCities(cities);
+  switch (props.loading) {
+    case LoadingTypes.LOAD_FAIL:
+      return `Что-то пошло не так, перезагрузите страницу.`;
 
-  // props.onGetOffers(cities[0]); - цикличный перерендер
+    case LoadingTypes.START_LOADING:
+      return `Ожидайте загрузки данных.`;
+
+    case LoadingTypes.END_LOADING:
+    default:
+      break;
+  }
+
+  const isNoOffers = !props.offers.length;
+
+  const renderOfferBlock = (isEmpty) => {
+    if (isEmpty) {
+      return (
+        <section className="cities__no-places">
+          <div className="cities__status-wrapper tabs__content">
+            <b className="cities__status">No places to stay available</b>
+            <p className="cities__status-description">
+              We could not find any property availbale at the moment in{` `}
+              {props.activeCity.name}
+            </p>
+          </div>
+        </section>
+      );
+    } else {
+      return (
+        <RentsListWrapped
+          elements={props.offers}
+          onElementActivate={onOfferChoose}
+          cityName={props.activeCity.name}
+          rentsCount={props.offers.length}
+          onCardTitleClick={props.onCardTitleClick}
+        />
+      );
+    }
+  };
+
+  const renderMapBlock = (isEmpty) => {
+    if (!isEmpty) {
+      return (
+        <section className="cities__map map">
+          <Map
+            city={props.activeCity}
+            offersLocation={props.offers.map((offer) => offer.location)}
+            leaflet={props.leaflet}
+          />
+        </section>
+      );
+    } else {
+      return ``;
+    }
+  };
 
   return (
     <React.Fragment>
@@ -79,34 +137,28 @@ const Main = (props) => {
         </div>
       </header>
 
-      <main className="page__main page__main--index">
+      <main
+        className={`page__main page__main--index${
+          isNoOffers ? ` page__main--index-empty` : ``
+        }`}>
         <h1 className="visually-hidden">Cities</h1>
 
         <CitiesListWrapped
-          elements={cities}
+          elements={props.cities}
           onElementActivate={(clickedCity) => {
-            props.onCityClick(clickedCity);
-            props.onGetOffers(clickedCity);
+            props.onChooseCity(clickedCity);
           }}
+          activeElementNumber={props.activeCityNumber}
         />
 
         <div className="cities__places-wrapper">
-          <div className="cities__places-container container">
-            <RentsListWrapped
-              elements={props.offers}
-              onElementActivate={onOfferChoose}
-              cityName={props.city.name}
-              rentsCount={props.offers.length}
-              onCardTitleClick={props.onCardTitleClick}
-            />
+          <div
+            className={`cities__places-container container${
+              isNoOffers ? ` cities__places-container--empty` : ``
+            }`}>
+            {renderOfferBlock(isNoOffers)}
             <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map
-                  city={props.city}
-                  offersCords={props.offers.map((offer) => offer.coordinates)}
-                  leaflet={props.leaflet}
-                />
-              </section>
+              {renderMapBlock(isNoOffers)}
             </div>
           </div>
         </div>
@@ -116,32 +168,34 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  offers: PropTypes.array.isRequired,
-  initialOffers: PropTypes.array.isRequired,
-  onCardTitleClick: PropTypes.func.isRequired,
-  onCityClick: PropTypes.func.isRequired,
-  onGetOffers: PropTypes.func.isRequired,
-  leaflet: PropTypes.object.isRequired,
-  city: PropTypes.shape({
+  offers: PropTypes.array,
+  allOffers: PropTypes.array.isRequired,
+  loading: PropTypes.string,
+  cities: PropTypes.array,
+  activeCity: PropTypes.shape({
     name: PropTypes.string,
     coordinates: PropTypes.array,
     rentsCount: PropTypes.number,
   }),
+  activeCityNumber: PropTypes.number,
+  onCardTitleClick: PropTypes.func.isRequired,
+  onChooseCity: PropTypes.func.isRequired,
+  leaflet: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
-    city: state.city,
-    offers: state.offers,
-    initialOffers: state.initialOffers,
+    offers: filterOffersByCity(state),
+    allOffers: state.allOffers,
+    loading: getLoadingStatus(state),
+    cities: getCities(state),
+    activeCity: getActiveCity(state),
+    activeCityNumber: getActiveCityNumber(state),
   });
 
 const mapDispatchToProps = (dispatch) => ({
-  onCityClick: (city) => dispatch(ActionCreator.changeCity(city)),
-
-  onGetOffers: (city) => {
-    dispatch(ActionCreator.getOffers(city));
-  },
+  onChooseCity: (cityNumber) =>
+    dispatch(ActionCreator.changeActiveCity(cityNumber)),
 });
 
 export {Main};

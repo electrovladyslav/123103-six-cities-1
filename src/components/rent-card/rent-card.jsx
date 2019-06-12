@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const RentCard = (props) => {
   const {
     isPremium = false,
-    imageSource,
+    previewImageSource,
     price,
     isBookmarked = false,
     rating = 3,
@@ -17,7 +17,6 @@ const RentCard = (props) => {
     onMouseEnterCard,
     onMouseLeaveCard
   } = props;
-
   return (
     <React.Fragment>
       <article
@@ -36,7 +35,7 @@ const RentCard = (props) => {
           }}>
             <img
               className="place-card__image"
-              src={imageSource}
+              src={previewImageSource}
               width="260"
               height="200"
               alt="Place image"
@@ -78,7 +77,7 @@ const RentCard = (props) => {
 RentCard.propTypes = {
   offer: PropTypes.shape({
     isPremium: PropTypes.bool,
-    imageSource: PropTypes.string.isRequired,
+    previewImageSource: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     isBookmarked: PropTypes.bool,
     rating: PropTypes.number,

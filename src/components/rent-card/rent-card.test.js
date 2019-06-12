@@ -5,7 +5,7 @@ import RentCard from './rent-card';
 
 const mockOffer = {
   isPremium: false,
-  imageSource: `blabla.jpg`,
+  previewImageSource: `blabla.jpg`,
   price: 100,
   isBookmarked: false,
   rating: 3,
