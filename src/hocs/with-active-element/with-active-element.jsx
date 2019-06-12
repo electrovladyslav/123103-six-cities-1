@@ -7,7 +7,7 @@ const withActiveElement = (Component) => {
       super(props);
 
       this.state = {
-        activeElementNumber: this.props.activeElementNumber || 0,
+        activeElementNumber: this.props.activeElementNumber,
       };
     }
 

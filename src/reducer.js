@@ -3,9 +3,17 @@ import adapter from "./adapter";
 
 export const ActionTypes = {
   LOAD_OFFERS: `LOAD_OFFERS`,
+  START_LOADING: `START_LOADING`,
+  END_LOADING: `END_LOADING`,
   LOAD_FAIL: `LOAD_FAIL`,
   CHANGE_ACTIVE_CITY: `CHANGE_ACTIVE_CITY`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+};
+
+export const LoadingTypes = {
+  START_LOADING: `START_LOADING`,
+  END_LOADING: `END_LOADING`,
+  LOAD_FAIL: `LOAD_FAIL`,
 };
 
 export const ActionCreator = {
@@ -20,6 +28,20 @@ export const ActionCreator = {
     return {
       type: ActionTypes.LOAD_OFFERS,
       payload: offers,
+    };
+  },
+
+  startLoading: (message) => {
+    return {
+      type: ActionTypes.START_LOADING,
+      payload: message,
+    };
+  },
+
+  endLoading: (message) => {
+    return {
+      type: ActionTypes.END_LOADING,
+      payload: message,
     };
   },
 
@@ -38,13 +60,15 @@ export const ActionCreator = {
 
 export const Operation = {
   loadOffers: () => (dispatch, _getState, api) => {
-    return api
-      .get(`/hotels`)
-      .then((response) => {
-        dispatch(ActionCreator.loadOffers(adapter(response.data)));
-      })
-      // eslint-disable-next-line no-console
-      .catch((err) => console.log(err));
+    return (
+      api
+        .get(`/hotels`)
+        .then((response) => {
+          dispatch(ActionCreator.loadOffers(adapter(response.data)));
+        })
+        // eslint-disable-next-line no-console
+        .catch((err) => console.log(err))
+    );
   },
 };
 
@@ -58,6 +82,16 @@ export function reducer(state = initialState, action) {
     case ActionTypes.LOAD_OFFERS:
       return Object.assign({}, state, {
         allOffers: action.payload,
+      });
+
+    case ActionTypes.START_LOADING:
+      return Object.assign({}, state, {
+        loading: action.payload,
+      });
+
+    case ActionTypes.END_LOADING:
+      return Object.assign({}, state, {
+        loading: action.payload,
       });
 
     case ActionTypes.LOAD_FAIL:

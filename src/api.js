@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import {ActionCreator} from "./reducer";
+import {ActionCreator, LoadingTypes} from "./reducer";
 
 export const createAPI = (dispatch) => {
   const api = axios.create({
@@ -9,7 +9,10 @@ export const createAPI = (dispatch) => {
     withCredentials: true,
   });
 
-  const onSuccess = (response) => response;
+  const onSuccess = (response) => {
+    dispatch(ActionCreator.endLoading(LoadingTypes.END_LOADING));
+    return response;
+  };
   const onFail = (err) => {
     if (err.response === undefined) {
       dispatch(ActionCreator.loadFail(err.message));

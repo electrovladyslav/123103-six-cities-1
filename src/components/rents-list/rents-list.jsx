@@ -96,7 +96,7 @@ class RentsList extends PureComponent {
 
 RentsList.propTypes = {
   elements: PropTypes.array.isRequired,
-  activeElementNumber: PropTypes.number.isRequired,
+  activeElementNumber: PropTypes.number,
   cityName: PropTypes.string.isRequired,
   rentsCount: PropTypes.number.isRequired,
   onCardTitleClick: PropTypes.func.isRequired,

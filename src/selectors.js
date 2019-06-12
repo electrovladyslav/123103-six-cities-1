@@ -12,17 +12,15 @@ export const getCities = (state) => {
   return cities;
 };
 
-// export const getActiveCity = (state) => {
-//   return getCities(state)[state.activeCityNumber];
-// };
+export const getActiveCityNumber = (state) => {
+  return state.activeCityNumber;
+};
 
 export const getActiveCity = createSelector(
-    (state) => {
-      return state;
-    },
+    getActiveCityNumber,
     getCities,
-    (state, cities) => {
-      return cities[state.activeCityNumber];
+    (activeCityNumber, cities) => {
+      return cities[activeCityNumber];
     }
 );
 

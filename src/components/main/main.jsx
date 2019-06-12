@@ -2,35 +2,44 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {ActionCreator} from "../../reducer";
-import {filterOffersByCity, getCities, getActiveCity, getLoadingStatus} from "../../selectors";
+import {ActionCreator, LoadingTypes} from "../../reducer";
+import {
+  filterOffersByCity,
+  getCities,
+  getActiveCity,
+  getLoadingStatus,
+  getActiveCityNumber,
+} from "../../selectors";
 
 import RentsList from "../rents-list/rents-list.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
 import Map from "../map/map.jsx";
 import withActiveElement from "../../hocs/with-active-element/with-active-element.jsx";
-// import getRandomNumber from "../../utils/getRandomNumber";
 
 const CitiesListWrapped = withActiveElement(CitiesList);
 const RentsListWrapped = withActiveElement(RentsList);
+
 const onOfferChoose = (offerNumber) => {
   // eslint-disable-next-line no-console
   console.log(`Offer #${offerNumber} was chosen`);
 };
 
 const Main = (props) => {
-  if (props.loading === `Network Error`) {
-    return `Что-то пошло не так, перезагрузите страницу.`;
+  switch (props.loading) {
+    case LoadingTypes.LOAD_FAIL:
+      return `Что-то пошло не так, перезагрузите страницу.`;
+
+    case LoadingTypes.START_LOADING:
+      return `Ожидайте загрузки данных.`;
+
+    case LoadingTypes.END_LOADING:
+    default:
+      break;
   }
 
-  if (!props.allOffers.length) {
-    return `Ожидайте загрузки данных.`;
-  }
-  if (!props.activeCity) {
-    // props.onChooseCity(cities[getRandomNumber(5)]); TODO прикрутить рандом
-    props.onChooseCity(0);
-    return `Ожидайте загрузки данных.`;
-  }
+  // if (!props.allOffers.length) {
+  //   ActionCreator.startLoading(`Loading data`);
+  // }
 
   const isNoOffers = !props.offers.length;
 
@@ -143,6 +152,7 @@ const Main = (props) => {
           onElementActivate={(clickedCity) => {
             props.onChooseCity(clickedCity);
           }}
+          activeElementNumber={props.activeCityNumber}
         />
 
         <div className="cities__places-wrapper">
@@ -171,6 +181,7 @@ Main.propTypes = {
     coordinates: PropTypes.array,
     rentsCount: PropTypes.number,
   }),
+  activeCityNumber: PropTypes.number,
   onCardTitleClick: PropTypes.func.isRequired,
   onChooseCity: PropTypes.func.isRequired,
   leaflet: PropTypes.object.isRequired,
@@ -183,10 +194,12 @@ const mapStateToProps = (state, ownProps) =>
     loading: getLoadingStatus(state),
     cities: getCities(state),
     activeCity: getActiveCity(state),
+    activeCityNumber: getActiveCityNumber(state),
   });
 
 const mapDispatchToProps = (dispatch) => ({
-  onChooseCity: (cityNumber) => dispatch(ActionCreator.changeActiveCity(cityNumber)),
+  onChooseCity: (cityNumber) =>
+    dispatch(ActionCreator.changeActiveCity(cityNumber)),
 });
 
 export {Main};

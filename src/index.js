@@ -7,8 +7,9 @@ import {compose} from "recompose";
 import leaflet from "leaflet";
 
 import Main from "./components/main/main.jsx";
-import {reducer, Operation} from "./reducer";
+import {reducer, Operation, ActionCreator, LoadingTypes} from "./reducer";
 import createApi from "./api";
+import getRandomNumber from "./utils/getRandomNumber";
 
 const handleClick = (event) => {
   console.log(`The link was clicked.`); // eslint-disable-line no-console
@@ -27,7 +28,9 @@ const init = () => {
       )
   );
 
+  store.dispatch(ActionCreator.startLoading(LoadingTypes.START_LOADING));
   store.dispatch(Operation.loadOffers());
+  store.dispatch(ActionCreator.changeActiveCity(getRandomNumber(5)));
 
   ReactDOM.render(
       <Provider store={store}>
