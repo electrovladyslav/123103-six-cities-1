@@ -15,8 +15,14 @@ it(`Should make a correct API call to /hotels`, function () {
 
   return offersLoader(dispatch, jest.fn(), api)
     .then(() => {
-      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledTimes(2);
+
       expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: `END_LOADING`,
+        payload: `END_LOADING`,
+      });
+
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
         type: `LOAD_OFFERS`,
         payload: adapter([{fake: true}]),
       });

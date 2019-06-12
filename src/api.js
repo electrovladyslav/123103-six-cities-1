@@ -13,6 +13,7 @@ export const createAPI = (dispatch) => {
     dispatch(ActionCreator.endLoading(LoadingTypes.END_LOADING));
     return response;
   };
+
   const onFail = (err) => {
     if (err.response === undefined) {
       dispatch(ActionCreator.loadFail(err.message));

@@ -37,10 +37,6 @@ const Main = (props) => {
       break;
   }
 
-  // if (!props.allOffers.length) {
-  //   ActionCreator.startLoading(`Loading data`);
-  // }
-
   const isNoOffers = !props.offers.length;
 
   const renderOfferBlock = (isEmpty) => {
