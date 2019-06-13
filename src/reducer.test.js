@@ -1,4 +1,4 @@
-import {reducer} from "./reducer";
+import {reducer, ActionTypes} from "./reducer";
 import initialState from "./mocks/initial-state";
 
 it(`Reducer without additional parameters should return initial state`, () => {
@@ -10,7 +10,7 @@ it(`Reducer play action CHANGE_ACTIVE_CITY correctly`, () => {
       reducer(
           {activeCityNumber: 0},
           {
-            type: `CHANGE_ACTIVE_CITY`,
+            type: ActionTypes.CHANGE_ACTIVE_CITY,
             payload: 1,
           }
       )
@@ -22,19 +22,19 @@ it(`Reducer play action LOAD_FAIL correctly`, () => {
       reducer(
           {loading: ``},
           {
-            type: `LOAD_FAIL`,
+            type: ActionTypes.LOAD_FAIL,
             payload: `Error`,
           }
       )
   ).toEqual({loading: `Error`});
 });
 
-it(`Reducer play action REQUIRED_AUTHORIZATION correctly`, () => {
+it(`Reducer play action REQUIRE_AUTHORIZATION correctly`, () => {
   expect(
       reducer(
           {isAuthorizationRequired: false},
           {
-            type: `REQUIRED_AUTHORIZATION`,
+            type: `REQUIRE_AUTHORIZATION`,
             payload: true,
           }
       )

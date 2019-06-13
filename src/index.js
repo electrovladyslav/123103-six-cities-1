@@ -32,6 +32,8 @@ const init = () => {
   store.dispatch(Operation.loadOffers());
   store.dispatch(ActionCreator.changeActiveCity(getRandomNumber(5)));
 
+  // export {store}
+
   ReactDOM.render(
       <Provider store={store}>
         <Main onCardTitleClick={handleClick} leaflet={leaflet} />

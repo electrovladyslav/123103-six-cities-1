@@ -7,7 +7,7 @@ import leafletMock from "../../mocks/leaflet";
 import mockAllOffers from "../../mocks/allOffers";
 import mockOffers from "../../mocks/offers";
 import mockCities from "../../mocks/cities";
-
+import mockUser from "../../mocks/user";
 
 it(`Main component renders correctly`, () => {
   const tree = renderer
@@ -23,6 +23,9 @@ it(`Main component renders correctly`, () => {
           onChooseCity={jest.fn()}
           onGetOffers={jest.fn()}
           leaflet={leafletMock}
+          userEmail={mockUser.email}
+          userAvatarUrl={mockUser.avatarUrl}
+          onSignIn={jest.fn()}
         />
     )
     .toJSON();

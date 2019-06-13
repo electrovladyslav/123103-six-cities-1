@@ -7,7 +7,8 @@ export const ActionTypes = {
   END_LOADING: `END_LOADING`,
   LOAD_FAIL: `LOAD_FAIL`,
   CHANGE_ACTIVE_CITY: `CHANGE_ACTIVE_CITY`,
-  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  REQUIRE_AUTHORIZATION: `REQUIRE_AUTHORIZATION`,
+  AUTHORIZE: `AUTHORIZE`,
 };
 
 export const LoadingTypes = {
@@ -19,8 +20,15 @@ export const LoadingTypes = {
 export const ActionCreator = {
   requireAuthorization: (status) => {
     return {
-      type: ActionTypes.REQUIRED_AUTHORIZATION,
+      type: ActionTypes.REQUIRE_AUTHORIZATION,
       payload: status,
+    };
+  },
+
+  authorize: (data) => {
+    return {
+      type: ActionTypes.AUTHORIZE,
+      payload: data,
     };
   },
 
@@ -70,6 +78,19 @@ export const Operation = {
         .catch((err) => console.log(err))
     );
   },
+
+  authorize: (data) => (dispatch, _getState, api) => {
+    return (
+      api
+        .post(`/login`, data)
+        .then((response) => {
+          dispatch(ActionCreator.authorize(response.data));
+          dispatch(ActionCreator.requireAuthorization(false));
+        })
+        // eslint-disable-next-line no-console
+        .catch((err) => console.log(err))
+    );
+  },
 };
 
 export function reducer(state = initialState, action) {
@@ -99,9 +120,14 @@ export function reducer(state = initialState, action) {
         loading: action.payload,
       });
 
-    case ActionTypes.REQUIRED_AUTHORIZATION:
+    case ActionTypes.REQUIRE_AUTHORIZATION:
       return Object.assign({}, state, {
         isAuthorizationRequired: action.payload,
+      });
+
+    case ActionTypes.AUTHORIZE:
+      return Object.assign({}, state, {
+        user: action.payload,
       });
   }
 

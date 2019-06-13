@@ -78,14 +78,20 @@ Array [
               <a
                 className="header__nav-link header__nav-link--profile"
                 href="#"
+                onClick={[MockFunction]}
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
+                  style={
+                    Object {
+                      "backgroundImage": "url(https://es31-server.appspot.com/six-cities/static/avatar/5.jpg)",
+                    }
+                  }
                 />
                 <span
                   className="header__user-name user__name"
                 >
-                  Oliver.conner@gmail.com
+                  1@1.ru
                 </span>
               </a>
             </li>

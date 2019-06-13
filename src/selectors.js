@@ -39,3 +39,16 @@ export const filterOffersByCity = createSelector(
       }
     }
 );
+
+export const getAuthRequiredStatus = (state) => {
+  return state.isAuthorizationRequired;
+};
+
+
+export const getUserEmail = (state) => {
+  return state.user.email;
+};
+
+export const getUserAvatarUrl = (state) => {
+  return state.user.avatar_url;
+};
