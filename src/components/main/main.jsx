@@ -3,17 +3,23 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
 import {ActionCreator, LoadingTypes} from "../../reducer";
+import {baseURL} from "../../api";
 import {
   filterOffersByCity,
   getCities,
   getActiveCity,
   getLoadingStatus,
   getActiveCityNumber,
+  getAuthRequiredStatus,
+  getUserEmail,
+  getUserAvatarUrl,
 } from "../../selectors";
 
 import RentsList from "../rents-list/rents-list.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
 import Map from "../map/map.jsx";
+import SignIn from "../sign-in/sign-in.jsx";
+
 import withActiveElement from "../../hocs/with-active-element/with-active-element.jsx";
 
 const CitiesListWrapped = withActiveElement(CitiesList);
@@ -35,6 +41,10 @@ const Main = (props) => {
     case LoadingTypes.END_LOADING:
     default:
       break;
+  }
+
+  if (props.isAuthRequired) {
+    return <SignIn />;
   }
 
   const isNoOffers = !props.offers.length;
@@ -81,6 +91,29 @@ const Main = (props) => {
     }
   };
 
+  const renderHeaderLogin = (isLogged) => {
+    if (isLogged) {
+      return (
+        <React.Fragment>
+          <div
+            className="header__avatar-wrapper user__avatar-wrapper"
+            style ={{backgroundImage: `url(${baseURL + props.userAvatarUrl})`}}
+          />
+          <span className="header__user-name user__name">
+            {props.userEmail}
+          </span>
+        </React.Fragment>
+      );
+    } else {
+      return (
+        <React.Fragment>
+          <div className="header__avatar-wrapper user__avatar-wrapper" />
+          <span className="header__login">Sign in</span>
+        </React.Fragment>
+      );
+    }
+  };
+
   return (
     <React.Fragment>
       <div style={{display: `none`}}>
@@ -124,11 +157,9 @@ const Main = (props) => {
                 <li className="header__nav-item user">
                   <a
                     className="header__nav-link header__nav-link--profile"
-                    href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper" />
-                    <span className="header__user-name user__name">
-                      Oliver.conner@gmail.com
-                    </span>
+                    href="#"
+                    onClick={props.onSignIn}>
+                    {renderHeaderLogin(props.userEmail.length)}
                   </a>
                 </li>
               </ul>
@@ -177,8 +208,12 @@ Main.propTypes = {
     coordinates: PropTypes.array,
     rentsCount: PropTypes.number,
   }),
+  isAuthRequired: PropTypes.bool,
+  userEmail: PropTypes.string,
+  userAvatarUrl: PropTypes.string,
   activeCityNumber: PropTypes.number,
   onCardTitleClick: PropTypes.func.isRequired,
+  onSignIn: PropTypes.func.isRequired,
   onChooseCity: PropTypes.func.isRequired,
   leaflet: PropTypes.object.isRequired,
 };
@@ -188,14 +223,19 @@ const mapStateToProps = (state, ownProps) =>
     offers: filterOffersByCity(state),
     allOffers: state.allOffers,
     loading: getLoadingStatus(state),
+    isAuthRequired: getAuthRequiredStatus(state),
     cities: getCities(state),
     activeCity: getActiveCity(state),
     activeCityNumber: getActiveCityNumber(state),
+    userEmail: getUserEmail(state),
+    userAvatarUrl: getUserAvatarUrl(state),
   });
 
 const mapDispatchToProps = (dispatch) => ({
   onChooseCity: (cityNumber) =>
     dispatch(ActionCreator.changeActiveCity(cityNumber)),
+  onSignIn: () =>
+    dispatch(ActionCreator.requireAuthorization(true)),
 });
 
 export {Main};

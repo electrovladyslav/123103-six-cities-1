@@ -8,6 +8,7 @@ import leafletMock from "../../mocks/leaflet";
 import mockAllOffers from "../../mocks/allOffers";
 import mockOffers from "../../mocks/offers";
 import mockCities from "../../mocks/cities";
+import mockUser from "../../mocks/user";
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -26,6 +27,9 @@ it(`In main component click on card header works`, () => {
         onChooseCity={jest.fn()}
         onGetOffers={jest.fn()}
         leaflet={leafletMock}
+        userEmail={mockUser.email}
+        userAvatarUrl={mockUser.avatarUrl}
+        onSignIn={jest.fn()}
       />
   );
 
