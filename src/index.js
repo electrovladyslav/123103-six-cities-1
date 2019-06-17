@@ -1,20 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {Provider} from "react-redux";
+import {BrowserRouter} from "react-router-dom";
 import {createStore, applyMiddleware} from "redux";
 import thunk from "redux-thunk";
 import {compose} from "recompose";
-import leaflet from "leaflet";
 
-import Main from "./components/main/main.jsx";
+import App from "./components/app/app.jsx";
 import {reducer, Operation, ActionCreator, LoadingTypes} from "./reducer";
 import createApi from "./api";
 import getRandomNumber from "./utils/getRandomNumber";
-
-const handleClick = (event) => {
-  console.log(`The link was clicked.`); // eslint-disable-line no-console
-  event.preventDefault();
-};
 
 const init = () => {
   const api = createApi((...args) => store.dispatch(...args));
@@ -32,11 +27,12 @@ const init = () => {
   store.dispatch(Operation.loadOffers());
   store.dispatch(ActionCreator.changeActiveCity(getRandomNumber(5)));
 
-  // export {store}
 
   ReactDOM.render(
       <Provider store={store}>
-        <Main onCardTitleClick={handleClick} leaflet={leaflet} />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </Provider>,
       document.getElementById(`root`)
   );

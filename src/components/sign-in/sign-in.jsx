@@ -63,7 +63,11 @@ const SignIn = (props) => {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post" onSubmit={props.sendForm}>
+            <form
+              className="login__form form"
+              action="#"
+              method="post"
+              onSubmit={() => props.sendForm}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input
@@ -108,13 +112,13 @@ const SignIn = (props) => {
 
 const mapDispatchToProps = (dispatch) => ({
   sendForm: (event) => {
+    event.preventDefault();
     dispatch(
         Operation.authorize({
           email: event.target[0].value,
           password: event.target[1].value,
         })
     );
-    event.preventDefault();
   },
 });
 

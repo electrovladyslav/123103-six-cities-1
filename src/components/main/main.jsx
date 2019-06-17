@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
 import {ActionCreator, LoadingTypes} from "../../reducer";
 import {baseURL} from "../../api";
@@ -97,7 +98,7 @@ const Main = (props) => {
         <React.Fragment>
           <div
             className="header__avatar-wrapper user__avatar-wrapper"
-            style ={{backgroundImage: `url(${baseURL + props.userAvatarUrl})`}}
+            style={{backgroundImage: `url(${baseURL + props.userAvatarUrl})`}}
           />
           <span className="header__user-name user__name">
             {props.userEmail}
@@ -155,12 +156,11 @@ const Main = (props) => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a
+                  <Link
                     className="header__nav-link header__nav-link--profile"
-                    href="#"
-                    onClick={props.onSignIn}>
+                    to="/login">
                     {renderHeaderLogin(props.userEmail.length)}
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </nav>
@@ -234,8 +234,7 @@ const mapStateToProps = (state, ownProps) =>
 const mapDispatchToProps = (dispatch) => ({
   onChooseCity: (cityNumber) =>
     dispatch(ActionCreator.changeActiveCity(cityNumber)),
-  onSignIn: () =>
-    dispatch(ActionCreator.requireAuthorization(true)),
+  onSignIn: () => dispatch(ActionCreator.requireAuthorization(true)),
 });
 
 export {Main};

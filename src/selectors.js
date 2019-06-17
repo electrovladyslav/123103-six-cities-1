@@ -44,6 +44,10 @@ export const getAuthRequiredStatus = (state) => {
   return state.isAuthorizationRequired;
 };
 
+export const getAuthrizationStatus = (state) => {
+  return state.user.email !== ``;
+};
+
 
 export const getUserEmail = (state) => {
   return state.user.email;
