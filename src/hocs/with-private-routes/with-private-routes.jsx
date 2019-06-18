@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 
-import {SignIn} from "../../components/sign-in/sign-in.jsx";
+// import {SignIn} from "../../components/sign-in/sign-in.jsx";
 
 const withPrivateRoutes = (Component) => {
   class WithPrivateRoutes extends PureComponent {
@@ -10,12 +10,18 @@ const withPrivateRoutes = (Component) => {
     }
 
     render() {
-      return this.props.isAuthorized ? <Component /> : <SignIn />;
+      if (this.props.isAuthorized) {
+        return <Component />;
+      } else {
+        return this.props.redirectToLogin();
+      }
+
     }
   }
 
   WithPrivateRoutes.propTypes = {
     isAuthorized: PropTypes.bool.isRequired,
+    redirectToLogin: PropTypes.func.isRequired,
   };
 
   return WithPrivateRoutes;

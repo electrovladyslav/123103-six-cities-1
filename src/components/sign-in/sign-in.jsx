@@ -1,10 +1,10 @@
 import React from "react";
-import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
-import {Operation} from "../../reducer";
-
 const SignIn = (props) => {
+  if (props.isAuthorized) {
+    return props.redirectToMain();
+  }
   return (
     <React.Fragment>
       <div style={{display: `none`}}>
@@ -67,7 +67,9 @@ const SignIn = (props) => {
               className="login__form form"
               action="#"
               method="post"
-              onSubmit={() => props.sendForm}>
+              onSubmit={(event) => {
+                props.onSignIn(event.target[0].value, event.target[1].value);
+              }}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input
@@ -110,25 +112,10 @@ const SignIn = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  sendForm: (event) => {
-    event.preventDefault();
-    dispatch(
-        Operation.authorize({
-          email: event.target[0].value,
-          password: event.target[1].value,
-        })
-    );
-  },
-});
-
 SignIn.propTypes = {
-  sendForm: PropTypes.func,
+  onSignIn: PropTypes.func.isRequired,
+  isAuthorized: PropTypes.bool.isRequired,
+  redirectToMain: PropTypes.func.isRequired,
 };
 
-export {SignIn};
-
-export default connect(
-    null,
-    mapDispatchToProps
-)(SignIn);
+export default SignIn;

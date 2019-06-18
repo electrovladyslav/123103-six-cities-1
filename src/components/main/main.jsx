@@ -96,20 +96,28 @@ const Main = (props) => {
     if (isLogged) {
       return (
         <React.Fragment>
-          <div
-            className="header__avatar-wrapper user__avatar-wrapper"
-            style={{backgroundImage: `url(${baseURL + props.userAvatarUrl})`}}
-          />
-          <span className="header__user-name user__name">
-            {props.userEmail}
-          </span>
+          <Link
+            className="header__nav-link header__nav-link--profile"
+            to="/favorites">
+            <div
+              className="header__avatar-wrapper user__avatar-wrapper"
+              style={{backgroundImage: `url(${baseURL + props.userAvatarUrl})`}}
+            />
+            <span className="header__user-name user__name">
+              {props.userEmail}
+            </span>
+          </Link>
         </React.Fragment>
       );
     } else {
       return (
         <React.Fragment>
-          <div className="header__avatar-wrapper user__avatar-wrapper" />
-          <span className="header__login">Sign in</span>
+          <Link
+            className="header__nav-link header__nav-link--profile"
+            to="/login">
+            <div className="header__avatar-wrapper user__avatar-wrapper" />
+            <span className="header__login">Sign in</span>
+          </Link>
         </React.Fragment>
       );
     }
@@ -156,11 +164,8 @@ const Main = (props) => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <Link
-                    className="header__nav-link header__nav-link--profile"
-                    to="/login">
-                    {renderHeaderLogin(props.userEmail.length)}
-                  </Link>
+                  {renderHeaderLogin(props.userEmail.length)}
+                  {/* </Link> */}
                 </li>
               </ul>
             </nav>
