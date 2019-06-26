@@ -1,7 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
-const Favorites = (props) => {
+const Favorites = () => {
   return (
     <React.Fragment>
       <div style={{display: `none`}}>
