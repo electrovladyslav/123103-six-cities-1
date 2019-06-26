@@ -1,5 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {StaticRouter} from "react-router";
 
 import {Main} from "./main";
 import {LoadingTypes} from "../../reducer";
@@ -12,21 +13,23 @@ import mockUser from "../../mocks/user";
 it(`Main component renders correctly`, () => {
   const tree = renderer
     .create(
-        <Main
-          offers={mockOffers}
-          allOffers={mockAllOffers}
-          loading={LoadingTypes.END_LOADING}
-          cities={mockCities}
-          activeCityNumber={0}
-          activeCity={mockCities[0]}
-          onCardTitleClick={jest.fn()}
-          onChooseCity={jest.fn()}
-          onGetOffers={jest.fn()}
-          leaflet={leafletMock}
-          userEmail={mockUser.email}
-          userAvatarUrl={mockUser.avatarUrl}
-          onSignIn={jest.fn()}
-        />
+        <StaticRouter>
+          <Main
+            offers={mockOffers}
+            allOffers={mockAllOffers}
+            loading={LoadingTypes.END_LOADING}
+            cities={mockCities}
+            activeCityNumber={0}
+            activeCity={mockCities[0]}
+            onCardTitleClick={jest.fn()}
+            onChooseCity={jest.fn()}
+            onGetOffers={jest.fn()}
+            leaflet={leafletMock}
+            userEmail={mockUser.email}
+            userAvatarUrl={mockUser.avatarUrl}
+            onSignIn={jest.fn()}
+          />
+        </StaticRouter>
     )
     .toJSON();
   expect(tree).toMatchSnapshot();

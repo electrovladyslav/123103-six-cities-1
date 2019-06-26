@@ -18,12 +18,13 @@ export const createAPI = (dispatch) => {
 
   const onFail = (err) => {
     if (err.response === undefined) {
-      dispatch(ActionCreator.loadFail(err.message));
+      dispatch(ActionCreator.loadFail(LoadingTypes.LOAD_FAIL));
       return Promise.reject(err);
     }
 
     if (err.response.status === 403) {
-      dispatch(ActionCreator.requireAuthorization(true));
+      history.pushState(null, null, `/login`);
+      // dispatch(ActionCreator.requireAuthorization(true));
     }
 
     return err;
