@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 const RentCard = (props) => {
   const {
@@ -9,10 +10,10 @@ const RentCard = (props) => {
     isBookmarked = false,
     rating = 3,
     name,
-    type
+    type,
+    id
   } = props.offer;
   const {
-    onCardTitleClick,
     onCardImageClick,
     onMouseEnterCard,
     onMouseLeaveCard
@@ -64,8 +65,8 @@ const RentCard = (props) => {
               <span className="visually-hidden">Rating</span>
             </div>
           </div>
-          <h2 className="place-card__name" onClick={onCardTitleClick}>
-            <a href="#">{name}</a>
+          <h2 className="place-card__name">
+            <Link to={`/offer/${id}`}>{name}</Link>
           </h2>
           <p className="place-card__type">{type}</p>
         </div>
@@ -84,7 +85,6 @@ RentCard.propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired
   }),
-  onCardTitleClick: PropTypes.func.isRequired,
   onCardImageClick: PropTypes.func.isRequired,
   onMouseEnterCard: PropTypes.func,
   onMouseLeaveCard: PropTypes.func,

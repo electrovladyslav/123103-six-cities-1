@@ -10,14 +10,11 @@ import {Operation} from "../../reducer";
 import Main from "../main/main.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import Favorites from "../favorites/favorites.jsx";
+import RentPlace from "../rent-place/rent-place.jsx";
+
 
 import withPrivateRoutes from "../../hocs/with-private-routes/with-private-routes.jsx";
 const FavoritesWrapped = withPrivateRoutes(Favorites);
-
-const handleClick = (event) => {
-  console.log(`The link was clicked.`); // eslint-disable-line no-console
-  event.preventDefault();
-};
 
 const redirectToLogin = () => {
   return <Redirect to="/login" />;
@@ -28,12 +25,20 @@ const redirectToMain = () => {
 };
 
 const App = (props) => {
+  const {allOffers} = props;
+
+  const SpecifiedRentPlace = (req) => {
+    const offerId = +req.match.params.id;
+    const offer = allOffers.find((currentOffer) => currentOffer.id === offerId);
+    return <RentPlace offer={offer} />;
+  };
+
   return (
     <Switch>
       <Route
         path="/"
         exact
-        render={() => <Main onCardTitleClick={handleClick} leaflet={leaflet} />}
+        render={() => <Main leaflet={leaflet} />}
       />
       <Route
         path="/login"
@@ -54,18 +59,24 @@ const App = (props) => {
           />
         )}
       />
+      <Route
+        path="/offer/:id"
+        component={SpecifiedRentPlace}
+      />
     </Switch>
   );
 };
 
 App.propTypes = {
   isAuthorized: PropTypes.bool,
+  allOffers: PropTypes.array,
   onSignIn: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
     isAuthorized: getAuthrizationStatus(state),
+    allOffers: state.allOffers,
   });
 
 const mapDispatchToProps = (dispatch) => ({

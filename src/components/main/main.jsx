@@ -70,7 +70,6 @@ const Main = (props) => {
           onElementActivate={onOfferChoose}
           cityName={props.activeCity.name}
           rentsCount={props.offers.length}
-          onCardTitleClick={props.onCardTitleClick}
         />
       );
     }
@@ -165,7 +164,6 @@ const Main = (props) => {
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
                   {renderHeaderLogin(props.userEmail.length)}
-                  {/* </Link> */}
                 </li>
               </ul>
             </nav>
@@ -217,7 +215,6 @@ Main.propTypes = {
   userEmail: PropTypes.string,
   userAvatarUrl: PropTypes.string,
   activeCityNumber: PropTypes.number,
-  onCardTitleClick: PropTypes.func.isRequired,
   onSignIn: PropTypes.func.isRequired,
   onChooseCity: PropTypes.func.isRequired,
   leaflet: PropTypes.object.isRequired,

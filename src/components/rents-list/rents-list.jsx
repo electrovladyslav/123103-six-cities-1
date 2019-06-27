@@ -6,14 +6,10 @@ import RentCard from "../rent-card/rent-card.jsx";
 class RentsList extends PureComponent {
   constructor(props) {
     super(props);
-
-    // this.state = {
-    //   activeCard: null,
-    // };
   }
 
   render() {
-    const {elements, onCardTitleClick, cityName, rentsCount} = this.props;
+    const {elements, cityName, rentsCount} = this.props;
     return (
       <React.Fragment>
         <section className="cities__places places">
@@ -60,7 +56,6 @@ class RentsList extends PureComponent {
               return (
                 <RentCard
                   offer={offer}
-                  onCardTitleClick={onCardTitleClick}
                   onCardImageClick={() => {
                     this._cardImageClickHandler(this.props.activeElementNumber);
                   }}
@@ -99,7 +94,6 @@ RentsList.propTypes = {
   activeElementNumber: PropTypes.number,
   cityName: PropTypes.string.isRequired,
   rentsCount: PropTypes.number.isRequired,
-  onCardTitleClick: PropTypes.func.isRequired,
   onElementActivate: PropTypes.func.isRequired,
 };
 
