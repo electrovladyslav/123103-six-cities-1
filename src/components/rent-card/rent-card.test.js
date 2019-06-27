@@ -1,7 +1,8 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import React from "react";
+import renderer from "react-test-renderer";
+import {StaticRouter} from "react-router";
 
-import RentCard from './rent-card';
+import RentCard from "./rent-card";
 
 const mockOffer = {
   isPremium: false,
@@ -15,12 +16,15 @@ const mockOffer = {
 
 it(`Rent card component renders correctly`, () => {
   const tree = renderer
-  .create(<RentCard
-    offer ={mockOffer}
-    onCardTitleClick = {jest.fn()}
-    onCardImageClick = {jest.fn()}
-
-  />)
-  .toJSON();
+    .create(
+        <StaticRouter>
+          <RentCard
+            offer={mockOffer}
+            onCardTitleClick={jest.fn()}
+            onCardImageClick={jest.fn()}
+          />
+        </StaticRouter>
+    )
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });

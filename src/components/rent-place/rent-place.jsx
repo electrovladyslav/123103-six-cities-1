@@ -476,10 +476,10 @@ RentPlace.propTypes = {
     rating: PropTypes.number,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    images: PropTypes.array,
+    images: PropTypes.array.isRequired,
     bedrooms: PropTypes.number,
     maxAdults: PropTypes.number,
-    goods: PropTypes.array,
+    goods: PropTypes.array.isRequired,
     description: PropTypes.array,
   }),
 };
