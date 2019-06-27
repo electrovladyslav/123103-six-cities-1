@@ -338,10 +338,10 @@ Array [
                 </div>
                 <h2
                   className="place-card__name"
-                  onClick={[MockFunction]}
                 >
                   <a
-                    href="#"
+                    href="/offer/undefined"
+                    onClick={[Function]}
                   >
                     Beautiful & luxurious apartment at great location
                   </a>
@@ -436,10 +436,10 @@ Array [
                 </div>
                 <h2
                   className="place-card__name"
-                  onClick={[MockFunction]}
                 >
                   <a
-                    href="#"
+                    href="/offer/undefined"
+                    onClick={[Function]}
                   >
                     Wood and stone place
                   </a>
@@ -534,10 +534,10 @@ Array [
                 </div>
                 <h2
                   className="place-card__name"
-                  onClick={[MockFunction]}
                 >
                   <a
-                    href="#"
+                    href="/offer/undefined"
+                    onClick={[Function]}
                   >
                     Canal View Prinsengracht
                   </a>
@@ -639,10 +639,10 @@ Array [
                 </div>
                 <h2
                   className="place-card__name"
-                  onClick={[MockFunction]}
                 >
                   <a
-                    href="#"
+                    href="/offer/undefined"
+                    onClick={[Function]}
                   >
                     Nice, cozy, warm big bed apartment
                   </a>

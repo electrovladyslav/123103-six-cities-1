@@ -83,10 +83,10 @@ exports[`Rent card component renders correctly 1`] = `
     </div>
     <h2
       className="place-card__name"
-      onClick={[MockFunction]}
     >
       <a
-        href="#"
+        href="/offer/undefined"
+        onClick={[Function]}
       >
         Super very best appartment
       </a>
