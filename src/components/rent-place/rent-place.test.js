@@ -3,27 +3,19 @@ import renderer from "react-test-renderer";
 import {StaticRouter} from "react-router";
 
 import RentPlace from "./rent-place.jsx";
-
-const mockOffer = {
-  isPremium: false,
-  previewImageSource: `blabla.jpg`,
-  price: 100,
-  isBookmarked: false,
-  rating: 3,
-  name: `Super very best appartment`,
-  type: `Closet`,
-  images: [],
-  goods: [],
-};
+import mockOffers from "../../mocks/allOffers";
+import leafletMock from "../../mocks/leaflet";
 
 it(`Rent place component renders correctly`, () => {
   const tree = renderer
     .create(
         <StaticRouter>
           <RentPlace
-            offer={mockOffer}
+            offer={mockOffers[0]}
             onCardTitleClick={jest.fn()}
             onCardImageClick={jest.fn()}
+            nearestOffers={mockOffers}
+            leaflet={leafletMock}
           />
         </StaticRouter>
     )

@@ -169,8 +169,8 @@ const RentPlace = (props) => {
               Other places in the neighbourhood
             </h2>
             <div className="near-places__list places__list">
-              {nearestOffers.map((offer) => (
-                <RentCard offer={offer} key={offer.name} />
+              {nearestOffers.map((offer, index) => (
+                <RentCard offer={offer} key={offer.name + index} />
               ))}
               {/* <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
@@ -240,7 +240,7 @@ RentPlace.propTypes = {
     description: PropTypes.string,
   }),
   leaflet: PropTypes.object,
-  nearestOffers: PropTypes.array,
+  nearestOffers: PropTypes.array.isRequired,
 };
 
 export default RentPlace;

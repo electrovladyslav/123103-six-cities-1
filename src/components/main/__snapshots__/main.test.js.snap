@@ -151,7 +151,6 @@ exports[`Main component renders correctly 1`] = `
         >
           <article
             className="cities__place-card place-card"
-            onMouseEnter={[Function]}
           >
             <div
               className="place-card__mark"
@@ -256,7 +255,6 @@ exports[`Main component renders correctly 1`] = `
           </article>
           <article
             className="cities__place-card place-card"
-            onMouseEnter={[Function]}
           >
             <div
               className="cities__image-wrapper place-card__image-wrapper"
@@ -354,7 +352,6 @@ exports[`Main component renders correctly 1`] = `
           </article>
           <article
             className="cities__place-card place-card"
-            onMouseEnter={[Function]}
           >
             <div
               className="cities__image-wrapper place-card__image-wrapper"
@@ -452,7 +449,6 @@ exports[`Main component renders correctly 1`] = `
           </article>
           <article
             className="cities__place-card place-card"
-            onMouseEnter={[Function]}
           >
             <div
               className="place-card__mark"
