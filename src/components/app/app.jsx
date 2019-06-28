@@ -23,6 +23,7 @@ import Main from "../main/main.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import Favorites from "../favorites/favorites.jsx";
 import RentPlace from "../rent-place/rent-place.jsx";
+import MainEmpty from "../main-empty/main-empty.jsx";
 
 import withPrivateRoutes from "../../hocs/with-private-routes/with-private-routes.jsx";
 const FavoritesWrapped = withPrivateRoutes(Favorites);
@@ -81,6 +82,7 @@ const App = (props) => {
           )}
         />
         <Route path="/offer/:id" component={SpecifiedRentPlace} />
+        <Route path="/main-empty" component={MainEmpty} />
       </Switch>
     </React.Fragment>
   );
