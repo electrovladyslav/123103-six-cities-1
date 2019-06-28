@@ -6,8 +6,7 @@ class Map extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.zoom = 10;
-    this.leaflet = props.leaflet;
+    this.updatePoints();
   }
 
   render() {
@@ -19,18 +18,15 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const cityCords = [
-      this.props.city.location.latitude,
-      this.props.city.location.longitude,
-    ];
+    const centerCords = [this.centerPoint.latitude, this.centerPoint.longitude];
 
     this.map = this.leaflet.map(`map`, {
-      center: cityCords,
+      center: centerCords,
       zoom: this.zoom,
       zoomControl: false,
       marker: true,
     });
-    this.map.setView(cityCords, this.zoom);
+    this.map.setView(centerCords, this.zoom);
     this.leaflet
       .tileLayer(
           `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
@@ -44,12 +40,23 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate() {
+    this.updatePoints();
+
     this.map.setView(
-        [this.props.city.location.latitude, this.props.city.location.longitude],
+        [this.centerPoint.latitude, this.centerPoint.longitude],
         this.zoom
     );
 
     this.renderOffersMarkers();
+  }
+
+  updatePoints() {
+    this.centerPoint = this.props.city
+      ? this.props.city.location
+      : this.props.activeOffer.location;
+    this.offersLocation = this.props.offersLocation;
+    this.leaflet = this.props.leaflet;
+    this.zoom = this.centerPoint.zoom || 10;
   }
 
   renderOffersMarkers() {
@@ -58,20 +65,45 @@ class Map extends PureComponent {
       iconSize: [30, 30],
     });
 
-    this.props.offersLocation.forEach((offerLocation) => {
-      this.leaflet.marker([offerLocation.latitude, offerLocation.longitude], {icon}).addTo(this.map);
+    this.offersLocation.forEach((offerLocation) => {
+      this.leaflet
+        .marker([offerLocation.latitude, offerLocation.longitude], {icon})
+        .addTo(this.map);
     });
+
+    if (this.props.activeOffer) {
+      const activeIcon = this.leaflet.icon({
+        iconUrl: `img/pin-orange.svg`,
+        iconSize: [30, 30],
+      });
+
+      this.leaflet
+        .marker(
+            [
+              this.props.activeOffer.location.latitude,
+              this.props.activeOffer.location.longitude,
+            ],
+            {icon: activeIcon}
+        )
+        .addTo(this.map);
+    }
   }
 }
 
 Map.propTypes = {
   city: PropTypes.shape({
-    name: PropTypes.string.isRequired,
     location: PropTypes.shape({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
-    }).isRequired,
-    rentsCount: PropTypes.number,
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+      zoom: PropTypes.number,
+    }),
+  }),
+  activeOffer: PropTypes.shape({
+    location: PropTypes.shape({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+      zoom: PropTypes.number,
+    }),
   }),
   offersLocation: PropTypes.array.isRequired,
   leaflet: PropTypes.object.isRequired,

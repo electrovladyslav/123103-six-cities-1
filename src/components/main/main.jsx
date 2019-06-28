@@ -59,6 +59,7 @@ const Main = (props) => {
         <section className="cities__map map">
           <Map
             city={props.activeCity}
+            // activeOffer={}
             offersLocation={props.offers.map((offer) => offer.location)}
             leaflet={props.leaflet}
           />

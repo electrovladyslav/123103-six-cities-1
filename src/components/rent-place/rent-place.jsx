@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+
 import ReviewList from "../review-list/review-list.jsx";
+import Map from "../map/map.jsx";
 
 const RentPlace = (props) => {
   const {
@@ -16,7 +18,9 @@ const RentPlace = (props) => {
     goods,
     type,
     description,
+    location,
   } = props.offer;
+  const {leaflet, nearestOffers} = props;
   return (
     <React.Fragment>
       <main className="page__main page__main--property">
@@ -128,7 +132,7 @@ const RentPlace = (props) => {
                       id: 4,
                       isPro: false,
                       name: `Max`,
-                      avatarUrl: `img/1.png`,
+                      avatarUrl: `img/avatar.svg`,
                     },
                     rating: 4,
                     comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
@@ -140,7 +144,7 @@ const RentPlace = (props) => {
                       id: 5,
                       isPro: false,
                       name: `Alex`,
-                      avatarUrl: `img/1.png`,
+                      avatarUrl: `img/avatar.svg`,
                     },
                     rating: 4,
                     comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
@@ -150,7 +154,13 @@ const RentPlace = (props) => {
               />
             </div>
           </div>
-          <section className="property__map map" />
+          <section className="property__map map">
+            <Map
+              activeOffer={{location}}
+              offersLocation={nearestOffers.map((offer) => offer.location)}
+              leaflet={leaflet}
+            />
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
@@ -315,6 +325,8 @@ RentPlace.propTypes = {
     goods: PropTypes.array.isRequired,
     description: PropTypes.string,
   }),
+  leaflet: PropTypes.object,
+  nearestOffers: PropTypes.array
 };
 
 export default RentPlace;

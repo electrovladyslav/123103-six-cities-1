@@ -7,7 +7,7 @@ import leaflet from "leaflet";
 import {getAuthrizationStatus} from "../../selectors";
 import {Operation, LoadingTypes} from "../../reducer";
 import {
-  // filterOffersByCity,
+  filterOffersByCity,
   // getCities,
   // getActiveCity,
   getLoadingStatus,
@@ -16,6 +16,7 @@ import {
   getUserEmail,
   getUserAvatarUrl,
 } from "../../selectors";
+import getNearestOffers from "../../utils/getNearestOffers";
 
 import Header from "../header/header.jsx";
 import Main from "../main/main.jsx";
@@ -35,14 +36,14 @@ const redirectToMain = () => {
 };
 
 const App = (props) => {
-  const {allOffers, userAvatarUrl, userEmail, loading} = props;
+  const {allOffers, offers, userAvatarUrl, userEmail, loading} = props;
 
   switch (loading) {
     case LoadingTypes.LOAD_FAIL:
-      return `Что-то пошло не так, перезагрузите страницу.`;
+      return `Something going wrong, please reload the page.`;
 
     case LoadingTypes.START_LOADING:
-      return `Ожидайте загрузки данных.`;
+      return `Please wait for data loading.`;
 
     case LoadingTypes.END_LOADING:
     default:
@@ -52,7 +53,7 @@ const App = (props) => {
   const SpecifiedRentPlace = (req) => {
     const offerId = +req.match.params.id;
     const offer = allOffers.find((currentOffer) => currentOffer.id === offerId);
-    return <RentPlace offer={offer} />;
+    return <RentPlace offer={offer} nearestOffers={getNearestOffers(offers)} leaflet={leaflet}/>;
   };
 
   return (
@@ -88,6 +89,7 @@ const App = (props) => {
 App.propTypes = {
   isAuthorized: PropTypes.bool,
   allOffers: PropTypes.array,
+  offers: PropTypes.array,
   onSignIn: PropTypes.func.isRequired,
   userEmail: PropTypes.string,
   userAvatarUrl: PropTypes.string,
@@ -97,6 +99,7 @@ App.propTypes = {
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
     isAuthorized: getAuthrizationStatus(state),
+    offers: filterOffersByCity(state),
     allOffers: state.allOffers,
     userEmail: getUserEmail(state),
     userAvatarUrl: getUserAvatarUrl(state),
