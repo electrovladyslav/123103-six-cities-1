@@ -57,15 +57,9 @@ class RentsList extends PureComponent {
                 <RentCard
                   offer={offer}
                   onCardImageClick={() => {
-                    this._cardImageClickHandler(this.props.activeElementNumber);
-                  }}
-                  key={`${offer.name}${index}`}
-                  onMouseEnterCard={() => {
                     this._setActiveCard(offer);
                   }}
-                  onMouseLeaveCrad={() => {
-                    this._removeActiveCard();
-                  }}
+                  key={`${offer.name}${index}`}
                 />
               );
             })}
@@ -80,21 +74,17 @@ class RentsList extends PureComponent {
     this.props.onElementActivate(offer);
   }
 
-  _removeActiveCard() {
-    this.props.onElementActivate(null);
-  }
-
-  _cardImageClickHandler(activeCard) {
-    console.log(`Active card: ${activeCard}`); // eslint-disable-line no-console
-  }
+  // _removeActiveCard() {
+  //   this.props.onElementActivate(null);
+  // }
 }
 
 RentsList.propTypes = {
   elements: PropTypes.array.isRequired,
-  activeElementNumber: PropTypes.number,
   cityName: PropTypes.string.isRequired,
   rentsCount: PropTypes.number.isRequired,
   onElementActivate: PropTypes.func.isRequired,
+  // isNeighbourhood: PropTypes.bool,
 };
 
 export default RentsList;
