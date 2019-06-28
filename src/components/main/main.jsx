@@ -1,4 +1,4 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
@@ -20,87 +20,81 @@ import withActiveElement from "../../hocs/with-active-element/with-active-elemen
 const CitiesListWrapped = withActiveElement(CitiesList);
 const RentsListWrapped = withActiveElement(RentsList);
 
-const onOfferChoose = (offerNumber) => {
-  // eslint-disable-next-line no-console
-  console.log(`Offer #${offerNumber} was chosen`);
-};
+class Main extends PureComponent {
+  constructor(props) {
+    super(props);
 
-const Main = (props) => {
-  const isNoOffers = !props.offers.length;
+    this.state = {
+      activeOfferNumber: null,
+    };
 
-  const renderOfferBlock = (isEmpty) => {
-    if (isEmpty) {
-      return (
-        <section className="cities__no-places">
-          <div className="cities__status-wrapper tabs__content">
-            <b className="cities__status">No places to stay available</b>
-            <p className="cities__status-description">
-              We could not find any property availbale at the moment in{` `}
-              {props.activeCity.name}
-            </p>
-          </div>
-        </section>
-      );
-    } else {
-      return (
-        <RentsListWrapped
-          elements={props.offers}
-          onElementActivate={onOfferChoose}
-          cityName={props.activeCity.name}
-          rentsCount={props.offers.length}
-        />
-      );
-    }
-  };
+    this.onOfferChoose = this.onOfferChoose.bind(this);
+  }
 
-  const renderMapBlock = (isEmpty) => {
-    if (!isEmpty) {
-      return (
-        <section className="cities__map map">
-          <Map
-            city={props.activeCity}
-            // activeOffer={}
-            offersLocation={props.offers.map((offer) => offer.location)}
-            leaflet={props.leaflet}
+  renderOfferBlock() {
+    //     <section className="cities__no-places">
+    //       <div className="cities__status-wrapper tabs__content">
+    //         <b className="cities__status">No places to stay available</b>
+    //         <p className="cities__status-description">
+    //           We could not find any property availbale at the moment in{` `}
+    //           {this.props.activeCity.name}
+    //         </p>
+    //       </div>
+    //     </section>
+  }
+
+  onOfferChoose(offerNumber) {
+    this.setState({activeOfferNumber: offerNumber});
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <main
+          className="page__main page__main--index">
+          <h1 className="visually-hidden">Cities</h1>
+
+          <CitiesListWrapped
+            elements={this.props.cities}
+            onElementActivate={(clickedCity) => {
+              this.props.onChooseCity(clickedCity);
+              this.setState({activeOfferNumber: null});
+            }}
+            activeElementNumber={this.props.activeCityNumber}
           />
-        </section>
-      );
-    } else {
-      return ``;
-    }
-  };
 
-  return (
-    <React.Fragment>
-      <main
-        className={`page__main page__main--index${
-          isNoOffers ? ` page__main--index-empty` : ``
-        }`}>
-        <h1 className="visually-hidden">Cities</h1>
-
-        <CitiesListWrapped
-          elements={props.cities}
-          onElementActivate={(clickedCity) => {
-            props.onChooseCity(clickedCity);
-          }}
-          activeElementNumber={props.activeCityNumber}
-        />
-
-        <div className="cities__places-wrapper">
-          <div
-            className={`cities__places-container container${
-              isNoOffers ? ` cities__places-container--empty` : ``
-            }`}>
-            {renderOfferBlock(isNoOffers)}
-            <div className="cities__right-section">
-              {renderMapBlock(isNoOffers)}
+          <div className="cities__places-wrapper">
+            <div
+              className={`cities__places-container container${
+                this.isNoOffers ? ` cities__places-container--empty` : ``
+              }`}>
+              <RentsListWrapped
+                elements={this.props.offers}
+                onElementActivate={this.onOfferChoose}
+                cityName={this.props.activeCity.name}
+                rentsCount={this.props.offers.length}
+              />
+              <div className="cities__right-section">
+                <section className="cities__map map">
+                  <Map
+                    city={this.props.activeCity}
+                    activeOffer={
+                      this.props.offers[this.state.activeOfferNumber]
+                    }
+                    offersLocation={this.props.offers.map(
+                        (offer) => offer.location
+                    )}
+                    leaflet={this.props.leaflet}
+                  />
+                </section>
+              </div>
             </div>
           </div>
-        </div>
-      </main>
-    </React.Fragment>
-  );
-};
+        </main>
+      </React.Fragment>
+    );
+  }
+}
 
 Main.propTypes = {
   offers: PropTypes.array,
