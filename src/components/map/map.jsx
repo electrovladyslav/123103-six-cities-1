@@ -7,6 +7,8 @@ class Map extends PureComponent {
     super(props);
 
     this.updatePoints();
+    // this.zoom = this.centerPoint.zoom || 10;
+    this.zoom = 12;
   }
 
   render() {
@@ -51,12 +53,11 @@ class Map extends PureComponent {
   }
 
   updatePoints() {
-    this.centerPoint = this.props.city
-      ? this.props.city.location
-      : this.props.activeOffer.location;
+    this.centerPoint = this.props.activeOffer
+      ? this.props.activeOffer.location
+      : this.props.city.location;
     this.offersLocation = this.props.offersLocation;
     this.leaflet = this.props.leaflet;
-    this.zoom = this.centerPoint.zoom || 10;
   }
 
   renderOffersMarkers() {
