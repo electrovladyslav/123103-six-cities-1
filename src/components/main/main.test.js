@@ -28,6 +28,7 @@ it(`Main component renders correctly`, () => {
             userEmail={mockUser.email}
             userAvatarUrl={mockUser.avatarUrl}
             onSignIn={jest.fn()}
+            redirectToMainEmpty={jest.fn()}
           />
         </StaticRouter>
     )

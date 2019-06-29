@@ -29,18 +29,7 @@ class Main extends PureComponent {
     };
 
     this.onOfferChoose = this.onOfferChoose.bind(this);
-  }
-
-  renderOfferBlock() {
-    //     <section className="cities__no-places">
-    //       <div className="cities__status-wrapper tabs__content">
-    //         <b className="cities__status">No places to stay available</b>
-    //         <p className="cities__status-description">
-    //           We could not find any property availbale at the moment in{` `}
-    //           {this.props.activeCity.name}
-    //         </p>
-    //       </div>
-    //     </section>
+    this.redirectToMainEmpty = props.redirectToMainEmpty;
   }
 
   onOfferChoose(offerNumber) {
@@ -48,6 +37,9 @@ class Main extends PureComponent {
   }
 
   render() {
+    if (!this.props.offers.length) {
+      this.redirectToMainEmpty();
+    }
     return (
       <React.Fragment>
         <main
@@ -109,6 +101,7 @@ Main.propTypes = {
   activeCityNumber: PropTypes.number,
   onSignIn: PropTypes.func.isRequired,
   onChooseCity: PropTypes.func.isRequired,
+  redirectToMainEmpty: PropTypes.func.isRequired,
   leaflet: PropTypes.object.isRequired,
 };
 
