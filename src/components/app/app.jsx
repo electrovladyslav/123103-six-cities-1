@@ -36,6 +36,10 @@ const redirectToMain = () => {
   return <Redirect to="/" />;
 };
 
+const redirectToMainEmpty = () => {
+  return <Redirect to="/main-empty" />;
+};
+
 const App = (props) => {
   const {allOffers, offers, userAvatarUrl, userEmail, loading} = props;
 
@@ -54,14 +58,26 @@ const App = (props) => {
   const SpecifiedRentPlace = (req) => {
     const offerId = +req.match.params.id;
     const offer = allOffers.find((currentOffer) => currentOffer.id === offerId);
-    return <RentPlace offer={offer} nearestOffers={getNearestOffers(offers)} leaflet={leaflet}/>;
+    return (
+      <RentPlace
+        offer={offer}
+        nearestOffers={getNearestOffers(offer, offers)}
+        leaflet={leaflet}
+      />
+    );
   };
 
   return (
     <React.Fragment>
       <Header userAvatarUrl={userAvatarUrl} userEmail={userEmail} />
       <Switch>
-        <Route path="/" exact render={() => <Main leaflet={leaflet} />} />
+        <Route
+          path="/"
+          exact
+          render={() => (
+            <Main leaflet={leaflet} redirectToMainEmpty={redirectToMainEmpty} />
+          )}
+        />
         <Route
           path="/login"
           render={() => (
