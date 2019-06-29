@@ -3,6 +3,7 @@ import adapter from "./adapter";
 
 export const ActionTypes = {
   LOAD_OFFERS: `LOAD_OFFERS`,
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
   START_LOADING: `START_LOADING`,
   END_LOADING: `END_LOADING`,
   LOAD_FAIL: `LOAD_FAIL`,
@@ -36,6 +37,13 @@ export const ActionCreator = {
     return {
       type: ActionTypes.LOAD_OFFERS,
       payload: offers,
+    };
+  },
+
+  loadReviews: (reviews) => {
+    return {
+      type: ActionTypes.LOAD_REVIEWS,
+      payload: reviews,
     };
   },
 
@@ -91,6 +99,18 @@ export const Operation = {
         .catch((err) => console.log(err))
     );
   },
+
+  loadReviews: (offerId) => (dispatch, _getState, api) => {
+    return (
+      api
+        .get(`/comments/${offerId}`)
+        .then((response) => {
+          dispatch(ActionCreator.loadReviews(response.data));
+        })
+        // eslint-disable-next-line no-console
+        .catch((err) => console.log(err))
+    );
+  },
 };
 
 export function reducer(state = initialState, action) {
@@ -103,6 +123,11 @@ export function reducer(state = initialState, action) {
     case ActionTypes.LOAD_OFFERS:
       return Object.assign({}, state, {
         allOffers: action.payload,
+      });
+
+    case ActionTypes.LOAD_REVIEWS:
+      return Object.assign({}, state, {
+        reviews: action.payload,
       });
 
     case ActionTypes.START_LOADING:

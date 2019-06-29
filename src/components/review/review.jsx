@@ -12,7 +12,7 @@ const Review = (props) => {
           <div className="reviews__avatar-wrapper user__avatar-wrapper">
             <img
               className="reviews__avatar user__avatar"
-              src={user.avatarUrl}
+              src={user.avatar_url}
               width="54"
               height="54"
               alt="Reviews avatar"
