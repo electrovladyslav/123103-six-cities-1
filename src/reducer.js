@@ -80,10 +80,16 @@ export const Operation = {
       api
         .get(`/hotels`)
         .then((response) => {
+          dispatch(ActionCreator.endLoading(LoadingTypes.END_LOADING));
+          return response;
+        })
+        .then((response) => {
           dispatch(ActionCreator.loadOffers(adapter(response.data)));
         })
-        // eslint-disable-next-line no-console
-        .catch((err) => console.log(err))
+        .catch((err) => {
+          dispatch(ActionCreator.loadFail(LoadingTypes.LOAD_FAIL));
+          return Promise.reject(err);
+        })
     );
   },
 
@@ -109,7 +115,7 @@ export const Operation = {
           dispatch(ActionCreator.requireAuthorization(false));
         })
         // eslint-disable-next-line no-console
-        .catch((err) => console.log(err))
+        .catch(() => console.log(`Not logged`))
     );
   },
 
