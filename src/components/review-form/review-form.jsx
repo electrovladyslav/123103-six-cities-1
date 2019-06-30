@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import {RATING_VALUES as ratingValues} from "../../constants";
 
-const RentForm = ({onSubmit, setRating, setComment, isError, isSubmitDisabled}) => {
+const ReviewForm = ({onSubmit, setRating, setComment, isError, isSubmitDisabled}) => {
   return (
     <form
       className="reviews__form form"
@@ -65,7 +65,7 @@ const RentForm = ({onSubmit, setRating, setComment, isError, isSubmitDisabled}) 
   );
 };
 
-RentForm.propTypes = {
+ReviewForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   setRating: PropTypes.func.isRequired,
   setComment: PropTypes.func.isRequired,
@@ -73,4 +73,4 @@ RentForm.propTypes = {
   isSubmitDisabled: PropTypes.bool,
 };
 
-export default RentForm;
+export default ReviewForm;

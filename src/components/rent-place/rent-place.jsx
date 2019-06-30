@@ -12,7 +12,7 @@ import ReviewForm from "../review-form/review-form.jsx";
 import withReview from "../../hocs/with-review/with-review.jsx";
 
 import {MAX_OFFER_IMAGES} from "../../constants";
-import {getReviews} from "../../selectors";
+import {getReviews, getAuthrizationStatus} from "../../selectors";
 
 const ReviewFormWrapped = withReview(ReviewForm);
 
@@ -29,7 +29,7 @@ class RentPlace extends PureComponent {
   }
 
   render() {
-    const {leaflet, offer, nearestOffers, reviews} = this.props;
+    const {leaflet, offer, nearestOffers, reviews, isAuthrized} = this.props;
 
     if (!offer) {
       return ``;
@@ -154,7 +154,14 @@ class RentPlace extends PureComponent {
                 </div>
                 <section className="property__reviews reviews">
                   <ReviewList reviews={reviews} />
-                  <ReviewFormWrapped onSendReview={this.sendReview} />
+                  {isAuthrized ? (
+                    <ReviewFormWrapped
+                      onSendReview={this.sendReview}
+                      isAuthrized={isAuthrized}
+                    />
+                  ) : (
+                    ``
+                  )}
                 </section>
               </div>
             </div>
@@ -207,14 +214,16 @@ RentPlace.propTypes = {
   offerId: PropTypes.number,
   leaflet: PropTypes.object,
   nearestOffers: PropTypes.array.isRequired,
-  loadReviews: PropTypes.func,
+  loadReviews: PropTypes.func.isRequired,
   sendReview: PropTypes.func,
-  reviews: PropTypes.array,
+  reviews: PropTypes.array.isRequired,
+  isAuthrized: PropTypes.bool,
 };
 
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
     reviews: getReviews(state),
+    isAuthrized: getAuthrizationStatus(state),
   });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Review from "../review/review.jsx";
 
 const ReviewList = (props) => {
-  const reviews = props.reviews.sort((review1, review2) => review1.date - review2.date);
+  const reviews = props.reviews;
 
   return (
     <React.Fragment>
@@ -14,9 +14,14 @@ const ReviewList = (props) => {
       </h2>
 
       <ul className="reviews__list">
-        {reviews.map((review) => (
-          <Review review={review} key={review.id} />
-        ))}
+        {reviews
+          .sort(
+              (review1, review2) =>
+                new Date(review2.date) - new Date(review1.date)
+          )
+          .map((review) => (
+            <Review review={review} key={review.id} />
+          ))}
       </ul>
     </React.Fragment>
   );

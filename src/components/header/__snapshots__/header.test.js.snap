@@ -86,7 +86,7 @@ Array [
                   className="header__avatar-wrapper user__avatar-wrapper"
                   style={
                     Object {
-                      "backgroundImage": "url(https://es31-server.appspot.com/six-citiesundefined)",
+                      "backgroundImage": "url(NaN)",
                     }
                   }
                 />
