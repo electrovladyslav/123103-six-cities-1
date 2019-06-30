@@ -110,7 +110,7 @@ App.propTypes = {
   allOffers: PropTypes.array,
   offers: PropTypes.array,
   onSignIn: PropTypes.func.isRequired,
-  userEmail: PropTypes.string,
+  userEmail: PropTypes.string.isRequired,
   userAvatarUrl: PropTypes.string,
   loading: PropTypes.string,
 };
