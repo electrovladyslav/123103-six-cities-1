@@ -25,7 +25,7 @@ const init = () => {
 
   store.dispatch(ActionCreator.startLoading(LoadingTypes.START_LOADING));
   store.dispatch(Operation.loadOffers());
-  // store.dispatch(Operation.getAuthorization());
+  store.dispatch(Operation.getAuthorization());
   store.dispatch(ActionCreator.changeActiveCity(getRandomNumber(5)));
 
 
