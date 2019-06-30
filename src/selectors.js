@@ -1,6 +1,7 @@
 import {createSelector} from "reselect";
 
 import prepareCities from "./utils/prepareCities";
+import {MAX_REVIEWS_PER_PAGE} from "./constants";
 
 export const getAllOffers = (state) => {
   return state.allOffers;
@@ -55,4 +56,12 @@ export const getUserEmail = (state) => {
 
 export const getUserAvatarUrl = (state) => {
   return state.user.avatar_url;
+};
+
+export const getReviews = (state) => {
+  if (state.reviews) {
+    return state.reviews.slice(0, MAX_REVIEWS_PER_PAGE);
+  } else {
+    return [];
+  }
 };

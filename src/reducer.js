@@ -100,10 +100,35 @@ export const Operation = {
     );
   },
 
+  getAuthorization: () => (dispatch, _getState, api) => {
+    return (
+      api
+        .get(`/login`)
+        .then((response) => {
+          dispatch(ActionCreator.authorize(response.data));
+          dispatch(ActionCreator.requireAuthorization(false));
+        })
+        // eslint-disable-next-line no-console
+        .catch((err) => console.log(err))
+    );
+  },
+
   loadReviews: (offerId) => (dispatch, _getState, api) => {
     return (
       api
         .get(`/comments/${offerId}`)
+        .then((response) => {
+          dispatch(ActionCreator.loadReviews(response.data));
+        })
+        // eslint-disable-next-line no-console
+        .catch((err) => console.log(err))
+    );
+  },
+
+  sendReviews: (offerId, review) => (dispatch, _getState, api) => {
+    return (
+      api
+        .post(`/comments/${offerId}`, review)
         .then((response) => {
           dispatch(ActionCreator.loadReviews(response.data));
         })

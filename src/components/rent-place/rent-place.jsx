@@ -8,12 +8,24 @@ import {Operation} from "../../reducer";
 import ReviewList from "../review-list/review-list.jsx";
 import Map from "../map/map.jsx";
 import RentCard from "../rent-card/rent-card.jsx";
+import ReviewForm from "../review-form/review-form.jsx";
+import withReview from "../../hocs/with-review/with-review.jsx";
+
+import {MAX_OFFER_IMAGES} from "../../constants";
+import {getReviews} from "../../selectors";
+
+const ReviewFormWrapped = withReview(ReviewForm);
 
 class RentPlace extends PureComponent {
   constructor(props) {
     super(props);
+    this.props.loadReviews(this.props.offerId);
 
-    this.props.loadReviews(this.props.offer.id);
+    this.sendReview = this.sendReview.bind(this);
+  }
+
+  sendReview(review) {
+    this.props.sendReview(this.props.offerId, review);
   }
 
   render() {
@@ -44,7 +56,7 @@ class RentPlace extends PureComponent {
           <section className="property">
             <div className="property__gallery-container container">
               <div className="property__gallery">
-                {images.map((imageSrc) => {
+                {images.slice(0, MAX_OFFER_IMAGES).map((imageSrc) => {
                   return (
                     <div className="property__image-wrapper" key={imageSrc}>
                       <img
@@ -140,8 +152,10 @@ class RentPlace extends PureComponent {
                     <p className="property__text">{description}</p>
                   </div>
                 </div>
-
-                <ReviewList reviews={reviews} />
+                <section className="property__reviews reviews">
+                  <ReviewList reviews={reviews} />
+                  <ReviewFormWrapped onSendReview={this.sendReview} />
+                </section>
               </div>
             </div>
             <section className="property__map map">
@@ -189,22 +203,27 @@ RentPlace.propTypes = {
     maxAdults: PropTypes.number,
     goods: PropTypes.array.isRequired,
     description: PropTypes.string,
-    id: PropTypes.number.string,
   }),
+  offerId: PropTypes.number,
   leaflet: PropTypes.object,
   nearestOffers: PropTypes.array.isRequired,
   loadReviews: PropTypes.func,
+  sendReview: PropTypes.func,
   reviews: PropTypes.array,
 };
 
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
-    reviews: state.reviews,
+    reviews: getReviews(state),
   });
 
 const mapDispatchToProps = (dispatch) => ({
   loadReviews: (offerId) => {
     dispatch(Operation.loadReviews(offerId));
+  },
+
+  sendReview: (offerId, review) => {
+    dispatch(Operation.sendReviews(offerId, review));
   },
 });
 

@@ -61,6 +61,7 @@ const App = (props) => {
     return (
       <RentPlace
         offer={offer}
+        offerId={offerId}
         nearestOffers={getNearestOffers(offer, offers)}
         leaflet={leaflet}
       />
