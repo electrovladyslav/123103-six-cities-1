@@ -3,6 +3,7 @@ import adapter from "./adapter";
 
 export const ActionTypes = {
   LOAD_OFFERS: `LOAD_OFFERS`,
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
   START_LOADING: `START_LOADING`,
   END_LOADING: `END_LOADING`,
   LOAD_FAIL: `LOAD_FAIL`,
@@ -39,6 +40,13 @@ export const ActionCreator = {
     };
   },
 
+  loadReviews: (reviews) => {
+    return {
+      type: ActionTypes.LOAD_REVIEWS,
+      payload: reviews,
+    };
+  },
+
   startLoading: (message) => {
     return {
       type: ActionTypes.START_LOADING,
@@ -68,15 +76,19 @@ export const ActionCreator = {
 
 export const Operation = {
   loadOffers: () => (dispatch, _getState, api) => {
-    return (
-      api
-        .get(`/hotels`)
-        .then((response) => {
-          dispatch(ActionCreator.loadOffers(adapter(response.data)));
-        })
-        // eslint-disable-next-line no-console
-        .catch((err) => console.log(err))
-    );
+    return api
+      .get(`/hotels`)
+      .then((response) => {
+        dispatch(ActionCreator.loadOffers(adapter(response.data)));
+      })
+      .then((response) => {
+        dispatch(ActionCreator.endLoading(LoadingTypes.END_LOADING));
+        return response;
+      })
+      .catch((err) => {
+        dispatch(ActionCreator.loadFail(LoadingTypes.LOAD_FAIL));
+        return Promise.reject(err);
+      });
   },
 
   authorize: (data) => (dispatch, _getState, api) => {
@@ -86,6 +98,43 @@ export const Operation = {
         .then((response) => {
           dispatch(ActionCreator.authorize(response.data));
           dispatch(ActionCreator.requireAuthorization(false));
+        })
+        // eslint-disable-next-line no-console
+        .catch((err) => console.log(err))
+    );
+  },
+
+  getAuthorization: () => (dispatch, _getState, api) => {
+    return (
+      api
+        .get(`/login`)
+        .then((response) => {
+          dispatch(ActionCreator.authorize(response.data));
+          dispatch(ActionCreator.requireAuthorization(false));
+        })
+        // eslint-disable-next-line no-console
+        .catch(() => console.log(`Not logged`))
+    );
+  },
+
+  loadReviews: (offerId) => (dispatch, _getState, api) => {
+    return (
+      api
+        .get(`/comments/${offerId}`)
+        .then((response) => {
+          dispatch(ActionCreator.loadReviews(response.data));
+        })
+        // eslint-disable-next-line no-console
+        .catch((err) => console.log(err))
+    );
+  },
+
+  sendReviews: (offerId, review) => (dispatch, _getState, api) => {
+    return (
+      api
+        .post(`/comments/${offerId}`, review)
+        .then((response) => {
+          dispatch(ActionCreator.loadReviews(response.data));
         })
         // eslint-disable-next-line no-console
         .catch((err) => console.log(err))
@@ -103,6 +152,11 @@ export function reducer(state = initialState, action) {
     case ActionTypes.LOAD_OFFERS:
       return Object.assign({}, state, {
         allOffers: action.payload,
+      });
+
+    case ActionTypes.LOAD_REVIEWS:
+      return Object.assign({}, state, {
+        reviews: action.payload,
       });
 
     case ActionTypes.START_LOADING:

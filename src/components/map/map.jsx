@@ -53,9 +53,18 @@ class Map extends PureComponent {
   }
 
   updatePoints() {
-    this.centerPoint = this.props.activeOffer
-      ? this.props.activeOffer.location
-      : this.props.city.location;
+    if (this.props.activeOffer) {
+      this.centerPoint = this.props.activeOffer.location;
+    } else if (this.props.city) {
+      this.centerPoint = this.props.city.location;
+    } else {
+      this.centerPoint = this.props.offersLocation[0];
+    }
+    // this.centerPoint = this.props.activeOffer
+    //   ? this.props.activeOffer.location
+    //   : this.props.city
+    //     ? this.props.city.location
+    //     : this.props.offersLocation[0];
     this.offersLocation = this.props.offersLocation;
     this.leaflet = this.props.leaflet;
   }

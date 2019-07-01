@@ -2,23 +2,25 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const CitiesList = (props) => {
-  const cities = props.elements.slice();
+  const cities = props.elements;
+  const handleCityClick = props.onElementActivate;
+  const activeCity = props.activeElement;
 
   return (
     <React.Fragment>
       <div className="cities tabs">
         <section className="locations container">
           <ul className="locations__list tabs__list">
-            {cities.map((city, number) => {
+            {cities.map((city) => {
               const cityClassActive =
-                number === props.activeElementNumber
+                city === activeCity
                   ? ` tabs__item--active`
                   : ``;
               return (
                 <li className="locations__item" key={city.name}>
                   <a
                     onClick={() => {
-                      props.onElementActivate(city);
+                      handleCityClick(city);
                     }}
                     className={`locations__item-link tabs__item${cityClassActive}`}
                     href="#">
@@ -37,7 +39,7 @@ const CitiesList = (props) => {
 CitiesList.propTypes = {
   elements: PropTypes.array.isRequired,
   onElementActivate: PropTypes.func.isRequired,
-  activeElementNumber: PropTypes.number.isRequired,
+  activeElement: PropTypes.object,
 };
 
 export default CitiesList;

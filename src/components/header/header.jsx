@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import {baseURL} from "../../api";
+import {BASE_URL as baseURL} from "../../constants";
 
 const Header = (props) => {
   const {userAvatarUrl, userEmail} = props;

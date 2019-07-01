@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 
 import {ActionCreator} from "../../reducer";
 import {
-  filterOffersByCity,
   getCities,
   getActiveCity,
   getActiveCityNumber,
@@ -24,59 +23,60 @@ class Main extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      activeOfferNumber: null,
-    };
-
-    this.onOfferChoose = this.onOfferChoose.bind(this);
     this.redirectToMainEmpty = props.redirectToMainEmpty;
+
+    this.handleOfferChoose = this.handleOfferChoose.bind(this);
   }
 
-  onOfferChoose(offerNumber) {
-    this.setState({activeOfferNumber: offerNumber});
+  handleOfferChoose(offer) {
+    this.props.onElementActivate(offer);
   }
 
   render() {
-    if (!this.props.offers.length) {
+    const {
+      cities,
+      onChooseCity,
+      activeCity,
+      eriseActiveElement,
+      leaflet,
+    } = this.props;
+    const activeOffer = this.props.activeElement;
+    const offers = this.props.elements;
+
+    if (!offers.length) {
       this.redirectToMainEmpty();
     }
+
     return (
       <React.Fragment>
-        <main
-          className="page__main page__main--index">
+        <main className="page__main page__main--index">
           <h1 className="visually-hidden">Cities</h1>
 
           <CitiesListWrapped
-            elements={this.props.cities}
+            elements={cities}
             onElementActivate={(clickedCity) => {
-              this.props.onChooseCity(clickedCity);
-              this.setState({activeOfferNumber: null});
+              onChooseCity(cities.indexOf(clickedCity));
+              eriseActiveElement();
             }}
-            activeElementNumber={this.props.activeCityNumber}
+            activeElement={activeCity}
           />
 
           <div className="cities__places-wrapper">
             <div
-              className={`cities__places-container container${
-                this.isNoOffers ? ` cities__places-container--empty` : ``
-              }`}>
+              className="cities__places-container container">
               <RentsListWrapped
-                elements={this.props.offers}
-                onElementActivate={this.onOfferChoose}
-                cityName={this.props.activeCity.name}
-                rentsCount={this.props.offers.length}
+                elements={offers}
+                onElementActivate={this.handleOfferChoose}
+                cityName={activeCity ? activeCity.name : ``}
+                rentsCount={offers.length}
               />
               <div className="cities__right-section">
                 <section className="cities__map map">
                   <Map
-                    city={this.props.activeCity}
-                    activeOffer={
-                      this.props.offers[this.state.activeOfferNumber]
-                    }
-                    offersLocation={this.props.offers.map(
-                        (offer) => offer.location
-                    )}
-                    leaflet={this.props.leaflet}
+                    city={activeCity}
+                    activeOffer={activeOffer}
+                    offersLocation={offers.map((offer) => offer.location)}
+                    leaflet={leaflet}
                   />
                 </section>
               </div>
@@ -89,8 +89,7 @@ class Main extends PureComponent {
 }
 
 Main.propTypes = {
-  offers: PropTypes.array,
-  allOffers: PropTypes.array.isRequired,
+  elements: PropTypes.array,
   cities: PropTypes.array,
   activeCity: PropTypes.shape({
     name: PropTypes.string,
@@ -103,12 +102,13 @@ Main.propTypes = {
   onChooseCity: PropTypes.func.isRequired,
   redirectToMainEmpty: PropTypes.func.isRequired,
   leaflet: PropTypes.object.isRequired,
+  activeElement: PropTypes.object,
+  onElementActivate: PropTypes.func,
+  eriseActiveElement: PropTypes.func,
 };
 
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
-    offers: filterOffersByCity(state),
-    allOffers: state.allOffers,
     isAuthRequired: getAuthRequiredStatus(state),
     cities: getCities(state),
     activeCity: getActiveCity(state),

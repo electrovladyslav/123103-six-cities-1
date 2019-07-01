@@ -15,7 +15,7 @@ it(`Main component renders correctly`, () => {
     .create(
         <StaticRouter>
           <Main
-            offers={mockOffers}
+            elements={mockOffers}
             allOffers={mockAllOffers}
             loading={LoadingTypes.END_LOADING}
             cities={mockCities}
