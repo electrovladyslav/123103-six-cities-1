@@ -26,6 +26,7 @@ import RentPlace from "../rent-place/rent-place.jsx";
 import MainEmpty from "../main-empty/main-empty.jsx";
 
 import withPrivateRoutes from "../../hocs/with-private-routes/with-private-routes.jsx";
+import withActiveElement from "../../hocs/with-active-element/with-active-element.jsx";
 const FavoritesWrapped = withPrivateRoutes(Favorites);
 
 const redirectToLogin = () => {
@@ -39,6 +40,8 @@ const redirectToMain = () => {
 const redirectToMainEmpty = () => {
   return <Redirect to="/main-empty" />;
 };
+
+const MainWrapped = withActiveElement(Main);
 
 const App = (props) => {
   const {allOffers, offers, userAvatarUrl, userEmail, loading} = props;
@@ -76,7 +79,11 @@ const App = (props) => {
           path="/"
           exact
           render={() => (
-            <Main leaflet={leaflet} redirectToMainEmpty={redirectToMainEmpty} />
+            <MainWrapped
+              elements={offers}
+              leaflet={leaflet}
+              redirectToMainEmpty={redirectToMainEmpty}
+            />
           )}
         />
         <Route

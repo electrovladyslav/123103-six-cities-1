@@ -18,13 +18,14 @@ it(`Should make a correct API call to /hotels`, function () {
       expect(dispatch).toHaveBeenCalledTimes(2);
 
       expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: `LOAD_OFFERS`,
+        payload: adapter([{fake: true}]),
+      });
+
+      expect(dispatch).toHaveBeenNthCalledWith(2, {
         type: `END_LOADING`,
         payload: `END_LOADING`,
       });
 
-      expect(dispatch).toHaveBeenNthCalledWith(2, {
-        type: `LOAD_OFFERS`,
-        payload: adapter([{fake: true}]),
-      });
     });
 });

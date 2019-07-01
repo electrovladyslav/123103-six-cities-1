@@ -73,10 +73,6 @@ class RentsList extends PureComponent {
   _setActiveCard(offer) {
     this.props.onElementActivate(offer);
   }
-
-  // _removeActiveCard() {
-  //   this.props.onElementActivate(null);
-  // }
 }
 
 RentsList.propTypes = {

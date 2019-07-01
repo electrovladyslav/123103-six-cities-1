@@ -76,21 +76,19 @@ export const ActionCreator = {
 
 export const Operation = {
   loadOffers: () => (dispatch, _getState, api) => {
-    return (
-      api
-        .get(`/hotels`)
-        .then((response) => {
-          dispatch(ActionCreator.endLoading(LoadingTypes.END_LOADING));
-          return response;
-        })
-        .then((response) => {
-          dispatch(ActionCreator.loadOffers(adapter(response.data)));
-        })
-        .catch((err) => {
-          dispatch(ActionCreator.loadFail(LoadingTypes.LOAD_FAIL));
-          return Promise.reject(err);
-        })
-    );
+    return api
+      .get(`/hotels`)
+      .then((response) => {
+        dispatch(ActionCreator.loadOffers(adapter(response.data)));
+      })
+      .then((response) => {
+        dispatch(ActionCreator.endLoading(LoadingTypes.END_LOADING));
+        return response;
+      })
+      .catch((err) => {
+        dispatch(ActionCreator.loadFail(LoadingTypes.LOAD_FAIL));
+        return Promise.reject(err);
+      });
   },
 
   authorize: (data) => (dispatch, _getState, api) => {

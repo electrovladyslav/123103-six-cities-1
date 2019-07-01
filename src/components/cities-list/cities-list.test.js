@@ -15,7 +15,7 @@ it(`Cities list component renders correctly`, () => {
         <CitiesList
           elements={mockState.cities}
           onElementActivate={mockState.onElementClick}
-          activeElementNumber={0}
+          activeElement={mockState.cities[0]}
         />
     )
     .toJSON();

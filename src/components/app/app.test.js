@@ -5,7 +5,7 @@ import {MemoryRouter} from "react-router";
 import {createStore, applyMiddleware} from "redux";
 import thunk from "redux-thunk";
 
-import {reducer, Operation} from "../../reducer";
+import {reducer} from "../../reducer";
 import {createAPI} from "../../api";
 import {App} from "./app.jsx";
 
