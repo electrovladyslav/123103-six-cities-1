@@ -75,7 +75,7 @@ Bookmark.propTypes = {
   isAuthorized: PropTypes.bool,
   bookmarkSize: PropTypes.string,
   bookmarkClass: PropTypes.string,
-  offerId: PropTypes.number.isRequired,
+  offerId: PropTypes.number,
   postToFavorites: PropTypes.func,
   toggleFavoriteStatus: PropTypes.func,
 };
