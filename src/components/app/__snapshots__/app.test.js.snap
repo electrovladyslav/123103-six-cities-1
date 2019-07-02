@@ -172,7 +172,7 @@ Array [
             className="cities__places-list places__list tabs__content"
           >
             <article
-              className="cities__place-card place-card"
+              className="cities__card place-card "
             >
               <div
                 className="place-card__mark"
@@ -198,7 +198,7 @@ Array [
                 </a>
               </div>
               <div
-                className="place-card__info"
+                className="place-card__info cities__card-info"
               >
                 <div
                   className="place-card__price-wrapper"
@@ -282,7 +282,7 @@ Array [
               </div>
             </article>
             <article
-              className="cities__place-card place-card"
+              className="cities__card place-card "
             >
               <div
                 className="cities__image-wrapper place-card__image-wrapper"
@@ -301,7 +301,7 @@ Array [
                 </a>
               </div>
               <div
-                className="place-card__info"
+                className="place-card__info cities__card-info"
               >
                 <div
                   className="place-card__price-wrapper"
@@ -385,7 +385,7 @@ Array [
               </div>
             </article>
             <article
-              className="cities__place-card place-card"
+              className="cities__card place-card "
             >
               <div
                 className="cities__image-wrapper place-card__image-wrapper"
@@ -404,7 +404,7 @@ Array [
                 </a>
               </div>
               <div
-                className="place-card__info"
+                className="place-card__info cities__card-info"
               >
                 <div
                   className="place-card__price-wrapper"
@@ -488,7 +488,7 @@ Array [
               </div>
             </article>
             <article
-              className="cities__place-card place-card"
+              className="cities__card place-card "
             >
               <div
                 className="place-card__mark"
@@ -514,7 +514,7 @@ Array [
                 </a>
               </div>
               <div
-                className="place-card__info"
+                className="place-card__info cities__card-info"
               >
                 <div
                   className="place-card__price-wrapper"
