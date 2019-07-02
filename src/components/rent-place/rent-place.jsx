@@ -24,7 +24,7 @@ class RentPlace extends PureComponent {
     super(props);
     this.props.loadReviews(this.props.offerId);
 
-    this.sendReview = this.sendReview.bind(this);
+    this.handleReviewSending = this.handleReviewSending.bind(this);
   }
 
   handleReviewSending(review) {
