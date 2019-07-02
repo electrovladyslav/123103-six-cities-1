@@ -1,5 +1,6 @@
 import initialState from "./mocks/initial-state";
 import adapter from "./adapter";
+import {Pathes} from "./constants";
 
 export const ActionTypes = {
   LOAD_OFFERS: `LOAD_OFFERS`,
@@ -77,7 +78,7 @@ export const ActionCreator = {
 export const Operation = {
   loadOffers: () => (dispatch, _getState, api) => {
     return api
-      .get(`/hotels`)
+      .get(`/${Pathes.offers}`)
       .then((response) => {
         dispatch(ActionCreator.loadOffers(adapter(response.data)));
       })
@@ -94,7 +95,7 @@ export const Operation = {
   authorize: (data) => (dispatch, _getState, api) => {
     return (
       api
-        .post(`/login`, data)
+        .post(`/${Pathes.signin}`, data)
         .then((response) => {
           dispatch(ActionCreator.authorize(response.data));
           dispatch(ActionCreator.requireAuthorization(false));
@@ -107,7 +108,7 @@ export const Operation = {
   getAuthorization: () => (dispatch, _getState, api) => {
     return (
       api
-        .get(`/login`)
+        .get(`/${Pathes.signin}`)
         .then((response) => {
           dispatch(ActionCreator.authorize(response.data));
           dispatch(ActionCreator.requireAuthorization(false));
@@ -120,7 +121,7 @@ export const Operation = {
   loadReviews: (offerId) => (dispatch, _getState, api) => {
     return (
       api
-        .get(`/comments/${offerId}`)
+        .get(`/${Pathes.comments}/${offerId}`)
         .then((response) => {
           dispatch(ActionCreator.loadReviews(response.data));
         })
@@ -132,7 +133,7 @@ export const Operation = {
   sendReviews: (offerId, review) => (dispatch, _getState, api) => {
     return (
       api
-        .post(`/comments/${offerId}`, review)
+        .post(`/${Pathes.comments}/${offerId}`, review)
         .then((response) => {
           dispatch(ActionCreator.loadReviews(response.data));
         })
@@ -144,9 +145,21 @@ export const Operation = {
   postToFavorites: (status, offerId) => (dispatch, _getState, api) => {
     return (
       api
-        .post(`/favorite/${offerId}/${status}`)
+        .post(`/${Pathes.favorite}/${offerId}/${status}`)
         .then((response) => {
           Promise.resolve(response.data);
+        })
+        // eslint-disable-next-line no-console
+        .catch((err) => console.log(err))
+    );
+  },
+
+  loadFavorites: () => (dispatch, _getState, api) => {
+    return (
+      api
+        .get(`/${Pathes.favorite}`)
+        .then((response) => {
+          return adapter(response.data);
         })
         // eslint-disable-next-line no-console
         .catch((err) => console.log(err))

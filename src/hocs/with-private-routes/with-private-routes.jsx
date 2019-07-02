@@ -9,11 +9,10 @@ const withPrivateRoutes = (Component) => {
 
     render() {
       if (this.props.isAuthorized) {
-        return <Component />;
+        return <Component {...this.props} />;
       } else {
         return this.props.redirectToLogin();
       }
-
     }
   }
 
@@ -26,4 +25,3 @@ const withPrivateRoutes = (Component) => {
 };
 
 export default withPrivateRoutes;
-

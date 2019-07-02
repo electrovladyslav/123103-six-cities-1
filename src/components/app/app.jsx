@@ -41,7 +41,14 @@ const redirectToMainEmpty = () => {
 const MainWrapped = withActiveElement(Main);
 
 const App = (props) => {
-  const {allOffers, offers, userAvatarUrl, userEmail, loading} = props;
+  const {
+    allOffers,
+    offers,
+    userAvatarUrl,
+    userEmail,
+    loading,
+    loadFavorites,
+  } = props;
 
   switch (loading) {
     case LoadingTypes.LOAD_FAIL:
@@ -99,6 +106,7 @@ const App = (props) => {
             <FavoritesWrapped
               isAuthorized={props.isAuthorized}
               redirectToLogin={redirectToLogin}
+              loadFavorites={loadFavorites}
             />
           )}
         />
@@ -114,6 +122,7 @@ App.propTypes = {
   allOffers: PropTypes.array,
   offers: PropTypes.array,
   onSignIn: PropTypes.func.isRequired,
+  loadFavorites: PropTypes.func,
   userEmail: PropTypes.string.isRequired,
   userAvatarUrl: PropTypes.string,
   loading: PropTypes.string,
@@ -140,6 +149,10 @@ const mapDispatchToProps = (dispatch) => ({
     );
 
     redirectToMain();
+  },
+
+  loadFavorites: () => {
+    return dispatch(Operation.loadFavorites());
   },
 });
 

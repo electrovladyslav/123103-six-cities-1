@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import {BASE_URL as baseURL} from "../../constants";
+import {Pathes} from "../../constants";
 
 const Header = (props) => {
   const {userAvatarUrl, userEmail} = props;
@@ -15,7 +15,7 @@ const Header = (props) => {
             to="/favorites">
             <div
               className="header__avatar-wrapper user__avatar-wrapper"
-              style={{backgroundImage: `url(${baseURL + userAvatarUrl})`}}
+              style={{backgroundImage: `url(${Pathes.baseURL + userAvatarUrl})`}}
             />
             <span className="header__user-name user__name">{userEmail}</span>
           </Link>
