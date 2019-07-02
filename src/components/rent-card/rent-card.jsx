@@ -1,13 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+import Bookmark from "../bookmark/bookmark.jsx";
+import withBookmark from "../../hocs/with-bookmark/with-bookmark.jsx";
+
+const BookmarkWrapped = withBookmark(Bookmark);
 
 const RentCard = (props) => {
   const {
     isPremium = false,
     previewImageSource,
     price,
-    isBookmarked = false,
+    isFavorite = false,
     rating = 3,
     name,
     type,
@@ -44,16 +48,7 @@ const RentCard = (props) => {
               <b className="place-card__price-value">&euro;{price}</b>
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
-            <button
-              className={`place-card__bookmark-button button ${
-                isBookmarked ? `place-card__bookmark-button--active` : ``
-              }`}
-              type="button">
-              <svg className="place-card__bookmark-icon" width="18" height="19">
-                <use xlinkHref="#icon-bookmark" />
-              </svg>
-              <span className="visually-hidden">To bookmarks</span>
-            </button>
+            <BookmarkWrapped isFavorite={isFavorite} offerId={id}/>
           </div>
           <div className="place-card__rating rating">
             <div className="place-card__stars rating__stars">
@@ -76,7 +71,7 @@ RentCard.propTypes = {
     isPremium: PropTypes.bool,
     previewImageSource: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    isBookmarked: PropTypes.bool,
+    isFavorite: PropTypes.bool,
     rating: PropTypes.number,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,

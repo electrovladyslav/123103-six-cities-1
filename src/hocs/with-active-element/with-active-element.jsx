@@ -1,8 +1,8 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 
 const withActiveElement = (Component) => {
-  class WithActiveElement extends React.Component {
+  class WithActiveElement extends PureComponent {
     constructor(props) {
       super(props);
 
