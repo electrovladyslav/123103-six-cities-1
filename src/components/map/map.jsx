@@ -1,13 +1,11 @@
 import React, {PureComponent} from "react";
-// import this.leaflet from "this.leaflet";
 import PropTypes from "prop-types";
 
 class Map extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.updatePoints();
-    // this.zoom = this.centerPoint.zoom || 10;
+    this._updatePoints();
     this.zoom = 12;
   }
 
@@ -38,21 +36,21 @@ class Map extends PureComponent {
       )
       .addTo(this.map);
 
-    this.renderOffersMarkers();
+    this._renderOffersMarkers();
   }
 
   componentDidUpdate() {
-    this.updatePoints();
+    this._updatePoints();
 
     this.map.setView(
         [this.centerPoint.latitude, this.centerPoint.longitude],
         this.zoom
     );
 
-    this.renderOffersMarkers();
+    this._renderOffersMarkers();
   }
 
-  updatePoints() {
+  _updatePoints() {
     if (this.props.activeOffer) {
       this.centerPoint = this.props.activeOffer.location;
     } else if (this.props.city) {
@@ -60,16 +58,11 @@ class Map extends PureComponent {
     } else {
       this.centerPoint = this.props.offersLocation[0];
     }
-    // this.centerPoint = this.props.activeOffer
-    //   ? this.props.activeOffer.location
-    //   : this.props.city
-    //     ? this.props.city.location
-    //     : this.props.offersLocation[0];
     this.offersLocation = this.props.offersLocation;
     this.leaflet = this.props.leaflet;
   }
 
-  renderOffersMarkers() {
+  _renderOffersMarkers() {
     const icon = this.leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30],

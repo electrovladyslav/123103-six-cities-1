@@ -24,10 +24,10 @@ class RentPlace extends PureComponent {
     super(props);
     this.props.loadReviews(this.props.offerId);
 
-    this.sendReview = this.sendReview.bind(this);
+    this.handleReviewSending = this.handleReviewSending.bind(this);
   }
 
-  sendReview(review) {
+  handleReviewSending(review) {
     this.props.sendReview(this.props.offerId, review);
   }
 
@@ -151,7 +151,7 @@ class RentPlace extends PureComponent {
                   <ReviewList reviews={reviews} />
                   {isAuthrized ? (
                     <ReviewFormWrapped
-                      onSendReview={this.sendReview}
+                      onSendReview={this.handleReviewSending}
                       isAuthrized={isAuthrized}
                     />
                   ) : (

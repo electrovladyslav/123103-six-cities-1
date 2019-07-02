@@ -17,16 +17,16 @@ const RentCard = (props) => {
     type,
     id,
   } = props.offer;
-  const {onCardImageClick} = props;
+  const {onCardImageClick, placeCardClass = `cities`} = props;
   return (
     <React.Fragment>
-      <article className="cities__place-card place-card">
+      <article className={`${placeCardClass}__card place-card `}>
         {isPremium && (
           <div className="place-card__mark">
             <span>Premium</span>
           </div>
         )}
-        <div className="cities__image-wrapper place-card__image-wrapper">
+        <div className={`${placeCardClass}__image-wrapper place-card__image-wrapper`}>
           <a
             href="#"
             onClick={(event) => {
@@ -42,7 +42,7 @@ const RentCard = (props) => {
             />
           </a>
         </div>
-        <div className="place-card__info">
+        <div className={`place-card__info ${placeCardClass ? `${placeCardClass}__card-info` : ``}`}>
           <div className="place-card__price-wrapper">
             <div className="place-card__price">
               <b className="place-card__price-value">&euro;{price}</b>
@@ -77,6 +77,7 @@ RentCard.propTypes = {
     type: PropTypes.string.isRequired,
   }),
   onCardImageClick: PropTypes.func,
+  placeCardClass: PropTypes.string,
 };
 
 export default RentCard;
