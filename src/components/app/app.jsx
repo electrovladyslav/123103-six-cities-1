@@ -8,11 +8,7 @@ import {getAuthrizationStatus} from "../../selectors";
 import {Operation, LoadingTypes} from "../../reducer";
 import {
   filterOffersByCity,
-  // getCities,
-  // getActiveCity,
   getLoadingStatus,
-  // getActiveCityNumber,
-  // getAuthRequiredStatus,
   getUserEmail,
   getUserAvatarUrl,
 } from "../../selectors";
@@ -27,6 +23,7 @@ import MainEmpty from "../main-empty/main-empty.jsx";
 
 import withPrivateRoutes from "../../hocs/with-private-routes/with-private-routes.jsx";
 import withActiveElement from "../../hocs/with-active-element/with-active-element.jsx";
+
 const FavoritesWrapped = withPrivateRoutes(Favorites);
 
 const redirectToLogin = () => {

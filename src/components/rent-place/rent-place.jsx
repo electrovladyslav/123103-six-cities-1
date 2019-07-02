@@ -1,6 +1,5 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 
 import {Operation} from "../../reducer";
@@ -9,9 +8,13 @@ import ReviewList from "../review-list/review-list.jsx";
 import Map from "../map/map.jsx";
 import RentCard from "../rent-card/rent-card.jsx";
 import ReviewForm from "../review-form/review-form.jsx";
+import Bookmark from "../bookmark/bookmark.jsx";
 import withReview from "../../hocs/with-review/with-review.jsx";
+import withBookmark from "../../hocs/with-bookmark/with-bookmark.jsx";
 
-import {MAX_OFFER_IMAGES} from "../../constants";
+const BookmarkWrapped = withBookmark(Bookmark);
+
+import {MAX_OFFER_IMAGES, BookmarkSizesEnum, RentCardClassesEnum} from "../../constants";
 import {getReviews, getAuthrizationStatus} from "../../selectors";
 
 const ReviewFormWrapped = withReview(ReviewForm);
@@ -38,7 +41,7 @@ class RentPlace extends PureComponent {
     const {
       isPremium = false,
       price,
-      isBookmarked = false,
+      isFavorite = false,
       rating = 3,
       images,
       name,
@@ -48,6 +51,7 @@ class RentPlace extends PureComponent {
       type,
       description,
       location,
+      id,
     } = offer;
 
     return (
@@ -81,21 +85,12 @@ class RentPlace extends PureComponent {
                 )}
                 <div className="property__name-wrapper">
                   <h1 className="property__name">{name}</h1>
-                  <button
-                    className={`property__bookmark-button button ${
-                      isBookmarked ? `property__bookmark-button--active` : ``
-                    }`}
-                    type="button">
-                    <Link to="/login">
-                      <svg
-                        className="property__bookmark-icon"
-                        width="31"
-                        height="33">
-                        <use xlinkHref="#icon-bookmark" />
-                      </svg>
-                      <span className="visually-hidden">To bookmarks</span>
-                    </Link>
-                  </button>
+                  <BookmarkWrapped
+                    isFavorite={isFavorite}
+                    offerId={id}
+                    bookmarkSize={BookmarkSizesEnum.big}
+                    bookmarkClass={RentCardClassesEnum.rentPlace}
+                  />
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">

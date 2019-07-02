@@ -140,6 +140,18 @@ export const Operation = {
         .catch((err) => console.log(err))
     );
   },
+
+  postToFavorites: (status, offerId) => (dispatch, _getState, api) => {
+    return (
+      api
+        .post(`/favorite/${offerId}/${status}`)
+        .then((response) => {
+          Promise.resolve(response.data);
+        })
+        // eslint-disable-next-line no-console
+        .catch((err) => console.log(err))
+    );
+  },
 };
 
 export function reducer(state = initialState, action) {
