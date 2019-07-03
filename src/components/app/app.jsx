@@ -115,6 +115,12 @@ const App = (props) => {
         />
         <Route path="/offer/:id" component={SpecifiedRentPlace} />
         <Route path="/main-empty" component={MainEmpty} />
+        <Route
+          path=""
+          render={() => (
+            <h1 style={{textAlign: `center`}}>Oops! 404! Page not found.</h1>
+          )}
+        />
       </Switch>
     </React.Fragment>
   );
