@@ -1,16 +1,16 @@
-export const calcDistance = (lat1, lon1, lat2, lon2) => {
-  let radlat1 = Math.PI * lat1 / 180;
-  let radlat2 = Math.PI * lat2 / 180;
-  let theta = lon1 - lon2;
-  let radtheta = Math.PI * theta / 180;
-  let dist = Math.sin(radlat1) * Math.sin(radlat2) +
-    Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-  if (dist > 1) {
-    dist = 1;
+export const calcDistance = (latitude1, longitude1, latitude2, longitude2) => {
+  let radialLatitude1 = Math.PI * latitude1 / 180;
+  let radialLatitude2 = Math.PI * latitude2 / 180;
+  let longitudeDiff = longitude1 - longitude2;
+  let radialLongitudeDiff = Math.PI * longitudeDiff / 180;
+  let distance = Math.sin(radialLatitude1) * Math.sin(radialLatitude2) +
+    Math.cos(radialLatitude1) * Math.cos(radialLatitude2) * Math.cos(radialLongitudeDiff);
+  if (distance > 1) {
+    distance = 1;
   }
-  dist = Math.acos(dist);
-  dist = dist * 180 / Math.PI;
-  dist = dist * 60 * 1.1515;
-  dist = dist * 1.609344;
-  return dist;
+  distance = Math.acos(distance);
+  distance = distance * 180 / Math.PI;
+  distance = distance * 60 * 1.1515;
+  distance = distance * 1.609344;
+  return distance;
 };
