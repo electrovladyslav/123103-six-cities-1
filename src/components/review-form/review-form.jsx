@@ -3,7 +3,14 @@ import PropTypes from "prop-types";
 
 import {RATING_VALUES, ReviewConstants} from "../../constants";
 
-const ReviewForm = ({onSubmit, setRating, setComment, isError, isSubmitDisabled}) => {
+const ReviewForm = ({
+  textareaValue,
+  onSubmit,
+  onSetRating,
+  onSetComment,
+  isError,
+  isSubmitDisabled,
+}) => {
   return (
     <form
       className="reviews__form form"
@@ -24,7 +31,7 @@ const ReviewForm = ({onSubmit, setRating, setComment, isError, isSubmitDisabled}
                 value={value}
                 id={`${value}-stars`}
                 type="radio"
-                onChange={setRating}
+                onChange={onSetRating}
               />
               <label
                 htmlFor={`${value}-stars`}
@@ -43,17 +50,30 @@ const ReviewForm = ({onSubmit, setRating, setComment, isError, isSubmitDisabled}
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={setComment}
-        // value={textareaValue}
+        onChange={onSetComment}
+        value={textareaValue}
       />
       <div className="reviews__button-wrapper">
-        <p className={`reviews__help ${isError ? `reviews__help--error` : ``}`}>
-          To submit review please make sure to set{` `}
-          <span className="reviews__star">rating</span> and describe your stay
-          with at least{` `}
-          <b className="reviews__text-amount">{ReviewConstants.MIN_CHARACTERS}</b>, but not more than{` `}
-          <b className="reviews__text-amount">{ReviewConstants.MAX_CHARACTERS} characters</b>.
-        </p>
+        {isError ? (
+          <p className="reviews__help reviews__help--error">
+            Something going wrong. Please try again later.
+          </p>
+        ) : (
+          <p className="reviews__help">
+            To submit review please make sure to set{` `}
+            <span className="reviews__star">rating</span> and describe your stay
+            with at least{` `}
+            <b className="reviews__text-amount">
+              {ReviewConstants.MIN_CHARACTERS}
+            </b>
+            , but not more than{` `}
+            <b className="reviews__text-amount">
+              {ReviewConstants.MAX_CHARACTERS} characters
+            </b>
+            .
+          </p>
+        )}
+
         <button
           className="reviews__submit form__submit button"
           type="submit"
@@ -67,10 +87,11 @@ const ReviewForm = ({onSubmit, setRating, setComment, isError, isSubmitDisabled}
 
 ReviewForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  setRating: PropTypes.func.isRequired,
-  setComment: PropTypes.func.isRequired,
+  onSetRating: PropTypes.func.isRequired,
+  onSetComment: PropTypes.func.isRequired,
   isError: PropTypes.bool,
   isSubmitDisabled: PropTypes.bool,
+  textareaValue: PropTypes.string,
 };
 
 export default ReviewForm;

@@ -27,7 +27,7 @@ class RentPlace extends PureComponent {
   }
 
   handleReviewSending(review) {
-    this.props.sendReview(this.props.offerId, review);
+    return this.props.sendReview(this.props.offerId, review);
   }
 
   render() {
@@ -179,6 +179,7 @@ class RentPlace extends PureComponent {
                   <RentCard
                     offer={nearestOffer}
                     key={nearestOffer.name + index}
+                    onCardImageClick={() => {}}
                   />
                 ))}
               </div>
@@ -226,7 +227,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   sendReview: (offerId, review) => {
-    dispatch(Operation.sendReviews(offerId, review));
+    return dispatch(Operation.sendReviews(offerId, review));
   },
 });
 

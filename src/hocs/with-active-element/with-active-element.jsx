@@ -11,7 +11,7 @@ const withActiveElement = (Component) => {
       };
 
       this.handleElementActivate = this.handleElementActivate.bind(this);
-      this.eriseActiveElement = this.eriseActiveElement.bind(this);
+      this.handleActiveElementErising = this.handleActiveElementErising.bind(this);
     }
 
     handleElementActivate(element) {
@@ -23,7 +23,7 @@ const withActiveElement = (Component) => {
       });
     }
 
-    eriseActiveElement() {
+    handleActiveElementErising() {
       this.setState({
         activeElement: null,
       });
@@ -36,7 +36,7 @@ const withActiveElement = (Component) => {
           elements={this.props.elements}
           activeElement={this.state.activeElement}
           onElementActivate={this.handleElementActivate}
-          eriseActiveElement={this.eriseActiveElement}
+          onEriseActiveElement={this.handleActiveElementErising}
         />
       );
     }

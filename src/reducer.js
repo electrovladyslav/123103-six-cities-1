@@ -1,6 +1,7 @@
 import initialState from "./mocks/initial-state";
 import adapter from "./adapter";
-import {Pathes} from "./constants";
+import {Pathes, ServerResponseCode} from "./constants";
+import history from "./history";
 
 export const ActionTypes = {
   LOAD_OFFERS: `LOAD_OFFERS`,
@@ -134,11 +135,22 @@ export const Operation = {
     return (
       api
         .post(`/${Pathes.COMMENTS}/${offerId}`, review)
-        .then((response) => {
-          dispatch(ActionCreator.loadReviews(response.data));
+        .then(
+            (response) => {
+              dispatch(ActionCreator.loadReviews(response.data));
+              return response;
+            },
+            (reject) => {
+              if (reject.response.status === ServerResponseCode.NOT_AUTHORIZED) {
+                history.push(Pathes.SIGN_IN);
+              }
+              return reject.response;
+            }
+        )
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.log(err);
         })
-        // eslint-disable-next-line no-console
-        .catch((err) => console.log(err))
     );
   },
 

@@ -10,11 +10,11 @@ const withBookbark = (Component) => {
         isFavorite: props.isFavorite,
       };
 
-      this.toggleFavoriteStatus = this.toggleFavoriteStatus.bind(this);
+      this.handleToggleFavoriteStatus = this.handleToggleFavoriteStatus.bind(this);
 
     }
 
-    toggleFavoriteStatus(isAdding) {
+    handleToggleFavoriteStatus(isAdding) {
       this.setState({isFavorite: isAdding});
     }
 
@@ -23,7 +23,7 @@ const withBookbark = (Component) => {
         <Component
           {...this.props}
           isFavorite={this.state.isFavorite}
-          toggleFavoriteStatus={this.toggleFavoriteStatus}
+          onToggleFavoriteStatus={this.handleToggleFavoriteStatus}
         />
       );
     }

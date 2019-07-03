@@ -62,6 +62,7 @@ class Favorites extends PureComponent {
                 offer={favorite}
                 key={favorite.id}
                 placeCardClass={RentCardClassesEnum.FAVORITES}
+                onCardImageClick={() => {}}
               />
             ))}
           </div>

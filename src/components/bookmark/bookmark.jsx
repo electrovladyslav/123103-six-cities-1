@@ -34,7 +34,7 @@ class Bookmark extends PureComponent {
       const isAdding = this.props.isFavorite ? 0 : 1;
       this.props
         .postToFavorites(isAdding, this.props.offerId)
-        .then(this.props.toggleFavoriteStatus(!!isAdding));
+        .then(this.props.onToggleFavoriteStatus(!!isAdding));
     }
     event.preventDefault();
   }
@@ -80,7 +80,7 @@ Bookmark.propTypes = {
   bookmarkClass: PropTypes.string,
   offerId: PropTypes.number,
   postToFavorites: PropTypes.func,
-  toggleFavoriteStatus: PropTypes.func,
+  onToggleFavoriteStatus: PropTypes.func,
 };
 
 const mapStateToProps = (state, ownProps) =>
