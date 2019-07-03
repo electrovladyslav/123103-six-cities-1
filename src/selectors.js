@@ -1,6 +1,6 @@
 import {createSelector} from "reselect";
 
-import prepareCities from "./utils/prepareCities";
+import prepareCities from "./utils/prepare-cities";
 import {ReviewConstants} from "./constants";
 
 export const getAllOffers = (state) => {

@@ -9,7 +9,7 @@ import {compose} from "recompose";
 import App from "./components/app/app.jsx";
 import {reducer, Operation, ActionCreator, LoadingTypes} from "./reducer";
 import createApi from "./api";
-import getRandomNumber from "./utils/getRandomNumber";
+import getRandomNumber from "./utils/get-random-number";
 
 const init = () => {
   const api = createApi((...args) => store.dispatch(...args));

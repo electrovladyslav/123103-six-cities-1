@@ -12,7 +12,7 @@ import {
   getUserEmail,
   getUserAvatarUrl,
 } from "../../selectors";
-import getNearestOffers from "../../utils/getNearestOffers";
+import getNearestOffers from "../../utils/get-nearest-offers";
 
 import Header from "../header/header.jsx";
 import Main from "../main/main.jsx";

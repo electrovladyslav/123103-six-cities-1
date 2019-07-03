@@ -1,4 +1,4 @@
-import {calcDistance} from "./calcDistance";
+import {calcDistance} from "./calc-distance";
 
 const getNearestOffers = (centerOffer, allOffers) => {
   const newOffers = allOffers.map((offer) => {
