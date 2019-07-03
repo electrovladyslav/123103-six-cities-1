@@ -7,6 +7,7 @@ class Map extends PureComponent {
 
     this._updatePoints();
     this.zoom = 12;
+    this.markersStorage = [];
   }
 
   render() {
@@ -68,10 +69,18 @@ class Map extends PureComponent {
       iconSize: [30, 30],
     });
 
+    if (this.markersStorage.length) {
+      this.markersStorage.forEach((marker) => this.map.removeLayer(marker));
+    }
+
+    this.markersStorage = [];
+
     this.offersLocation.forEach((offerLocation) => {
-      this.leaflet
-        .marker([offerLocation.latitude, offerLocation.longitude], {icon})
-        .addTo(this.map);
+      this.markersStorage.push(
+          this.leaflet
+          .marker([offerLocation.latitude, offerLocation.longitude], {icon})
+          .addTo(this.map)
+      );
     });
 
     if (this.props.activeOffer) {
@@ -80,15 +89,17 @@ class Map extends PureComponent {
         iconSize: [30, 30],
       });
 
-      this.leaflet
-        .marker(
-            [
-              this.props.activeOffer.location.latitude,
-              this.props.activeOffer.location.longitude,
-            ],
-            {icon: activeIcon}
-        )
-        .addTo(this.map);
+      this.markersStorage.push(
+          this.leaflet
+          .marker(
+              [
+                this.props.activeOffer.location.latitude,
+                this.props.activeOffer.location.longitude,
+              ],
+              {icon: activeIcon}
+          )
+          .addTo(this.map)
+      );
     }
   }
 }
