@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {RATING_VALUES as ratingValues} from "../../constants";
+import {RATING_VALUES, ReviewConstants} from "../../constants";
 
 const ReviewForm = ({onSubmit, setRating, setComment, isError, isSubmitDisabled}) => {
   return (
@@ -14,8 +14,8 @@ const ReviewForm = ({onSubmit, setRating, setComment, isError, isSubmitDisabled}
         Your review
       </label>
       <div className="reviews__rating-form form__rating">
-        {ratingValues.map((ratingValue, number) => {
-          const value = ratingValues.length - number;
+        {RATING_VALUES.map((ratingValue, number) => {
+          const value = RATING_VALUES.length - number;
           return (
             <React.Fragment key={ratingValue}>
               <input
@@ -51,8 +51,8 @@ const ReviewForm = ({onSubmit, setRating, setComment, isError, isSubmitDisabled}
           To submit review please make sure to set{` `}
           <span className="reviews__star">rating</span> and describe your stay
           with at least{` `}
-          <b className="reviews__text-amount">50</b>, but not more than{` `}
-          <b className="reviews__text-amount">300 characters</b>.
+          <b className="reviews__text-amount">{ReviewConstants.MIN_CHARACTERS}</b>, but not more than{` `}
+          <b className="reviews__text-amount">{ReviewConstants.MAX_CHARACTERS} characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"

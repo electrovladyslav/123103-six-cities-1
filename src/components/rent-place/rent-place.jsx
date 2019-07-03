@@ -14,7 +14,7 @@ import withBookmark from "../../hocs/with-bookmark/with-bookmark.jsx";
 
 const BookmarkWrapped = withBookmark(Bookmark);
 
-import {MAX_OFFER_IMAGES, BookmarkSizesEnum, RentCardClassesEnum} from "../../constants";
+import {MAX_OFFER_IMAGES, BookmarkSize, RentCardClassesEnum} from "../../constants";
 import {getReviews, getAuthrizationStatus} from "../../selectors";
 
 const ReviewFormWrapped = withReview(ReviewForm);
@@ -88,8 +88,8 @@ class RentPlace extends PureComponent {
                   <BookmarkWrapped
                     isFavorite={isFavorite}
                     offerId={id}
-                    bookmarkSize={BookmarkSizesEnum.big}
-                    bookmarkClass={RentCardClassesEnum.rentPlace}
+                    bookmarkSize={BookmarkSize.BIG}
+                    bookmarkClass={RentCardClassesEnum.RENT_PLACE}
                   />
                 </div>
                 <div className="property__rating rating">

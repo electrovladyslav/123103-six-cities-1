@@ -15,7 +15,7 @@ const Header = (props) => {
             to="/favorites">
             <div
               className="header__avatar-wrapper user__avatar-wrapper"
-              style={{backgroundImage: `url(${Pathes.baseURL + userAvatarUrl})`}}
+              style={{backgroundImage: `url(${Pathes.BASE_URL + userAvatarUrl})`}}
             />
             <span className="header__user-name user__name">{userEmail}</span>
           </Link>

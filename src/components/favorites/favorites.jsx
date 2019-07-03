@@ -61,7 +61,7 @@ class Favorites extends PureComponent {
               <RentCard
                 offer={favorite}
                 key={favorite.id}
-                placeCardClass={RentCardClassesEnum.favorites}
+                placeCardClass={RentCardClassesEnum.FAVORITES}
               />
             ))}
           </div>

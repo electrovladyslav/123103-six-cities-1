@@ -5,14 +5,14 @@ import {connect} from "react-redux";
 
 import {getAuthrizationStatus} from "../../selectors";
 import {Operation} from "../../reducer";
-import {BOOKMARK_SIZES, BookmarkSizesEnum, RentCardClassesEnum} from "../../constants";
+import {BookmarkSize, RentCardClassesEnum} from "../../constants";
 
 class Bookmark extends PureComponent {
   constructor(props) {
     super(props);
 
     this._handleClick = this._handleClick.bind(this);
-    this.bookmarkClass = props.bookmarkClass || RentCardClassesEnum.rentCard;
+    this.bookmarkClass = props.bookmarkClass || RentCardClassesEnum.RENT_CARD;
   }
 
   render() {
@@ -40,7 +40,7 @@ class Bookmark extends PureComponent {
   }
 
   _renderFlag(isAuthorized) {
-    const bookmarkSize = BOOKMARK_SIZES[this.props.bookmarkSize || BookmarkSizesEnum.normal];
+    const bookmarkSize = this.props.bookmarkSize || BookmarkSize.NORMAL;
 
     if (isAuthorized) {
       return (
@@ -73,7 +73,10 @@ class Bookmark extends PureComponent {
 Bookmark.propTypes = {
   isFavorite: PropTypes.bool.isRequired,
   isAuthorized: PropTypes.bool,
-  bookmarkSize: PropTypes.string,
+  bookmarkSize: PropTypes.shape({
+    width: PropTypes.number,
+    height: PropTypes.number,
+  }),
   bookmarkClass: PropTypes.string,
   offerId: PropTypes.number,
   postToFavorites: PropTypes.func,

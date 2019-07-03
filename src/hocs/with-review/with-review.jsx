@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 
-import {MIN_REVIEW_CHARACTERS, MAX_REVIEW_CHARACTERS} from "../../constants";
+import {ReviewConstants} from "../../constants";
 
 const withReview = (Component) => {
   class WithReview extends PureComponent {
@@ -46,8 +46,8 @@ const withReview = (Component) => {
 
     checkIsPossibleSubmit() {
       if (
-        this.state.comment.length <= MAX_REVIEW_CHARACTERS &&
-        this.state.comment.length > MIN_REVIEW_CHARACTERS &&
+        this.state.comment.length <= ReviewConstants.MAX_CHARACTERS &&
+        this.state.comment.length > ReviewConstants.MIN_CHARACTERS &&
         this.state.rating > 0
       ) {
         this.setState({isSubmitDisabled: false});

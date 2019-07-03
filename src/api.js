@@ -4,7 +4,7 @@ import {Pathes} from "./constants";
 
 export const createAPI = () => {
   const api = axios.create({
-    baseURL: Pathes.baseURL,
+    baseURL: Pathes.BASE_URL,
     timeout: 1000 * 5,
     withCredentials: true,
   });

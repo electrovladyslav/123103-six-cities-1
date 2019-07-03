@@ -78,7 +78,7 @@ export const ActionCreator = {
 export const Operation = {
   loadOffers: () => (dispatch, _getState, api) => {
     return api
-      .get(`/${Pathes.offers}`)
+      .get(`/${Pathes.OFFERS}`)
       .then((response) => {
         dispatch(ActionCreator.loadOffers(adapter(response.data)));
       })
@@ -95,7 +95,7 @@ export const Operation = {
   authorize: (data) => (dispatch, _getState, api) => {
     return (
       api
-        .post(`/${Pathes.signin}`, data)
+        .post(`/${Pathes.SIGN_IN}`, data)
         .then((response) => {
           dispatch(ActionCreator.authorize(response.data));
           dispatch(ActionCreator.requireAuthorization(false));
@@ -108,7 +108,7 @@ export const Operation = {
   getAuthorization: () => (dispatch, _getState, api) => {
     return (
       api
-        .get(`/${Pathes.signin}`)
+        .get(`/${Pathes.SIGN_IN}`)
         .then((response) => {
           dispatch(ActionCreator.authorize(response.data));
           dispatch(ActionCreator.requireAuthorization(false));
@@ -121,7 +121,7 @@ export const Operation = {
   loadReviews: (offerId) => (dispatch, _getState, api) => {
     return (
       api
-        .get(`/${Pathes.comments}/${offerId}`)
+        .get(`/${Pathes.COMMENTS}/${offerId}`)
         .then((response) => {
           dispatch(ActionCreator.loadReviews(response.data));
         })
@@ -133,7 +133,7 @@ export const Operation = {
   sendReviews: (offerId, review) => (dispatch, _getState, api) => {
     return (
       api
-        .post(`/${Pathes.comments}/${offerId}`, review)
+        .post(`/${Pathes.COMMENTS}/${offerId}`, review)
         .then((response) => {
           dispatch(ActionCreator.loadReviews(response.data));
         })
@@ -145,7 +145,7 @@ export const Operation = {
   postToFavorites: (status, offerId) => (dispatch, _getState, api) => {
     return (
       api
-        .post(`/${Pathes.favorite}/${offerId}/${status}`)
+        .post(`/${Pathes.FAVORITE}/${offerId}/${status}`)
         .then((response) => {
           Promise.resolve(response.data);
         })
@@ -157,7 +157,7 @@ export const Operation = {
   loadFavorites: () => (dispatch, _getState, api) => {
     return (
       api
-        .get(`/${Pathes.favorite}`)
+        .get(`/${Pathes.FAVORITE}`)
         .then((response) => {
           return adapter(response.data);
         })
