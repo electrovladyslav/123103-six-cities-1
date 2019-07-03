@@ -1,4 +1,4 @@
-import getUniqueElementsByName from "./getUniqueElementsByName";
+import getUniqueElementsByName from "./get-unique-elements-by-name";
 
 it(`Offers array by name field correctly`, () => {
   const mockArray = [

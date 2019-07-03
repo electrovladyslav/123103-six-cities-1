@@ -8,8 +8,8 @@ it(`Review component renders correctly`, () => {
     .create(
         <ReviewForm
           onSubmit={jest.fn()}
-          setRating={jest.fn()}
-          setComment={jest.fn()}
+          onSetRating={jest.fn()}
+          onSetComment={jest.fn()}
         />
     )
     .toJSON();

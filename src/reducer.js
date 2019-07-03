@@ -1,5 +1,7 @@
 import initialState from "./mocks/initial-state";
 import adapter from "./adapter";
+import {Pathes, ServerResponseCode} from "./constants";
+import history from "./history";
 
 export const ActionTypes = {
   LOAD_OFFERS: `LOAD_OFFERS`,
@@ -77,7 +79,7 @@ export const ActionCreator = {
 export const Operation = {
   loadOffers: () => (dispatch, _getState, api) => {
     return api
-      .get(`/hotels`)
+      .get(`/${Pathes.OFFERS}`)
       .then((response) => {
         dispatch(ActionCreator.loadOffers(adapter(response.data)));
       })
@@ -94,7 +96,7 @@ export const Operation = {
   authorize: (data) => (dispatch, _getState, api) => {
     return (
       api
-        .post(`/login`, data)
+        .post(`/${Pathes.SIGN_IN}`, data)
         .then((response) => {
           dispatch(ActionCreator.authorize(response.data));
           dispatch(ActionCreator.requireAuthorization(false));
@@ -107,7 +109,7 @@ export const Operation = {
   getAuthorization: () => (dispatch, _getState, api) => {
     return (
       api
-        .get(`/login`)
+        .get(`/${Pathes.SIGN_IN}`)
         .then((response) => {
           dispatch(ActionCreator.authorize(response.data));
           dispatch(ActionCreator.requireAuthorization(false));
@@ -120,7 +122,7 @@ export const Operation = {
   loadReviews: (offerId) => (dispatch, _getState, api) => {
     return (
       api
-        .get(`/comments/${offerId}`)
+        .get(`/${Pathes.COMMENTS}/${offerId}`)
         .then((response) => {
           dispatch(ActionCreator.loadReviews(response.data));
         })
@@ -132,21 +134,44 @@ export const Operation = {
   sendReviews: (offerId, review) => (dispatch, _getState, api) => {
     return (
       api
-        .post(`/comments/${offerId}`, review)
-        .then((response) => {
-          dispatch(ActionCreator.loadReviews(response.data));
+        .post(`/${Pathes.COMMENTS}/${offerId}`, review)
+        .then(
+            (response) => {
+              dispatch(ActionCreator.loadReviews(response.data));
+              return response;
+            },
+            (reject) => {
+              if (reject.response.status === ServerResponseCode.NOT_AUTHORIZED) {
+                history.push(Pathes.SIGN_IN);
+              }
+              return reject.response;
+            }
+        )
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.log(err);
         })
-        // eslint-disable-next-line no-console
-        .catch((err) => console.log(err))
     );
   },
 
   postToFavorites: (status, offerId) => (dispatch, _getState, api) => {
     return (
       api
-        .post(`/favorite/${offerId}/${status}`)
+        .post(`/${Pathes.FAVORITE}/${offerId}/${status}`)
         .then((response) => {
           Promise.resolve(response.data);
+        })
+        // eslint-disable-next-line no-console
+        .catch((err) => console.log(err))
+    );
+  },
+
+  loadFavorites: () => (dispatch, _getState, api) => {
+    return (
+      api
+        .get(`/${Pathes.FAVORITE}`)
+        .then((response) => {
+          return adapter(response.data);
         })
         // eslint-disable-next-line no-console
         .catch((err) => console.log(err))

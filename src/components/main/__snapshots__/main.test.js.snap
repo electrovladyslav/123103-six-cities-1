@@ -150,7 +150,7 @@ exports[`Main component renders correctly 1`] = `
           className="cities__places-list places__list tabs__content"
         >
           <article
-            className="cities__place-card place-card"
+            className="cities__card place-card "
           >
             <div
               className="place-card__mark"
@@ -176,7 +176,7 @@ exports[`Main component renders correctly 1`] = `
               </a>
             </div>
             <div
-              className="place-card__info"
+              className="place-card__info cities__card-info"
             >
               <div
                 className="place-card__price-wrapper"
@@ -260,7 +260,7 @@ exports[`Main component renders correctly 1`] = `
             </div>
           </article>
           <article
-            className="cities__place-card place-card"
+            className="cities__card place-card "
           >
             <div
               className="cities__image-wrapper place-card__image-wrapper"
@@ -279,7 +279,7 @@ exports[`Main component renders correctly 1`] = `
               </a>
             </div>
             <div
-              className="place-card__info"
+              className="place-card__info cities__card-info"
             >
               <div
                 className="place-card__price-wrapper"
@@ -363,7 +363,7 @@ exports[`Main component renders correctly 1`] = `
             </div>
           </article>
           <article
-            className="cities__place-card place-card"
+            className="cities__card place-card "
           >
             <div
               className="cities__image-wrapper place-card__image-wrapper"
@@ -382,7 +382,7 @@ exports[`Main component renders correctly 1`] = `
               </a>
             </div>
             <div
-              className="place-card__info"
+              className="place-card__info cities__card-info"
             >
               <div
                 className="place-card__price-wrapper"
@@ -466,7 +466,7 @@ exports[`Main component renders correctly 1`] = `
             </div>
           </article>
           <article
-            className="cities__place-card place-card"
+            className="cities__card place-card "
           >
             <div
               className="place-card__mark"
@@ -492,7 +492,7 @@ exports[`Main component renders correctly 1`] = `
               </a>
             </div>
             <div
-              className="place-card__info"
+              className="place-card__info cities__card-info"
             >
               <div
                 className="place-card__price-wrapper"

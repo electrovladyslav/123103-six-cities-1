@@ -1,7 +1,7 @@
 import {createSelector} from "reselect";
 
-import prepareCities from "./utils/prepareCities";
-import {MAX_REVIEWS_PER_PAGE} from "./constants";
+import prepareCities from "./utils/prepare-cities";
+import {ReviewConstants} from "./constants";
 
 export const getAllOffers = (state) => {
   return state.allOffers;
@@ -60,7 +60,7 @@ export const getUserAvatarUrl = (state) => {
 
 export const getReviews = (state) => {
   if (state.reviews) {
-    return state.reviews.slice(0, MAX_REVIEWS_PER_PAGE);
+    return state.reviews.slice(0, ReviewConstants.MAX_REVIEWS_PER_PAGE);
   } else {
     return [];
   }

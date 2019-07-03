@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 
-import {MIN_REVIEW_CHARACTERS, MAX_REVIEW_CHARACTERS} from "../../constants";
+import {ReviewConstants} from "../../constants";
 
 const withReview = (Component) => {
   class WithReview extends PureComponent {
@@ -15,58 +15,83 @@ const withReview = (Component) => {
         isSubmitDisabled: true,
       };
 
-      this.setRating = this.setRating.bind(this);
-      this.setComment = this.setComment.bind(this);
-      this.onSendReview = this.onSendReview.bind(this);
+      this.handleSetRating = this.handleSetRating.bind(this);
+      this.handleSetComment = this.handleSetComment.bind(this);
+      this.handleSendReview = this.handleSendReview.bind(this);
     }
 
-    onSendReview(event) {
-      this.props.onSendReview({
-        rating: this.state.rating,
-        comment: this.state.comment,
-      });
+    handleSendReview(event) {
+      this.props
+        .onSendReview({
+          rating: this.state.rating,
+          comment: this.state.comment,
+        })
+        .then((response) => {
+          if (response) {
+            this._clearForm();
+            this._hideError();
+          } else {
+            this.setState({isSubmitDisabled: false});
+            this._showError();
+          }
+        });
 
       this.setState({isSubmitDisabled: true});
       event.preventDefault();
     }
 
-    showError() {
+    _clearForm() {
+      this.setState({
+        comment: ``,
+      });
+    }
+
+    _showError() {
       this.setState({isError: true});
     }
 
-    setRating(event) {
-      this.setState({rating: event.target.value});
-      this.checkIsPossibleSubmit();
+    _hideError() {
+      this.setState({isError: false});
     }
 
-    setComment(event) {
-      this.setState({comment: event.target.value});
-      this.checkIsPossibleSubmit();
+    handleSetRating(event) {
+      this.setState({
+        rating: event.target.value,
+      });
+      this._checkIsPossibleSubmit();
     }
 
-    checkIsPossibleSubmit() {
-      if (
-        this.state.comment.length <= MAX_REVIEW_CHARACTERS &&
-        this.state.comment.length > MIN_REVIEW_CHARACTERS &&
-        this.state.rating > 0
-      ) {
-        this.setState({isSubmitDisabled: false});
-      } else {
-        this.setState({isSubmitDisabled: true});
-      }
+    handleSetComment(event) {
+      this.setState({
+        comment: event.target.value,
+      });
+      this._checkIsPossibleSubmit();
     }
 
     render() {
       return (
         <Component
           {...this.props}
-          onSubmit={this.onSendReview}
-          setRating={this.setRating}
-          setComment={this.setComment}
+          textareaValue={this.state.comment}
+          onSubmit={this.handleSendReview}
+          onSetRating={this.handleSetRating}
+          onSetComment={this.handleSetComment}
           isError={this.state.isError}
           isSubmitDisabled={this.state.isSubmitDisabled}
         />
       );
+    }
+
+    _checkIsPossibleSubmit() {
+      if (
+        this.state.comment.length <= ReviewConstants.MAX_CHARACTERS &&
+        this.state.comment.length > ReviewConstants.MIN_CHARACTERS &&
+        this.state.rating > 0
+      ) {
+        this.setState({isSubmitDisabled: false});
+      } else {
+        this.setState({isSubmitDisabled: true});
+      }
     }
   }
 

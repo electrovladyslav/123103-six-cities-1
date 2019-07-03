@@ -481,6 +481,11 @@ img {
   height: 100%;
   background: url(../img/stars-active.svg) transparent no-repeat center;
 }
+.cities__image-wrapper {
+  background: url(../img/placeholder.jpg) no-repeat center;
+  min-height: 200px;
+}
+
 .cities__places-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -537,7 +542,7 @@ img {
   margin-left: -8px;
   padding-left: 5px;
 }
-.cities__place-card {
+.cities__card {
   width: 260px;
   margin-left: 8px;
   margin-bottom: 24px;

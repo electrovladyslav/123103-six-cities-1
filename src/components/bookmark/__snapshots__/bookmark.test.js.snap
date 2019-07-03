@@ -2,28 +2,22 @@
 
 exports[`Bookmark component renders correctly 1`] = `
 <button
-  className="place-card__bookmark-button button "
-  onClick={[Function]}
+  className="undefined__bookmark-button button "
   type="button"
 >
-  <a
-    href="/login"
-    onClick={[Function]}
+  <svg
+    className="undefined__bookmark-icon"
+    height={300}
+    width={300}
   >
-    <svg
-      className="place-card__bookmark-icon"
-      height={19}
-      width={18}
-    >
-      <use
-        xlinkHref="#icon-bookmark"
-      />
-    </svg>
-    <span
-      className="visually-hidden"
-    >
-      To bookmarks
-    </span>
-  </a>
+    <use
+      xlinkHref="#icon-bookmark"
+    />
+  </svg>
+  <span
+    className="visually-hidden"
+  >
+    To bookmarks
+  </span>
 </button>
 `;

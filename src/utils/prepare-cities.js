@@ -1,4 +1,4 @@
-import getUniqueCities from "./getUniqueElementsByName";
+import getUniqueCities from "./get-unique-elements-by-name";
 
 
 export default (inletCities) => {
