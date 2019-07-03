@@ -65,11 +65,14 @@ const App = (props) => {
   const SpecifiedRentPlace = (req) => {
     const offerId = +req.match.params.id;
     const offer = allOffers.find((currentOffer) => currentOffer.id === offerId);
+    const nearOffers = allOffers.filter(
+        (currentOffer) => currentOffer.city.name === offer.city.name
+    );
     return (
       <RentPlace
         offer={offer}
         offerId={offerId}
-        nearestOffers={getNearestOffers(offer, offers)}
+        nearestOffers={getNearestOffers(offer, nearOffers)}
         leaflet={leaflet}
       />
     );
