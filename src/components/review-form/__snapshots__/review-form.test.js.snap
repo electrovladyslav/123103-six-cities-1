@@ -164,7 +164,8 @@ exports[`Review component renders correctly 1`] = `
       <b
         className="reviews__text-amount"
       >
-        300 characters
+        300
+         characters
       </b>
       .
     </p>

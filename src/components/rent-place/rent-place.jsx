@@ -12,11 +12,10 @@ import Bookmark from "../bookmark/bookmark.jsx";
 import withReview from "../../hocs/with-review/with-review.jsx";
 import withBookmark from "../../hocs/with-bookmark/with-bookmark.jsx";
 
-const BookmarkWrapped = withBookmark(Bookmark);
-
 import {MAX_OFFER_IMAGES, BookmarkSize, RentCardClassesEnum} from "../../constants";
 import {getReviews, getAuthrizationStatus} from "../../selectors";
 
+const BookmarkWrapped = withBookmark(Bookmark);
 const ReviewFormWrapped = withReview(ReviewForm);
 
 class RentPlace extends PureComponent {
