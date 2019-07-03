@@ -37,7 +37,7 @@ class Main extends PureComponent {
       cities,
       onChooseCity,
       activeCity,
-      eriseActiveElement,
+      onEriseActiveElement,
       leaflet,
     } = this.props;
     const activeOffer = this.props.activeElement;
@@ -56,7 +56,7 @@ class Main extends PureComponent {
             elements={cities}
             onElementActivate={(clickedCity) => {
               onChooseCity(cities.indexOf(clickedCity));
-              eriseActiveElement();
+              onEriseActiveElement();
             }}
             activeElement={activeCity}
           />
@@ -104,7 +104,7 @@ Main.propTypes = {
   leaflet: PropTypes.object.isRequired,
   activeElement: PropTypes.object,
   onElementActivate: PropTypes.func,
-  eriseActiveElement: PropTypes.func,
+  onEriseActiveElement: PropTypes.func,
 };
 
 const mapStateToProps = (state, ownProps) =>

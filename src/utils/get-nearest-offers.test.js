@@ -1,4 +1,4 @@
-import getNearestOffers from "./getNearestOffers";
+import getNearestOffers from "./get-nearest-offers";
 
 const mockCenterOffer = {
   location: {

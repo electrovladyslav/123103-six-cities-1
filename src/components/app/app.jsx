@@ -12,7 +12,7 @@ import {
   getUserEmail,
   getUserAvatarUrl,
 } from "../../selectors";
-import getNearestOffers from "../../utils/getNearestOffers";
+import getNearestOffers from "../../utils/get-nearest-offers";
 
 import Header from "../header/header.jsx";
 import Main from "../main/main.jsx";
@@ -23,8 +23,9 @@ import MainEmpty from "../main-empty/main-empty.jsx";
 
 import withPrivateRoutes from "../../hocs/with-private-routes/with-private-routes.jsx";
 import withActiveElement from "../../hocs/with-active-element/with-active-element.jsx";
+import withFavorites from "../../hocs/with-favorites/with-favorites.jsx";
 
-const FavoritesWrapped = withPrivateRoutes(Favorites);
+const FavoritesWrapped = withPrivateRoutes(withFavorites(Favorites));
 
 const redirectToLogin = () => {
   return <Redirect to="/login" />;
@@ -65,11 +66,14 @@ const App = (props) => {
   const SpecifiedRentPlace = (req) => {
     const offerId = +req.match.params.id;
     const offer = allOffers.find((currentOffer) => currentOffer.id === offerId);
+    const nearOffers = allOffers.filter(
+        (currentOffer) => currentOffer.city.name === offer.city.name
+    );
     return (
       <RentPlace
         offer={offer}
         offerId={offerId}
-        nearestOffers={getNearestOffers(offer, offers)}
+        nearestOffers={getNearestOffers(offer, nearOffers)}
         leaflet={leaflet}
       />
     );
@@ -112,6 +116,12 @@ const App = (props) => {
         />
         <Route path="/offer/:id" component={SpecifiedRentPlace} />
         <Route path="/main-empty" component={MainEmpty} />
+        <Route
+          path=""
+          render={() => (
+            <h1 style={{textAlign: `center`}}>Oops! 404! Page not found.</h1>
+          )}
+        />
       </Switch>
     </React.Fragment>
   );

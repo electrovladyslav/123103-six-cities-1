@@ -12,11 +12,10 @@ import Bookmark from "../bookmark/bookmark.jsx";
 import withReview from "../../hocs/with-review/with-review.jsx";
 import withBookmark from "../../hocs/with-bookmark/with-bookmark.jsx";
 
-const BookmarkWrapped = withBookmark(Bookmark);
-
-import {MAX_OFFER_IMAGES, BookmarkSizesEnum, RentCardClassesEnum} from "../../constants";
+import {MAX_OFFER_IMAGES, BookmarkSize, RentCardClassesEnum} from "../../constants";
 import {getReviews, getAuthrizationStatus} from "../../selectors";
 
+const BookmarkWrapped = withBookmark(Bookmark);
 const ReviewFormWrapped = withReview(ReviewForm);
 
 class RentPlace extends PureComponent {
@@ -28,7 +27,7 @@ class RentPlace extends PureComponent {
   }
 
   handleReviewSending(review) {
-    this.props.sendReview(this.props.offerId, review);
+    return this.props.sendReview(this.props.offerId, review);
   }
 
   render() {
@@ -88,8 +87,8 @@ class RentPlace extends PureComponent {
                   <BookmarkWrapped
                     isFavorite={isFavorite}
                     offerId={id}
-                    bookmarkSize={BookmarkSizesEnum.big}
-                    bookmarkClass={RentCardClassesEnum.rentPlace}
+                    bookmarkSize={BookmarkSize.BIG}
+                    bookmarkClass={RentCardClassesEnum.RENT_PLACE}
                   />
                 </div>
                 <div className="property__rating rating">
@@ -180,6 +179,7 @@ class RentPlace extends PureComponent {
                   <RentCard
                     offer={nearestOffer}
                     key={nearestOffer.name + index}
+                    onCardImageClick={() => {}}
                   />
                 ))}
               </div>
@@ -227,7 +227,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   sendReview: (offerId, review) => {
-    dispatch(Operation.sendReviews(offerId, review));
+    return dispatch(Operation.sendReviews(offerId, review));
   },
 });
 
