@@ -23,8 +23,9 @@ import MainEmpty from "../main-empty/main-empty.jsx";
 
 import withPrivateRoutes from "../../hocs/with-private-routes/with-private-routes.jsx";
 import withActiveElement from "../../hocs/with-active-element/with-active-element.jsx";
+import withFavorites from "../../hocs/with-favorites/with-favorites.jsx"
 
-const FavoritesWrapped = withPrivateRoutes(Favorites);
+const FavoritesWrapped = withPrivateRoutes(withFavorites(Favorites));
 
 const redirectToLogin = () => {
   return <Redirect to="/login" />;
