@@ -237,6 +237,9 @@ img {
   clip: rect(0 0 0 0);
   overflow: hidden;
 }
+.leaflet-container {
+  height: 100%;
+}
 .container {
   width: 1144px;
   margin-left: auto;
@@ -504,6 +507,9 @@ img {
 }
 .cities__places-container--empty {
   padding-right: 0;
+}
+.cities__place-card:hover {
+  opacity: 0.6;
 }
 .cities__no-places {
   position: relative;
@@ -1294,9 +1300,12 @@ img {
   margin-bottom: 55px;
 }
 .property__map {
-  width: 100%;
+  /* width: 100%; */
+  width: 1140px;
   height: 579px;
   margin-bottom: 50px;
+  margin-left: auto;
+  margin-right: auto;
   background-image: url(../img/map-big.jpg);
   background-repeat: no-repeat;
   background-size: 1144px auto;
@@ -1434,6 +1443,9 @@ img {
   margin-bottom: 0;
   font-size: 12px;
   line-height: 1.334;
+}
+.reviews__help--error {
+  border: 1px solid red;
 }
 .reviews__star {
   padding-left: 15px;

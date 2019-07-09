@@ -48513,16 +48513,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _rent_card_rent_card_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../rent-card/rent-card.jsx */ "./src/components/rent-card/rent-card.jsx");
-/* harmony import */ var _rents_sort_rents_sort_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../rents-sort/rents-sort.jsx */ "./src/components/rents-sort/rents-sort.jsx");
-/* harmony import */ var _hocs_with_flag_with_flag_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../hocs/with-flag/with-flag.jsx */ "./src/hocs/with-flag/with-flag.jsx");
-/* harmony import */ var _hocs_with_active_element_with_active_element_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../hocs/with-active-element/with-active-element.jsx */ "./src/hocs/with-active-element/with-active-element.jsx");
 
 
-
-
-
-
-var WrappedRentsSort = Object(_hocs_with_flag_with_flag_jsx__WEBPACK_IMPORTED_MODULE_4__["default"])(Object(_hocs_with_active_element_with_active_element_jsx__WEBPACK_IMPORTED_MODULE_5__["default"])(_rents_sort_rents_sort_jsx__WEBPACK_IMPORTED_MODULE_3__["default"]));
+ // import RentsSort from "../rents-sort/rents-sort.jsx";
+// import withFlag from "../../hocs/with-flag/with-flag.jsx";
+// import withActiveElement from "../../hocs/with-active-element/with-active-element.jsx";
+// import {SortingVariants} from "../../constants";
+// const WrappedRentsSort = withFlag(withActiveElement(RentsSort));
 
 var RentsList = function RentsList(props) {
   var elements = props.elements,
@@ -48535,7 +48532,7 @@ var RentsList = function RentsList(props) {
     className: "visually-hidden"
   }, "Places"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
     className: "places__found"
-  }, rentsCount, " places to stay in ", cityName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(WrappedRentsSort, null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, rentsCount, " places to stay in ", cityName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "cities__places-list places__list tabs__content"
   }, elements.map(function (offer, index) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_rent_card_rent_card_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -48555,65 +48552,6 @@ RentsList.propTypes = {
   onElementActivate: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (RentsList);
-
-/***/ }),
-
-/***/ "./src/components/rents-sort/rents-sort.jsx":
-/*!**************************************************!*\
-  !*** ./src/components/rents-sort/rents-sort.jsx ***!
-  \**************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-
-
-
-var RentsSort = function RentsSort(_ref) {
-  var flag = _ref.flag,
-      onToggleFlag = _ref.onToggleFlag;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-    className: "places__sorting",
-    action: "#",
-    method: "get"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "places__sorting-caption"
-  }, "Sort by"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "places__sorting-type",
-    tabIndex: "0",
-    onClick: onToggleFlag
-  }, "Popular", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-    className: "places__sorting-arrow",
-    width: "7",
-    height: "4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("use", {
-    xlinkHref: "#icon-arrow-select"
-  }))), flag ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "places__options places__options--custom places__options--opened"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "places__option places__option--active",
-    tabIndex: "0"
-  }, "Popular"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "places__option",
-    tabIndex: "0"
-  }, "Price: low to high"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "places__option",
-    tabIndex: "0"
-  }, "Price: high to low"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "places__option",
-    tabIndex: "0"
-  }, "Top rated first")) : ""));
-};
-
-RentsSort.propTypes = {
-  isShown: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
-};
-/* harmony default export */ __webpack_exports__["default"] = (RentsSort);
 
 /***/ }),
 
@@ -48915,7 +48853,7 @@ SignIn.propTypes = {
 /*!**************************!*\
   !*** ./src/constants.js ***!
   \**************************/
-/*! exports provided: Pathes, ServerResponseCode, ReviewConstants, MAX_OFFER_IMAGES, CITIES_QUANTITY, RATING_VALUES, NEAR_OFFERS_QUANTITY, BookmarkSize, RentCardClassesEnum */
+/*! exports provided: Pathes, ServerResponseCode, ReviewConstants, MAX_OFFER_IMAGES, CITIES_QUANTITY, RATING_VALUES, NEAR_OFFERS_QUANTITY, BookmarkSize, RentCardClassesEnum, SortingVariants */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48929,6 +48867,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NEAR_OFFERS_QUANTITY", function() { return NEAR_OFFERS_QUANTITY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BookmarkSize", function() { return BookmarkSize; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RentCardClassesEnum", function() { return RentCardClassesEnum; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SortingVariants", function() { return SortingVariants; });
 var Pathes = {
   BASE_URL: "https://es31-server.appspot.com/six-cities",
   OFFERS: "hotels",
@@ -48965,6 +48904,12 @@ var RentCardClassesEnum = {
   RENT_PLACE: "property",
   RENT_CARD: "place-card",
   FAVORITES: "favorites"
+};
+var SortingVariants = {
+  POPULAR: "popular",
+  LOW_TO_HIGH: "Price: low to high",
+  HIGH_TO_LOW: "Price: high to low",
+  TOP_RATED: "Top rated first"
 };
 
 /***/ }),
@@ -49316,91 +49261,6 @@ var withFavorites = function withFavorites(Component) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (withFavorites);
-
-/***/ }),
-
-/***/ "./src/hocs/with-flag/with-flag.jsx":
-/*!******************************************!*\
-  !*** ./src/hocs/with-flag/with-flag.jsx ***!
-  \******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-var withFlag = function withFlag(Component) {
-  var WithFlag =
-  /*#__PURE__*/
-  function (_PureComponent) {
-    _inherits(WithFlag, _PureComponent);
-
-    function WithFlag(props) {
-      var _this;
-
-      _classCallCheck(this, WithFlag);
-
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(WithFlag).call(this, props));
-      _this.state = {
-        flag: _this.props.flag || false
-      };
-      _this.handleToggleFlag = _this.handleToggleFlag.bind(_assertThisInitialized(_this));
-      return _this;
-    }
-
-    _createClass(WithFlag, [{
-      key: "handleToggleFlag",
-      value: function handleToggleFlag() {
-        this.setState({
-          flag: !this.state.flag
-        });
-      }
-    }, {
-      key: "render",
-      value: function render() {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, _extends({}, this.props, {
-          flag: this.state.flag,
-          onToggleFlag: this.handleToggleFlag
-        }));
-      }
-    }]);
-
-    return WithFlag;
-  }(react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]);
-
-  WithFlag.propTypes = {
-    flag: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
-  };
-  return WithFlag;
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (withFlag);
 
 /***/ }),
 
@@ -49945,10 +49805,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mocks_initial_state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mocks/initial-state */ "./src/mocks/initial-state.js");
 /* harmony import */ var _adapter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./adapter */ "./src/adapter.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants */ "./src/constants.js");
-/* harmony import */ var _mocks_allOffers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./mocks/allOffers */ "./src/mocks/allOffers.js");
+/* harmony import */ var _history__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./history */ "./src/history.js");
+/* harmony import */ var _mocks_allOffers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./mocks/allOffers */ "./src/mocks/allOffers.js");
 
 
- // import history from "./history";
+
 
 
 var ActionTypes = {
@@ -50025,7 +49886,7 @@ var Operation = {
         dispatch(ActionCreator.endLoading(LoadingTypes.END_LOADING));
         return response;
       })["catch"](function (err) {
-        dispatch(ActionCreator.loadOffers(_mocks_allOffers__WEBPACK_IMPORTED_MODULE_3__["default"]));
+        dispatch(ActionCreator.loadOffers(_mocks_allOffers__WEBPACK_IMPORTED_MODULE_4__["default"]));
         dispatch(ActionCreator.endLoading(LoadingTypes.END_LOADING)); //   dispatch(ActionCreator.loadFail(LoadingTypes.LOAD_FAIL));
         //   return Promise.reject(err);
       });
@@ -50069,9 +49930,10 @@ var Operation = {
         dispatch(ActionCreator.loadReviews(response.data));
         return response;
       }, function (reject) {
-        // if (reject.response.status === ServerResponseCode.NOT_AUTHORIZED) {
-        //   history.push(Pathes.SIGN_IN);
-        // }
+        if (reject.response.status === _constants__WEBPACK_IMPORTED_MODULE_2__["ServerResponseCode"].NOT_AUTHORIZED) {
+          _history__WEBPACK_IMPORTED_MODULE_3__["default"].push(_constants__WEBPACK_IMPORTED_MODULE_2__["Pathes"].SIGN_IN);
+        }
+
         return reject.response;
       })["catch"](function (err) {
         // eslint-disable-next-line no-console
