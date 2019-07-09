@@ -1,46 +1,22 @@
-# Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
+# Курсовой проект «Шесть городов» (май-июль 2019)[![Build status][travis-image]][travis-url]
 
+Сайт для поиска отелей с интерактивной картой, регистрацией и избранным.
+
+* Интенсив «[JavaScript, уровень 3 (React)](https://htmlacademy.ru/intensive/react)» от [HTML Academy](https://htmlacademy.ru)
+* [Техническое задание](https://up.htmlacademy.ru/react/1/project/six-cities).
+* [Критерии оценки](https://up.htmlacademy.ru/react/1/criteries#advanced).
+* [Итоговый результат](https://up.htmlacademy.ru/react/1/examination/six-cities).
 * Студент: [Владислав Ермолин](https://htmlacademy.ru/profile/id123103).
 * Наставник: [Алексей Балесный](https://htmlacademy.ru/profile/id221665).
 
----
+## Использованные подходы и технологии
 
-_Не удаляйте и не изменяйте папки и файлы:_
-_`.editorconfig`, `.gitattributes`, `.gitignore`, `.travis.yml`, `package.json`._
-
----
-
-### Памятка
-
-#### 1. Зарегистрируйтесь на Гитхабе
-
-Если у вас ещё нет аккаунта на [github.com](https://github.com/join), скорее зарегистрируйтесь.
-
-#### 2. Создайте форк
-
-Откройте репозиторий и нажмите кнопку «Fork» в правом верхнем углу. Репозиторий из Академии будет скопирован в ваш аккаунт.
-
-<img width="769" alt="Press 'Fork'" src="https://cloud.githubusercontent.com/assets/259739/20264045/a1ddbf40-aa7a-11e6-9a1a-724a1c0123c8.png">
-
-Получится вот так:
-
-<img width="769" alt="Forked" src="https://cloud.githubusercontent.com/assets/259739/20264122/f63219a6-aa7a-11e6-945a-89818fc7c014.png">
-
-#### 3. Клонируйте репозиторий на свой компьютер
-
-Будьте внимательны: нужно клонировать свой репозиторий (форк), а не репозиторий Академии. Также обратите внимание, что клонировать репозиторий нужно через SSH, а не через HTTPS. Нажмите зелёную кнопку в правой части экрана, чтобы скопировать SSH-адрес вашего репозитория:
-
-<img width="769" alt="SSH" src="https://cloud.githubusercontent.com/assets/259739/20264180/42704126-aa7b-11e6-9ab4-73372b812a53.png">
-
-Клонировать репозиторий можно так:
-
-```
-git clone SSH-адрес_вашего_форка
-```
-
-Команда клонирует репозиторий на ваш компьютер и подготовит всё необходимое для старта работы.
-
-#### 4. Начинайте обучение!
+* Single Page Application сделано на Реакте,
+* Redux - для хранения состояния приложения,
+* Prop-types - для типизации,
+* Axios, redux-thunk - для общения с сервером,
+* Leaflet - для карты,
+* Jest, enzyme - для тестирования.
 
 ---
 
