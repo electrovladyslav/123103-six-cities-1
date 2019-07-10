@@ -4,7 +4,7 @@ import {Provider} from "react-redux";
 import {Router} from "react-router-dom";
 import {createStore, applyMiddleware} from "redux";
 import thunk from "redux-thunk";
-import {compose} from "recompose";
+import {composeWithDevTools} from "redux-devtools-extension";
 
 import App from "./components/app/app.jsx";
 import {reducer, Operation, ActionCreator, LoadingTypes} from "./reducer";
@@ -18,22 +18,22 @@ const init = () => {
 
   const store = createStore(
       reducer,
-      compose(
-          applyMiddleware(thunk.withExtraArgument(api)),
-          window.__REDUX_DEVTOOLS_EXTENSION__ &&
-        window.__REDUX_DEVTOOLS_EXTENSION__()
+      composeWithDevTools(
+          applyMiddleware(thunk.withExtraArgument(api))
       )
   );
 
   store.dispatch(ActionCreator.startLoading(LoadingTypes.START_LOADING));
   store.dispatch(Operation.loadOffers());
   store.dispatch(Operation.getAuthorization());
-  store.dispatch(ActionCreator.changeActiveCity(getRandomNumber(CITIES_QUANTITY - 1)));
-
+  store.dispatch(
+      ActionCreator.changeActiveCity(getRandomNumber(CITIES_QUANTITY - 1))
+  );
 
   ReactDOM.render(
       <Provider store={store}>
-        <Router history={history}>
+        // eslint-disable-next-line no-undef
+        <Router history={history} basename={process.env.PUBLIC_URL}>
           <App />
         </Router>
       </Provider>,
