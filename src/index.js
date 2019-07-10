@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {Provider} from "react-redux";
-import {Router} from "react-router-dom";
+import {BrowserRouter as Router} from "react-router-dom";
 import {createStore, applyMiddleware} from "redux";
 import thunk from "redux-thunk";
 import {composeWithDevTools} from "redux-devtools-extension";
@@ -32,8 +32,7 @@ const init = () => {
 
   ReactDOM.render(
       <Provider store={store}>
-        // eslint-disable-next-line no-undef
-        <Router history={history} basename={process.env.PUBLIC_URL}>
+        <Router history={history} basename="/123103-six-cities-1">
           <App />
         </Router>
       </Provider>,
