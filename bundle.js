@@ -49511,7 +49511,7 @@ var withReview = function withReview(Component) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
@@ -49552,12 +49552,14 @@ var init = function init() {
   store.dispatch(_reducer__WEBPACK_IMPORTED_MODULE_8__["ActionCreator"].changeActiveCity(Object(_utils_get_random_number__WEBPACK_IMPORTED_MODULE_12__["default"])(_constants__WEBPACK_IMPORTED_MODULE_11__["CITIES_QUANTITY"] - 1)));
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_2__["Provider"], {
     store: store
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Router"], {
-    history: _history__WEBPACK_IMPORTED_MODULE_10__["default"]
+  }, "// eslint-disable-next-line no-undef", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Router"], {
+    history: _history__WEBPACK_IMPORTED_MODULE_10__["default"],
+    basename: process.env.PUBLIC_URL
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_app_app_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], null))), document.getElementById("root"));
 };
 
 init();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
 
 /***/ }),
 
