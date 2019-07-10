@@ -47790,10 +47790,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../reducer */ "./src/reducer.js");
 /* harmony import */ var _selectors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../selectors */ "./src/selectors.js");
-/* harmony import */ var _rents_list_rents_list_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../rents-list/rents-list.jsx */ "./src/components/rents-list/rents-list.jsx");
-/* harmony import */ var _cities_list_cities_list_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../cities-list/cities-list.jsx */ "./src/components/cities-list/cities-list.jsx");
-/* harmony import */ var _map_map_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../map/map.jsx */ "./src/components/map/map.jsx");
-/* harmony import */ var _hocs_with_active_element_with_active_element_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../hocs/with-active-element/with-active-element.jsx */ "./src/hocs/with-active-element/with-active-element.jsx");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../constants */ "./src/constants.js");
+/* harmony import */ var _rents_list_rents_list_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../rents-list/rents-list.jsx */ "./src/components/rents-list/rents-list.jsx");
+/* harmony import */ var _cities_list_cities_list_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../cities-list/cities-list.jsx */ "./src/components/cities-list/cities-list.jsx");
+/* harmony import */ var _map_map_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../map/map.jsx */ "./src/components/map/map.jsx");
+/* harmony import */ var _hocs_with_active_element_with_active_element_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../hocs/with-active-element/with-active-element.jsx */ "./src/hocs/with-active-element/with-active-element.jsx");
+/* harmony import */ var _hocs_with_sorting_with_sorting_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../hocs/with-sorting/with-sorting.jsx */ "./src/hocs/with-sorting/with-sorting.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -47821,8 +47823,10 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var CitiesListWrapped = Object(_hocs_with_active_element_with_active_element_jsx__WEBPACK_IMPORTED_MODULE_8__["default"])(_cities_list_cities_list_jsx__WEBPACK_IMPORTED_MODULE_6__["default"]);
-var RentsListWrapped = Object(_hocs_with_active_element_with_active_element_jsx__WEBPACK_IMPORTED_MODULE_8__["default"])(_rents_list_rents_list_jsx__WEBPACK_IMPORTED_MODULE_5__["default"]);
+
+
+var CitiesListWrapped = Object(_hocs_with_active_element_with_active_element_jsx__WEBPACK_IMPORTED_MODULE_9__["default"])(_cities_list_cities_list_jsx__WEBPACK_IMPORTED_MODULE_7__["default"]);
+var RentsListWrapped = Object(_hocs_with_active_element_with_active_element_jsx__WEBPACK_IMPORTED_MODULE_9__["default"])(Object(_hocs_with_sorting_with_sorting_jsx__WEBPACK_IMPORTED_MODULE_10__["default"])(_rents_list_rents_list_jsx__WEBPACK_IMPORTED_MODULE_6__["default"]));
 
 var Main =
 /*#__PURE__*/
@@ -47880,12 +47884,13 @@ function (_PureComponent) {
         elements: offers,
         onElementActivate: this.handleOfferChoose,
         cityName: activeCity ? activeCity.name : "",
-        rentsCount: offers.length
+        rentsCount: offers.length,
+        sortingVariants: _constants__WEBPACK_IMPORTED_MODULE_5__["SortingVariants"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "cities__right-section"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "cities__map map"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_map_map_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_map_map_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
         city: activeCity,
         activeOffer: activeOffer,
         offersLocation: offers.map(function (offer) {
@@ -48513,28 +48518,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _rent_card_rent_card_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../rent-card/rent-card.jsx */ "./src/components/rent-card/rent-card.jsx");
+/* harmony import */ var _rents_sort_rents_sort_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../rents-sort/rents-sort.jsx */ "./src/components/rents-sort/rents-sort.jsx");
+/* harmony import */ var _utils_sortVariantsfunctions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/sortVariantsfunctions */ "./src/utils/sortVariantsfunctions.js");
 
 
- // import RentsSort from "../rents-sort/rents-sort.jsx";
-// import withFlag from "../../hocs/with-flag/with-flag.jsx";
-// import withActiveElement from "../../hocs/with-active-element/with-active-element.jsx";
-// import {SortingVariants} from "../../constants";
-// const WrappedRentsSort = withFlag(withActiveElement(RentsSort));
+
+
+
 
 var RentsList = function RentsList(props) {
   var elements = props.elements,
       cityName = props.cityName,
       rentsCount = props.rentsCount,
-      onElementActivate = props.onElementActivate;
+      onElementActivate = props.onElementActivate,
+      sortingVariants = props.sortingVariants,
+      isSortingMenuOpen = props.isSortingMenuOpen,
+      onChooseVariant = props.onChooseVariant,
+      onSortingMenuToggle = props.onSortingMenuToggle,
+      activeSortingVariant = props.activeSortingVariant;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "cities__places places"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
     className: "visually-hidden"
   }, "Places"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
     className: "places__found"
-  }, rentsCount, " places to stay in ", cityName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, rentsCount, " places to stay in ", cityName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_rents_sort_rents_sort_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    sortingVariants: sortingVariants,
+    isSortingMenuOpen: isSortingMenuOpen,
+    onSortingMenuToggle: onSortingMenuToggle,
+    onChooseVariant: onChooseVariant,
+    activeSortingVariant: activeSortingVariant
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "cities__places-list places__list tabs__content"
-  }, elements.map(function (offer, index) {
+  }, elements.sort(Object(_utils_sortVariantsfunctions__WEBPACK_IMPORTED_MODULE_4__["default"])(activeSortingVariant)).map(function (offer, index) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_rent_card_rent_card_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
       offer: offer,
       onCardImageClick: function onCardImageClick() {
@@ -48549,9 +48565,78 @@ RentsList.propTypes = {
   elements: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array.isRequired,
   cityName: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired,
   rentsCount: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired,
-  onElementActivate: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+  onElementActivate: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  sortingVariants: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
+  isSortingMenuOpen: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  onChooseVariant: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onSortingMenuToggle: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  activeSortingVariant: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
 };
 /* harmony default export */ __webpack_exports__["default"] = (RentsList);
+
+/***/ }),
+
+/***/ "./src/components/rents-sort/rents-sort.jsx":
+/*!**************************************************!*\
+  !*** ./src/components/rents-sort/rents-sort.jsx ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var RentsSort = function RentsSort(_ref) {
+  var isSortingMenuOpen = _ref.isSortingMenuOpen,
+      onSortingMenuToggle = _ref.onSortingMenuToggle,
+      sortingVariants = _ref.sortingVariants,
+      onChooseVariant = _ref.onChooseVariant,
+      activeSortingVariant = _ref.activeSortingVariant;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    className: "places__sorting",
+    action: "#",
+    method: "get"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "places__sorting-caption"
+  }, "Sort by "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "places__sorting-type",
+    tabIndex: "0",
+    onClick: function onClick(event) {
+      onSortingMenuToggle();
+      event.preventDefault();
+    }
+  }, activeSortingVariant, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    className: "places__sorting-arrow",
+    width: "7",
+    height: "4"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("use", {
+    xlinkHref: "#icon-arrow-select"
+  }))), isSortingMenuOpen ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "places__options places__options--custom places__options--opened"
+  }, Object.values(sortingVariants).map(function (variant) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      onClick: function onClick(event) {
+        onChooseVariant(variant);
+        event.preventDefault();
+      },
+      className: "places__option ".concat(variant === activeSortingVariant ? "places__option--active" : ""),
+      tabIndex: "0",
+      key: variant
+    }, variant);
+  })) : ""));
+};
+
+RentsSort.propTypes = {
+  isSortingMenuOpen: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  onSortingMenuToggle: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func
+};
+/* harmony default export */ __webpack_exports__["default"] = (RentsSort);
 
 /***/ }),
 
@@ -48906,7 +48991,7 @@ var RentCardClassesEnum = {
   FAVORITES: "favorites"
 };
 var SortingVariants = {
-  POPULAR: "popular",
+  POPULAR: "Popular",
   LOW_TO_HIGH: "Price: low to high",
   HIGH_TO_LOW: "Price: high to low",
   TOP_RATED: "Top rated first"
@@ -49502,6 +49587,104 @@ var withReview = function withReview(Component) {
 
 /***/ }),
 
+/***/ "./src/hocs/with-sorting/with-sorting.jsx":
+/*!************************************************!*\
+  !*** ./src/hocs/with-sorting/with-sorting.jsx ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var withSorting = function withSorting(Component) {
+  var WithSorting =
+  /*#__PURE__*/
+  function (_PureComponent) {
+    _inherits(WithSorting, _PureComponent);
+
+    function WithSorting(props) {
+      var _this;
+
+      _classCallCheck(this, WithSorting);
+
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(WithSorting).call(this, props));
+      _this.state = {
+        isOpen: props.isOpen || false,
+        activeSortingVariant: props.sortingVariants[Object.keys(props.sortingVariants)[0]]
+      };
+      _this.handleSortingMenuToggle = _this.handleSortingMenuToggle.bind(_assertThisInitialized(_this));
+      _this.handleChooseVariant = _this.handleChooseVariant.bind(_assertThisInitialized(_this));
+      return _this;
+    }
+
+    _createClass(WithSorting, [{
+      key: "handleSortingMenuToggle",
+      value: function handleSortingMenuToggle() {
+        this.setState({
+          isOpen: !this.state.isOpen
+        });
+      }
+    }, {
+      key: "handleChooseVariant",
+      value: function handleChooseVariant(variant) {
+        this.setState({
+          activeSortingVariant: variant,
+          isOpen: false
+        });
+      }
+    }, {
+      key: "render",
+      value: function render() {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, _extends({}, this.props, {
+          isSortingMenuOpen: this.state.isOpen,
+          onSortingMenuToggle: this.handleSortingMenuToggle,
+          onChooseVariant: this.handleChooseVariant,
+          activeSortingVariant: this.state.activeSortingVariant
+        }));
+      }
+    }]);
+
+    return WithSorting;
+  }(react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]);
+
+  WithSorting.propTypes = {
+    isOpen: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+    sortingVariants: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
+  };
+  return WithSorting;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (withSorting);
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -49562,211 +49745,6 @@ init();
 
 /***/ }),
 
-/***/ "./src/mocks/allOffers.js":
-/*!********************************!*\
-  !*** ./src/mocks/allOffers.js ***!
-  \********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ([{
-  city: {
-    name: "Amsterdam",
-    location: {
-      latitude: 52.370216,
-      longitude: 4.895168,
-      zoom: 10
-    }
-  },
-  isPremium: true,
-  imageSource: "img/apartment-01.jpg",
-  price: 120,
-  isBookmarked: false,
-  rating: 4.5,
-  name: "Beautiful & luxurious apartment at great location",
-  type: "Apartment",
-  location: {
-    latitude: 52.370216,
-    longitude: 4.895168,
-    zoom: 10
-  },
-  previewImageSource: "https://es31-server.appspot.com/six-cities/static/hotel/8.jpg",
-  goods: ["Air conditioning", "Washer", "Fridge", "Baby seat", "Dishwasher", "Coffee machine", "Laptop friendly workspace", "Towels", "Breakfast"],
-  images: ["https://es31-server.appspot.com/six-cities/static/hotel/15.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/9.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/12.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/16.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/13.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/20.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/18.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/19.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/11.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/1.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/10.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/14.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/6.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/3.jpg"]
-}, {
-  city: {
-    name: "Amsterdam",
-    location: {
-      latitude: 52.370216,
-      longitude: 4.895168,
-      zoom: 10
-    }
-  },
-  isPremium: false,
-  imageSource: "img/room.jpg",
-  price: 80,
-  isBookmarked: true,
-  rating: 4,
-  name: "Wood and stone place",
-  type: "Private room",
-  location: {
-    latitude: 52.370216,
-    longitude: 4.895168,
-    zoom: 10
-  },
-  previewImageSource: "https://es31-server.appspot.com/six-cities/static/hotel/8.jpg",
-  goods: ["Air conditioning", "Washer", "Fridge", "Baby seat", "Dishwasher", "Coffee machine", "Laptop friendly workspace", "Towels", "Breakfast"],
-  images: ["https://es31-server.appspot.com/six-cities/static/hotel/15.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/9.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/12.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/16.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/13.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/20.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/18.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/19.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/11.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/1.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/10.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/14.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/6.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/3.jpg"]
-}, {
-  city: {
-    name: "Amsterdam",
-    location: {
-      latitude: 52.370216,
-      longitude: 4.895168,
-      zoom: 10
-    }
-  },
-  isPremium: false,
-  imageSource: "img/apartment-02.jpg",
-  price: 132,
-  isBookmarked: false,
-  rating: 4,
-  name: "Canal View Prinsengracht",
-  type: "Apartment",
-  location: {
-    latitude: 52.370216,
-    longitude: 4.895168,
-    zoom: 10
-  },
-  previewImageSource: "https://es31-server.appspot.com/six-cities/static/hotel/8.jpg",
-  goods: ["Air conditioning", "Washer", "Fridge", "Baby seat", "Dishwasher", "Coffee machine", "Laptop friendly workspace", "Towels", "Breakfast"],
-  images: ["https://es31-server.appspot.com/six-cities/static/hotel/15.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/9.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/12.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/16.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/13.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/20.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/18.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/19.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/11.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/1.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/10.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/14.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/6.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/3.jpg"]
-}, {
-  city: {
-    name: "Amsterdam",
-    location: {
-      latitude: 52.370216,
-      longitude: 4.895168,
-      zoom: 10
-    }
-  },
-  isPremium: true,
-  imageSource: "img/apartment-03.jpg",
-  price: 180,
-  isBookmarked: false,
-  rating: 5,
-  name: "Nice, cozy, warm big bed apartment",
-  type: "Apartment",
-  location: {
-    latitude: 52.370216,
-    longitude: 4.895168,
-    zoom: 10
-  },
-  previewImageSource: "https://es31-server.appspot.com/six-cities/static/hotel/8.jpg",
-  goods: ["Air conditioning", "Washer", "Fridge", "Baby seat", "Dishwasher", "Coffee machine", "Laptop friendly workspace", "Towels", "Breakfast"],
-  images: ["https://es31-server.appspot.com/six-cities/static/hotel/15.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/9.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/12.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/16.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/13.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/20.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/18.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/19.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/11.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/1.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/10.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/14.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/6.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/3.jpg"]
-}, {
-  city: {
-    name: "Melbourne",
-    location: {
-      latitude: -37,
-      longitude: 144,
-      zoom: 10
-    }
-  },
-  isPremium: false,
-  imageSource: "img/apartment-02.jpg",
-  price: 132,
-  isBookmarked: false,
-  rating: 4,
-  name: "Canal View Prinsengracht",
-  type: "Apartment",
-  location: {
-    latitude: 52.370216,
-    longitude: 4.895168,
-    zoom: 10
-  },
-  previewImageSource: "https://es31-server.appspot.com/six-cities/static/hotel/8.jpg",
-  goods: ["Air conditioning", "Washer", "Fridge", "Baby seat", "Dishwasher", "Coffee machine", "Laptop friendly workspace", "Towels", "Breakfast"],
-  images: ["https://es31-server.appspot.com/six-cities/static/hotel/15.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/9.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/12.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/16.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/13.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/20.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/18.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/19.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/11.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/1.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/10.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/14.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/6.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/3.jpg"]
-}, {
-  city: {
-    name: "Melbourne",
-    location: {
-      latitude: -37,
-      longitude: 144,
-      zoom: 10
-    }
-  },
-  isPremium: true,
-  imageSource: "img/apartment-03.jpg",
-  price: 180,
-  isBookmarked: false,
-  rating: 5,
-  name: "Nice, cozy, warm big bed apartment",
-  type: "Apartment",
-  location: {
-    latitude: 52.370216,
-    longitude: 4.895168,
-    zoom: 10
-  },
-  previewImageSource: "https://es31-server.appspot.com/six-cities/static/hotel/8.jpg",
-  goods: ["Air conditioning", "Washer", "Fridge", "Baby seat", "Dishwasher", "Coffee machine", "Laptop friendly workspace", "Towels", "Breakfast"],
-  images: ["https://es31-server.appspot.com/six-cities/static/hotel/15.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/9.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/12.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/16.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/13.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/20.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/18.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/19.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/11.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/1.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/10.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/14.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/6.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/3.jpg"]
-}, {
-  city: {
-    name: "Moscow",
-    location: {
-      latitude: 55,
-      longitude: 37,
-      zoom: 10
-    }
-  },
-  isPremium: false,
-  imageSource: "img/room.jpg",
-  price: 80,
-  isBookmarked: true,
-  rating: 4,
-  name: "Wood and stone place",
-  type: "Private room",
-  location: {
-    latitude: 52.370216,
-    longitude: 4.895168,
-    zoom: 10
-  },
-  previewImageSource: "https://es31-server.appspot.com/six-cities/static/hotel/8.jpg",
-  goods: ["Air conditioning", "Washer", "Fridge", "Baby seat", "Dishwasher", "Coffee machine", "Laptop friendly workspace", "Towels", "Breakfast"],
-  images: ["https://es31-server.appspot.com/six-cities/static/hotel/15.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/9.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/12.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/16.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/13.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/20.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/18.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/19.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/11.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/1.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/10.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/14.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/6.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/3.jpg"]
-}, {
-  city: {
-    name: "Moscow",
-    location: {
-      latitude: 55,
-      longitude: 37,
-      zoom: 10
-    }
-  },
-  isPremium: false,
-  imageSource: "img/apartment-02.jpg",
-  price: 132,
-  isBookmarked: false,
-  rating: 4,
-  name: "Canal View Prinsengracht",
-  type: "Apartment",
-  location: {
-    latitude: 52.370216,
-    longitude: 4.895168,
-    zoom: 10
-  },
-  previewImageSource: "https://es31-server.appspot.com/six-cities/static/hotel/8.jpg",
-  goods: ["Air conditioning", "Washer", "Fridge", "Baby seat", "Dishwasher", "Coffee machine", "Laptop friendly workspace", "Towels", "Breakfast"],
-  images: ["https://es31-server.appspot.com/six-cities/static/hotel/15.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/9.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/12.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/16.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/13.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/20.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/18.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/19.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/11.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/1.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/10.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/14.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/6.jpg", "https://es31-server.appspot.com/six-cities/static/hotel/3.jpg"]
-}]);
-
-/***/ }),
-
 /***/ "./src/mocks/initial-state.js":
 /*!************************************!*\
   !*** ./src/mocks/initial-state.js ***!
@@ -49807,11 +49785,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _adapter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./adapter */ "./src/adapter.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants */ "./src/constants.js");
 /* harmony import */ var _history__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./history */ "./src/history.js");
-/* harmony import */ var _mocks_allOffers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./mocks/allOffers */ "./src/mocks/allOffers.js");
 
 
 
-
+ // import allOffers from "./mocks/allOffers";
 
 var ActionTypes = {
   LOAD_OFFERS: "LOAD_OFFERS",
@@ -49887,9 +49864,11 @@ var Operation = {
         dispatch(ActionCreator.endLoading(LoadingTypes.END_LOADING));
         return response;
       })["catch"](function (err) {
-        dispatch(ActionCreator.loadOffers(_mocks_allOffers__WEBPACK_IMPORTED_MODULE_4__["default"]));
-        dispatch(ActionCreator.endLoading(LoadingTypes.END_LOADING)); //   dispatch(ActionCreator.loadFail(LoadingTypes.LOAD_FAIL));
-        //   return Promise.reject(err);
+        // For devlopment offline
+        // dispatch(ActionCreator.loadOffers(allOffers));
+        // dispatch(ActionCreator.endLoading(LoadingTypes.END_LOADING));
+        dispatch(ActionCreator.loadFail(LoadingTypes.LOAD_FAIL));
+        return Promise.reject(err);
       });
     };
   },
@@ -50213,6 +50192,42 @@ __webpack_require__.r(__webpack_exports__);
   cities = Object(_get_unique_elements_by_name__WEBPACK_IMPORTED_MODULE_0__["default"])(cities);
   cities = cities.slice(0, 6);
   return cities;
+});
+
+/***/ }),
+
+/***/ "./src/utils/sortVariantsfunctions.js":
+/*!********************************************!*\
+  !*** ./src/utils/sortVariantsfunctions.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
+
+/* harmony default export */ __webpack_exports__["default"] = (function (sorting) {
+  switch (sorting) {
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["SortingVariants"].HIGH_TO_LOW:
+      return function (offer1, offer2) {
+        return offer2.price - offer1.price;
+      };
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["SortingVariants"].LOW_TO_HIGH:
+      return function (offer1, offer2) {
+        return offer1.price - offer2.price;
+      };
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["SortingVariants"].TOP_RATED:
+      return function (offer1, offer2) {
+        return offer2.rating - offer1.rating;
+      };
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["SortingVariants"].POPULAR:
+    default:
+      return function () {};
+  }
 });
 
 /***/ })
