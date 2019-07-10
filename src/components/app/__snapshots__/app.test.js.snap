@@ -150,10 +150,11 @@ Array [
             <span
               className="places__sorting-caption"
             >
-              Sort by
+              Sort by 
             </span>
             <span
               className="places__sorting-type"
+              onClick={[Function]}
               tabIndex="0"
             >
               Popular
@@ -167,6 +168,7 @@ Array [
                 />
               </svg>
             </span>
+            
           </form>
           <div
             className="cities__places-list places__list tabs__content"

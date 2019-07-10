@@ -56,6 +56,9 @@ const RentsSort = ({
 RentsSort.propTypes = {
   isSortingMenuOpen: PropTypes.bool,
   onSortingMenuToggle: PropTypes.func,
+  sortingVariants: PropTypes.object,
+  onChooseVariant: PropTypes.func,
+  activeSortingVariant: PropTypes.string,
 };
 
 export default RentsSort;
