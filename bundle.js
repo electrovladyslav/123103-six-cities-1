@@ -49552,7 +49552,7 @@ var init = function init() {
   store.dispatch(_reducer__WEBPACK_IMPORTED_MODULE_8__["ActionCreator"].changeActiveCity(Object(_utils_get_random_number__WEBPACK_IMPORTED_MODULE_12__["default"])(_constants__WEBPACK_IMPORTED_MODULE_11__["CITIES_QUANTITY"] - 1)));
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_2__["Provider"], {
     store: store
-  }, "// eslint-disable-next-line no-undef", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Router"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["BrowserRouter"], {
     history: _history__WEBPACK_IMPORTED_MODULE_10__["default"],
     basename: process.env.PUBLIC_URL
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_app_app_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], null))), document.getElementById("root"));
