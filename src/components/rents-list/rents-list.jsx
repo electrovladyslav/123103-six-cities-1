@@ -2,9 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import RentCard from "../rent-card/rent-card.jsx";
+import RentsSort from "../rents-sort/rents-sort.jsx";
+import sortingVariantsFunctions from "../../utils/sortVariantsfunctions";
 
 const RentsList = (props) => {
-  const {elements, cityName, rentsCount, onElementActivate} = props;
+  const {
+    elements,
+    cityName,
+    rentsCount,
+    onElementActivate,
+    sortingVariants,
+    isSortingMenuOpen,
+    onChooseVariant,
+    onSortingMenuToggle,
+    activeSortingVariant,
+  } = props;
 
   return (
     <React.Fragment>
@@ -13,28 +25,28 @@ const RentsList = (props) => {
         <b className="places__found">
           {rentsCount} places to stay in {cityName}
         </b>
-        <form className="places__sorting" action="#" method="get">
-          <span className="places__sorting-caption">Sort by</span>
-          <span className="places__sorting-type" tabIndex="0">
-            Popular
-            <svg className="places__sorting-arrow" width="7" height="4">
-              <use xlinkHref="#icon-arrow-select" />
-            </svg>
-          </span>
-        </form>
+        <RentsSort
+          sortingVariants={sortingVariants}
+          isSortingMenuOpen={isSortingMenuOpen}
+          onSortingMenuToggle={onSortingMenuToggle}
+          onChooseVariant={onChooseVariant}
+          activeSortingVariant={activeSortingVariant}
+        />
         <div className="cities__places-list places__list tabs__content">
           {/* ---Rent card--- */}
-          {elements.map((offer, index) => {
-            return (
-              <RentCard
-                offer={offer}
-                onCardImageClick={() => {
-                  onElementActivate(offer);
-                }}
-                key={`${offer.name}${index}`}
-              />
-            );
-          })}
+          {elements
+            .sort(sortingVariantsFunctions(activeSortingVariant))
+            .map((offer, index) => {
+              return (
+                <RentCard
+                  offer={offer}
+                  onCardImageClick={() => {
+                    onElementActivate(offer);
+                  }}
+                  key={`${offer.name}${index}`}
+                />
+              );
+            })}
           {/* ---End of rent card--- */}
         </div>
       </section>
@@ -47,6 +59,11 @@ RentsList.propTypes = {
   cityName: PropTypes.string.isRequired,
   rentsCount: PropTypes.number.isRequired,
   onElementActivate: PropTypes.func.isRequired,
+  sortingVariants: PropTypes.object,
+  isSortingMenuOpen: PropTypes.bool,
+  onChooseVariant: PropTypes.func,
+  onSortingMenuToggle: PropTypes.func,
+  activeSortingVariant: PropTypes.string,
 };
 
 export default RentsList;

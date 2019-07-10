@@ -2,6 +2,7 @@ import initialState from "./mocks/initial-state";
 import adapter from "./adapter";
 import {Pathes, ServerResponseCode} from "./constants";
 import history from "./history";
+// import allOffers from "./mocks/allOffers";
 
 export const ActionTypes = {
   LOAD_OFFERS: `LOAD_OFFERS`,
@@ -88,6 +89,9 @@ export const Operation = {
         return response;
       })
       .catch((err) => {
+        // For devlopment offline
+        // dispatch(ActionCreator.loadOffers(allOffers));
+        // dispatch(ActionCreator.endLoading(LoadingTypes.END_LOADING));
         dispatch(ActionCreator.loadFail(LoadingTypes.LOAD_FAIL));
         return Promise.reject(err);
       });

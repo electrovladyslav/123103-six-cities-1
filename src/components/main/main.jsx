@@ -9,15 +9,17 @@ import {
   getActiveCityNumber,
   getAuthRequiredStatus,
 } from "../../selectors";
+import {SortingVariants} from "../../constants";
 
 import RentsList from "../rents-list/rents-list.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
 import Map from "../map/map.jsx";
 
 import withActiveElement from "../../hocs/with-active-element/with-active-element.jsx";
+import withSorting from "../../hocs/with-sorting/with-sorting.jsx";
 
 const CitiesListWrapped = withActiveElement(CitiesList);
-const RentsListWrapped = withActiveElement(RentsList);
+const RentsListWrapped = withActiveElement(withSorting(RentsList));
 
 class Main extends PureComponent {
   constructor(props) {
@@ -69,6 +71,8 @@ class Main extends PureComponent {
                 onElementActivate={this.handleOfferChoose}
                 cityName={activeCity ? activeCity.name : ``}
                 rentsCount={offers.length}
+                sortingVariants={SortingVariants}
+
               />
               <div className="cities__right-section">
                 <section className="cities__map map">
